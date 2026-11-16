@@ -1,6 +1,32 @@
 /* Pyx · comportamiento común a todas las páginas */
 (() => {
   const root = document.documentElement;
+
+  /* ---------- abrir o recargar una página siempre la empieza por arriba ----------
+     El navegador no restaura la posición anterior, y los enlaces internos (#…)
+     desplazan la página sin escribirse en la dirección: así, al recargar o al
+     pegar la dirección en otra ventana, se vuelve al principio. Si se llega con
+     un ancla desde otra página (manual/#atajos), se va a ella una vez y se quita. */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const byHash = (hash) => { try { return hash.length > 1 ? document.getElementById(decodeURIComponent(hash.slice(1))) : null; } catch { return null; } };
+  const arrival = byHash(location.hash);
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  let touched = false;
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((t) => addEventListener(t, () => { touched = true; }, { once: true, passive: true }));
+  const settle = () => { if (touched) return; if (arrival) arrival.scrollIntoView(); else scrollTo(0, 0); };
+  settle();
+  // otra vez al terminar de cargar (fuentes e imágenes), salvo que ya te hayas movido
+  addEventListener('load', settle, { once: true });
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    const a = e.target.closest('a[href^="#"]');
+    const target = a && byHash(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    if (a.classList.contains('skip')) { target.tabIndex = -1; target.focus({ preventScroll: true }); }
+  });
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch { return null; } },
     set(k, v) { try { localStorage.setItem(k, v); } catch { /* sin almacenamiento: no pasa nada */ } },

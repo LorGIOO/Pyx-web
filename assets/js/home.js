@@ -685,7 +685,12 @@
       list.innerHTML = items.map((it, i) => `<li role="option" id="ac-${i}" aria-selected="${i === sel}" data-i="${i}"><span>${esc(it.label)}</span><small>${esc(it.desc)}</small>${it.tag ? `<em class="${it.add ? 'add' : ''}">${esc(it.tag)}</em>` : '<span></span>'}</li>`).join('');
       input.setAttribute('aria-expanded', String(items.length > 0));
       if (items.length) input.setAttribute('aria-activedescendant', `ac-${sel}`);
-      $(`#ac-${sel}`, list)?.scrollIntoView({ block: 'nearest' });
+      // desplaza solo la lista, nunca la página
+      const cur = $(`#ac-${sel}`, list);
+      if (cur) {
+        if (cur.offsetTop < list.scrollTop) list.scrollTop = cur.offsetTop - 4;
+        else if (cur.offsetTop + cur.offsetHeight > list.scrollTop + list.clientHeight) list.scrollTop = cur.offsetTop + cur.offsetHeight - list.clientHeight + 4;
+      }
     };
     const accept = (i) => {
       const it = items[i];

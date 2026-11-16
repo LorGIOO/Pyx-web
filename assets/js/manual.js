@@ -90,7 +90,11 @@
     else if (e.key === 'Escape') { input.value = ''; search(); input.blur(); return; }
     else return;
     items.forEach((a, k) => a.classList.toggle('is-on', k === sel));
-    items[sel]?.scrollIntoView({ block: 'nearest' });
+    const cur = items[sel];
+    if (cur) {
+      if (cur.offsetTop < results.scrollTop) results.scrollTop = cur.offsetTop - 4;
+      else if (cur.offsetTop + cur.offsetHeight > results.scrollTop + results.clientHeight) results.scrollTop = cur.offsetTop + cur.offsetHeight - results.clientHeight + 4;
+    }
   });
   results.addEventListener('click', (e) => { const a = e.target.closest('a'); if (a) { e.preventDefault(); go(Number(a.dataset.i)); } });
   document.addEventListener('click', (e) => { if (!e.target.closest('.search')) results.innerHTML = ''; });

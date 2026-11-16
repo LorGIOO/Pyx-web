@@ -163,8 +163,9 @@ p code, li code, dd code, td code { background: var(--paper-2); border: 1px soli
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
 .brand svg { width: 18px; height: 22px; }
-.runhead .where { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink-3); }
-.runhead .where b { color: var(--ink-2); font-weight: 500; }
+.runhead .brand { padding: 6px 4px; border-radius: 6px; }
+.runhead .brand svg { width: 22px; height: 27px; }
+.runhead nav { margin-left: auto; }
 .runhead nav { display: flex; align-items: center; gap: 4px; }
 .runhead nav a { color: var(--ink-2); text-decoration: none; padding: 6px 10px; border-radius: 5px; }
 .runhead nav a:hover, .runhead nav a[aria-current="page"] { color: var(--ink); background: var(--paper-2); }
@@ -174,7 +175,6 @@ p code, li code, dd code, td code { background: var(--paper-2); border: 1px soli
 .icon-btn svg { width: 18px; height: 18px; }
 .menu-btn { display: none; }
 @media (max-width: 860px) {
-  .runhead .where { display: none; }
   .runhead { justify-content: space-between; }
   .runhead nav { position: fixed; top: var(--head-h); left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 18px; background: var(--paper); border-bottom: 1px solid var(--rule); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: .25s var(--ease); }
   .runhead nav a { padding: 14px 4px; font-size: 16px; border-bottom: 1px solid var(--rule); border-radius: 0; }
