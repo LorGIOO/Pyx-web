@@ -21,6 +21,7 @@ su historia, sus herramientas, las novedades de cada versión y el manual de usu
 | Manual | `manual/index.html` | El manual de usuario entero, con índice, buscador y prueba de atajos. **Se genera**; no se edita a mano (ver abajo). |
 | Novedades | `novedades/index.html` | Todas las versiones, a partir de `assets/data/novedades.js`. |
 | Privacidad | `privacidad/index.html` | Qué datos trata la web y qué conexiones hace la aplicación. |
+| Firma de código | `firma/index.html` | La política de firma de código (*code signing policy*) que exige SignPath Foundation: qué se firma, quién lo aprueba y la privacidad. |
 | Error 404 | `404.html` | La página que sirve GitHub Pages cuando una dirección no existe. |
 
 Es una web estática: HTML, CSS y JavaScript sin dependencias ni paso de compilación. Las fuentes (Computer Modern y JetBrains Mono, con licencia OFL) están en `assets/fonts/`, así que la web no contacta con ningún servicio externo.
