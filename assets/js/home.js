@@ -664,7 +664,8 @@
       ];
     };
     const context = () => {
-      const pos = input.selectionStart ?? input.value.length;
+      // sin el foco, el cursor se supone al final de la línea
+      const pos = document.activeElement === input ? (input.selectionStart ?? input.value.length) : input.value.length;
       const before = input.value.slice(0, pos);
       let m = before.match(/\\py\{([A-Za-z_]\w*)?$/);
       if (m) return { kind: 'var', start: pos - (m[1] || '').length, word: m[1] || '', pos };
@@ -733,7 +734,7 @@
     input.setAttribute('role', 'combobox');
     input.setAttribute('aria-controls', 'ac-list');
     list.id = 'ac-list';
-    input.setSelectionRange(input.value.length, input.value.length);
+    // no se toca el cursor al cargar: en el móvil, colocarlo en un campo hace que la página salte hasta él
     render();
   })();
 
