@@ -77,7 +77,9 @@ y abre <http://localhost:8000>.
 
 ## Publicación
 
-La web se publica con **GitHub Pages** desde la rama `main`, carpeta raíz (`Settings → Pages → Build and deployment → Deploy from a branch`). El archivo `.nojekyll` evita que GitHub procese la web con Jekyll.
+La web se publica en **<https://lorgioo.github.io/Pyx-web/>** con GitHub Pages, que sirve la rama `gh-pages`. No hace falta tocarla: el flujo `.github/workflows/publicar.yml` copia `main` en `gh-pages` cada vez que se sube un cambio, y en un par de minutos está en línea. Se trabaja siempre en `main`.
+
+En `Settings → Pages` debe figurar `Deploy from a branch` con la rama `gh-pages` y la carpeta `/ (root)`. El archivo `.nojekyll` evita que GitHub procese la web con Jekyll.
 
 ## Licencia
 
