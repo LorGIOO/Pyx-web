@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- Plantilla de la imagen para redes sociales (assets/img/og.png, 1200×630).
+     Se regenera con: node tools/og.js (necesita Playwright). -->
+<html lang="es"><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: CMU; src: url(../assets/fonts/cmu-serif-500-roman.woff2); }
+  @font-face { font-family: CMU; font-style: italic; src: url(../assets/fonts/cmu-serif-500-italic.woff2); }
+  @font-face { font-family: JB; src: url(../assets/fonts/jetbrains-mono-latin-400-normal.woff2); }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { background: #f4f2ec; font-family: CMU, serif; color: #16171b; position: relative; }
+  .copy { position: absolute; left: 84px; top: 112px; }
+  .mark { display: flex; align-items: center; gap: 22px; }
+  .mark svg { width: 92px; height: 112px; }
+  h1 { font-weight: 400; font-size: 200px; line-height: .8; letter-spacing: -.045em; margin: 0; }
+  p { font-size: 46px; line-height: 1.12; margin: 40px 0 0; max-width: 21ch; }
+  p em { color: #00599a; }
+  .meta { font-family: JB, monospace; font-size: 22px; color: #7d8088; position: absolute; left: 88px; bottom: 58px; }
+  .meta b { color: #00599a; font-weight: 400; }
+  .sheet { position: absolute; right: 70px; top: 70px; width: 380px; height: 520px; background: #fff; box-shadow: 0 40px 90px -30px rgba(20,18,12,.45); transform: rotate(4deg); padding: 46px 40px; box-sizing: border-box; font-size: 17px; line-height: 1.5; }
+  .sheet h2 { font-size: 24px; margin: 0 0 14px; }
+  .sheet .v { background: rgba(255,214,10,.45); }
+  .sheet .ok { color: #1a7f37; }
+  .sheet svg { margin-top: 22px; width: 100%; }
+  .code { position: absolute; right: 40px; bottom: 34px; background: #1d1e22; color: #d8d9dc; font: 19px/1.7 JB, monospace; padding: 16px 22px; border-radius: 10px; box-shadow: 0 30px 70px -20px rgba(0,0,0,.5); transform: rotate(-2deg); }
+  .py { color: #f7a24b; } .n { color: #e8a7ff; }
+</style></head>
+<body>
+  <div class="copy">
+    <div class="mark">
+      <svg viewBox="-2 -4 86 104"><rect x=".5" y="11.15" width="6.25" height="74.4" rx="3.1" fill="#007acc"/><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74" fill="none" stroke="#16171b" stroke-width="7" stroke-linecap="round"/><path d="M80.06 84.77 58.5 95.28V74.26Z" fill="#007acc"/></svg>
+      <h1>Pyx</h1>
+    </div>
+    <p>El cálculo y el documento, <em>en un mismo archivo.</em></p>
+  </div>
+  <div class="sheet">
+    <h2>1&nbsp;&nbsp;Ménsula de acero</h2>
+    Con una carga de <span class="v">15</span> kN, la flecha es de <span class="v">7.69</span> mm, que <span class="ok">cumple</span> el límite <i>L</i>/300.
+    <svg viewBox="0 0 300 110"><path d="M20 10V95H295" fill="none" stroke="#999" stroke-width="1"/><path d="M20 12C120 14 200 40 290 76" fill="none" stroke="#007acc" stroke-width="3" stroke-linecap="round"/><path d="M20 88H295" stroke="#d97706" stroke-dasharray="6 5" stroke-width="1.5"/></svg>
+  </div>
+  <div class="code"><span class="n">P</span> = <span class="n">15.0</span><br><span class="py">\py</span>{f"{flecha:.2f}"}</div>
+  <div class="meta"><b>v2.0.0</b> · LaTeX + Python · Windows y Linux · Libre</div>
+</body></html>

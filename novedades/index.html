@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Novedades · Pyx</title>
+  <meta name="description" content="Qué trae cada versión de Pyx, de la más reciente a la primera.">
+  <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Novedades de Pyx">
+  <meta property="og:image" content="../assets/img/og.png">
+  <link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="alternate" type="application/atom+xml" title="Versiones de Pyx" href="https://github.com/LorGIOO/Pyx/releases.atom">
+  <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/doc.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="logo" viewBox="-2 -4 86 104"><rect x=".5" y="11.15" width="6.25" height="74.4" rx="3.1" fill="var(--blue)"/><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M80.06 84.77 58.5 95.28V74.26Z" fill="var(--blue)"/></symbol>
+  <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2Z" fill="currentColor"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v13M6 12l6 6 6-6M5 21h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header class="runhead">
+  <a class="brand" href="../" aria-label="Pyx, inicio"><svg aria-hidden="true"><use href="#logo"/></svg>Pyx</a>
+  <span class="where" data-default="Novedades">Novedades</span>
+  <nav aria-label="Principal">
+    <a href="../#laboratorio">Laboratorio</a>
+    <a href="../manual/">Manual</a>
+    <a href="./" aria-current="page">Novedades</a>
+    <a class="key small primary" href="../#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar</a>
+  </nav>
+  <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar el tema"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
+  <button class="icon-btn menu-btn" type="button" aria-label="Menú" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+</header>
+
+<header class="page-head">
+  <p class="eyebrow"><span>Registro de cambios</span><span class="n" data-count></span></p>
+  <h1>Lo que ha ido <em>cambiando.</em></h1>
+  <p class="lede">Cada versión de Pyx, de la más reciente a la primera. Para tenerla basta con <span class="menu">Configuración → General → Buscar actualizaciones</span>.</p>
+</header>
+
+<div class="doc-layout single">
+  <main class="doc-body" id="contenido" style="max-width:none">
+    <noscript><p>Esta lista necesita JavaScript. Las versiones también están en <a href="https://github.com/LorGIOO/Pyx/releases">GitHub</a>.</p></noscript>
+    <div data-releases></div>
+    <p style="margin-top:40px"><a class="key" href="https://github.com/LorGIOO/Pyx/releases">Instaladores de cada versión en GitHub</a></p>
+  </main>
+</div>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div>
+      <a class="brand" href="../"><svg aria-hidden="true"><use href="#logo"/></svg>Pyx</a>
+      <p>El cálculo y el documento, en un mismo archivo.</p>
+      <p>No usa cookies ni rastreadores.</p>
+    </div>
+    <div><h2>Producto</h2><ul><li><a href="../#laboratorio">Laboratorio</a></li><li><a href="../#descargar">Descargar</a></li><li><a href="./">Novedades</a></li></ul></div>
+    <div><h2>Ayuda</h2><ul><li><a href="../manual/">Manual de usuario</a></li><li><a href="../manual/manual-pyx.pdf">Manual en PDF</a></li><li><a href="https://github.com/LorGIOO/Pyx/issues">Informar de un fallo</a></li></ul></div>
+    <div><h2>Proyecto</h2><ul><li><a href="https://github.com/LorGIOO/Pyx">Código fuente</a></li><li><a href="../privacidad/">Privacidad</a></li><li><a href="https://github.com/LorGIOO/Pyx/blob/main/LICENSE">Licencia MIT</a></li></ul></div>
+  </div>
+  <div class="endmark"><span>© <span data-year>2026</span> Pyx · Software libre</span><span>∎</span></div>
+</footer>
+
+<script src="../assets/data/novedades.js"></script>
+<script>
+(() => {
+  const data = window.PYX_NOVEDADES || [];
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const md = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  const fecha = (f) => new Date(`${f}T12:00:00`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  document.querySelector('[data-count]').textContent = `${data.length} versiones`;
+  document.querySelector('[data-releases]').innerHTML = data.map((v, i) => `
+    <article class="release${v.destacada ? '' : ' minor'}" id="v${esc(v.version)}" data-chapter="<b>v${esc(v.version)}</b> · ${esc(fecha(v.fecha))}">
+      <div class="release-tag">
+        <a class="v" href="#v${esc(v.version)}" style="color:inherit;text-decoration:none">${esc(v.version)}</a>
+        <time datetime="${esc(v.fecha)}">${esc(fecha(v.fecha))}</time>
+        ${i === 0 ? '<span class="badge">la más reciente</span>' : v.destacada ? '<span class="badge">versión grande</span>' : ''}
+      </div>
+      <div>
+        <h2>${md(v.titulo)}</h2>
+        ${v.grupos.map((g) => `${v.grupos.length > 1 || g.nombre !== 'Novedades' ? `<h3>${esc(g.nombre)}</h3>` : ''}<ul>${g.cambios.map((c) => `<li>${md(c)}</li>`).join('')}</ul>`).join('')}
+      </div>
+    </article>`).join('');
+})();
+</script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>

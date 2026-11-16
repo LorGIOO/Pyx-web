@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manual de usuario · Pyx</title>
+  <meta name="description" content="El manual de usuario completo de Pyx 2.0: instalación, la interfaz, LaTeX, celdas de Python, \py{} y \pyif, cuadernos de Jupyter, ejecución reactiva, compilación, el visor de PDF, macros, configuración y atajos.">
+  <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Manual de usuario de Pyx">
+  <meta property="og:description" content="Todo Pyx, capítulo a capítulo.">
+  <meta property="og:image" content="../assets/img/og.png">
+  <link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/doc.css">
+</head>
+<body>
+<!-- ESTE ARCHIVO ES LA PLANTILLA. manual/index.html se genera con: python3 tools/manual.py -->
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="logo" viewBox="-2 -4 86 104"><rect x=".5" y="11.15" width="6.25" height="74.4" rx="3.1" fill="var(--blue)"/><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M80.06 84.77 58.5 95.28V74.26Z" fill="var(--blue)"/></symbol>
+  <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2Z" fill="currentColor"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v13M6 12l6 6 6-6M5 21h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15.5 15.5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</defs></svg>
+
+<header class="runhead">
+  <a class="brand" href="../" aria-label="Pyx, inicio"><svg aria-hidden="true"><use href="#logo"/></svg>Pyx</a>
+  <span class="where" data-default="Manual de usuario">Manual de usuario</span>
+  <nav aria-label="Principal">
+    <a href="../#laboratorio">Laboratorio</a>
+    <a href="./" aria-current="page">Manual</a>
+    <a href="../novedades/">Novedades</a>
+    <a class="key small primary" href="../#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar</a>
+  </nav>
+  <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar el tema"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
+  <button class="icon-btn menu-btn" type="button" aria-label="Menú" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+</header>
+
+<header class="page-head">
+  <p class="eyebrow"><span>Versión 2.0.0</span><span class="n">Escrito y compilado con Pyx</span></p>
+  <h1>Manual de <em>usuario</em></h1>
+  <p class="lede">Todo Pyx, capítulo a capítulo: desde instalarlo hasta el último atajo de teclado. Es el mismo texto que el PDF, que se escribió en Pyx con celdas de Python que se ejecutaron al compilarlo.</p>
+  <div class="doc-meta">
+    <a class="key primary" href="manual-pyx.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg>Manual en PDF <span class="k-hint">1,7 MB</span></a>
+    <a class="key" href="#cap-atajos-de-teclado">Atajos de teclado</a>
+    <a class="key" href="#cap-solucion-de-problemas">Solución de problemas</a>
+  </div>
+</header>
+
+<div class="doc-layout">
+  <aside class="toc" id="indice" aria-label="Índice del manual">
+    <div class="search">
+      <svg aria-hidden="true"><use href="#i-search"/></svg>
+      <input type="search" placeholder="Buscar en el manual" aria-label="Buscar en el manual" autocomplete="off" data-search>
+      <kbd>/</kbd>
+      <ul class="search-results" data-results aria-label="Resultados"></ul>
+    </div>
+    <p class="toc-title">Índice</p>
+    {{INDICE}}
+  </aside>
+  <article class="doc-body" id="contenido">
+    {{CONTENIDO}}
+  </article>
+</div>
+<button class="key primary toc-toggle" type="button" aria-controls="indice" aria-expanded="false" data-toc-toggle>Índice</button>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div>
+      <a class="brand" href="../"><svg aria-hidden="true"><use href="#logo"/></svg>Pyx</a>
+      <p>El cálculo y el documento, en un mismo archivo.</p>
+      <p>Esta página se genera a partir de la fuente del manual en PDF. No usa cookies ni rastreadores.</p>
+    </div>
+    <div><h2>Producto</h2><ul><li><a href="../#laboratorio">Laboratorio</a></li><li><a href="../#descargar">Descargar</a></li><li><a href="../novedades/">Novedades</a></li></ul></div>
+    <div><h2>Ayuda</h2><ul><li><a href="./">Manual de usuario</a></li><li><a href="manual-pyx.pdf">Manual en PDF</a></li><li><a href="https://github.com/LorGIOO/Pyx/issues">Informar de un fallo</a></li></ul></div>
+    <div><h2>Proyecto</h2><ul><li><a href="https://github.com/LorGIOO/Pyx">Código fuente</a></li><li><a href="../privacidad/">Privacidad</a></li><li><a href="https://github.com/LorGIOO/Pyx/blob/main/LICENSE">Licencia MIT</a></li></ul></div>
+  </div>
+  <div class="endmark"><span>© <span data-year>2026</span> Pyx · Software libre</span><span>∎</span></div>
+</footer>
+
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/manual.js"></script>
+</body>
+</html>

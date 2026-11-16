@@ -1,0 +1,266 @@
+/* ==========================================================================
+   Pyx · estilos comunes a todas las páginas
+   Papel y tinta: la web se compone como un documento de LaTeX.
+   ========================================================================== */
+
+@font-face { font-family: "CMU Serif"; font-weight: 400; font-style: normal; font-display: swap; src: url("../fonts/cmu-serif-500-roman.woff2") format("woff2"); }
+@font-face { font-family: "CMU Serif"; font-weight: 400; font-style: italic; font-display: swap; src: url("../fonts/cmu-serif-500-italic.woff2") format("woff2"); }
+@font-face { font-family: "CMU Serif"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/cmu-serif-700-roman.woff2") format("woff2"); }
+@font-face { font-family: "CMU Serif"; font-weight: 700; font-style: italic; font-display: swap; src: url("../fonts/cmu-serif-700-italic.woff2") format("woff2"); }
+@font-face { font-family: "CMU Sans"; font-weight: 400; font-style: normal; font-display: swap; src: url("../fonts/cmu-sans-serif-500-roman.woff2") format("woff2"); }
+@font-face { font-family: "CMU Sans"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/cmu-sans-serif-700-roman.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("../fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: italic; font-display: swap; src: url("../fonts/jetbrains-mono-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("../fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/jetbrains-mono-latin-700-normal.woff2") format("woff2"); }
+
+:root {
+  color-scheme: light;
+  --paper: #f4f2ec;
+  --paper-2: #ebe8df;
+  --paper-3: #e1ddd2;
+  --sheet: #ffffff;
+  --sheet-ink: #15161a;
+  --ink: #16171b;
+  --ink-2: #474a52;
+  --ink-3: #7d8088;
+  --rule: #d6d1c5;
+  --rule-strong: #b9b3a5;
+  --blue: #007acc;
+  --blue-ink: #00599a;
+  --blue-wash: #dde9f3;
+  --red: #cf222e;
+  --green: #1a7f37;
+  --amber: #b45309;
+  --yellow: #d4a72c;
+  --hl: rgba(255, 214, 10, .45);
+  --editor: #1d1e22;
+  --editor-2: #25262b;
+  --editor-line: #2f3036;
+  --editor-ink: #d8d9dc;
+  --editor-dim: #7c7f87;
+  --tk-cmd: #6cb6ff;
+  --tk-py: #f7a24b;
+  --tk-str: #b5d98a;
+  --tk-num: #e8a7ff;
+  --tk-com: #6f737b;
+  --tk-kw: #ff8a80;
+  --shadow: 0 1px 2px rgba(20, 18, 12, .06), 0 10px 30px -10px rgba(20, 18, 12, .18);
+  --shadow-lg: 0 2px 4px rgba(20, 18, 12, .05), 0 30px 80px -24px rgba(20, 18, 12, .35);
+
+  --serif: "CMU Serif", "Latin Modern Roman", "Computer Modern", Georgia, "Times New Roman", serif;
+  --sans: "CMU Sans", "Latin Modern Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --measure: 40rem;
+  --wide: 76rem;
+  --gutter: clamp(16px, 4vw, 40px);
+  --head-h: 52px;
+  --radius: 6px;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #111214;
+    --paper-2: #18191c;
+    --paper-3: #222327;
+    --sheet: #1c1d21;
+    --sheet-ink: #e6e3dc;
+    --ink: #ebe8e1;
+    --ink-2: #b4b1aa;
+    --ink-3: #85837e;
+    --rule: #2d2e33;
+    --rule-strong: #43444b;
+    --blue: #3aa0ea;
+    --blue-ink: #6cbaf2;
+    --blue-wash: #14263a;
+    --red: #ff6b6b;
+    --green: #4cc26e;
+    --amber: #f0a450;
+    --hl: rgba(255, 214, 10, .28);
+    --editor: #16171a;
+    --editor-2: #1f2024;
+    --editor-line: #2a2b30;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px -10px rgba(0, 0, 0, .7);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, .4), 0 30px 80px -24px rgba(0, 0, 0, .9);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #111214;
+  --paper-2: #18191c;
+  --paper-3: #222327;
+  --sheet: #1c1d21;
+  --sheet-ink: #e6e3dc;
+  --ink: #ebe8e1;
+  --ink-2: #b4b1aa;
+  --ink-3: #85837e;
+  --rule: #2d2e33;
+  --rule-strong: #43444b;
+  --blue: #3aa0ea;
+  --blue-ink: #6cbaf2;
+  --blue-wash: #14263a;
+  --red: #ff6b6b;
+  --green: #4cc26e;
+  --amber: #f0a450;
+  --hl: rgba(255, 214, 10, .28);
+  --editor: #16171a;
+  --editor-2: #1f2024;
+  --editor-line: #2a2b30;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px -10px rgba(0, 0, 0, .7);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, .4), 0 30px 80px -24px rgba(0, 0, 0, .9);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--head-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.05rem + .25vw, 21px);
+  line-height: 1.55;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg, video, canvas { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--blue-ink); text-decoration-thickness: 1px; text-underline-offset: .18em; }
+a:hover { text-decoration-thickness: 2px; }
+::selection { background: var(--blue); color: #fff; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 3px; }
+code, kbd, pre, .mono { font-family: var(--mono); font-size: .8em; }
+p code, li code, dd code, td code { background: var(--paper-2); border: 1px solid var(--rule); padding: .05em .35em; border-radius: 4px; white-space: nowrap; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--ink); color: var(--paper); padding: 8px 14px; border-radius: 4px; font-family: var(--mono); font-size: 14px; }
+.skip:focus { top: 10px; }
+
+/* El logotipo de LaTeX */
+.latex { font-family: var(--serif); letter-spacing: -.02em; white-space: nowrap; }
+.latex sup { font-size: .72em; vertical-align: .32em; margin-left: -.36em; margin-right: -.15em; text-transform: uppercase; }
+.latex sub { font-size: 1em; vertical-align: -.22em; margin-left: -.1em; margin-right: -.12em; text-transform: uppercase; }
+
+/* --------------------------------------------------------------------------
+   Cabecera corrida (como la del manual: título a la izquierda, capítulo a la derecha)
+   -------------------------------------------------------------------------- */
+.runhead {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  height: var(--head-h);
+  display: flex; align-items: center; gap: 18px;
+  padding: 0 var(--gutter);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  backdrop-filter: saturate(1.4) blur(14px);
+  font-family: var(--mono); font-size: 13px; color: var(--ink-2);
+}
+.runhead::after { /* la raya de la cabecera, que se llena al leer */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, var(--blue) var(--read, 0%), color-mix(in srgb, var(--blue) 30%, var(--rule)) var(--read, 0%));
+}
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+.brand svg { width: 18px; height: 22px; }
+.runhead .where { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink-3); }
+.runhead .where b { color: var(--ink-2); font-weight: 500; }
+.runhead nav { display: flex; align-items: center; gap: 4px; }
+.runhead nav a { color: var(--ink-2); text-decoration: none; padding: 6px 10px; border-radius: 5px; }
+.runhead nav a:hover, .runhead nav a[aria-current="page"] { color: var(--ink); background: var(--paper-2); }
+.runhead nav a.key.primary, .runhead nav a.key.primary:hover { color: #fff; background: var(--blue); margin-left: 6px; }
+.icon-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 6px; border: 1px solid transparent; background: none; cursor: pointer; color: var(--ink-2); }
+.icon-btn:hover { background: var(--paper-2); color: var(--ink); }
+.icon-btn svg { width: 18px; height: 18px; }
+.menu-btn { display: none; }
+@media (max-width: 860px) {
+  .runhead .where { display: none; }
+  .runhead { justify-content: space-between; }
+  .runhead nav { position: fixed; top: var(--head-h); left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 18px; background: var(--paper); border-bottom: 1px solid var(--rule); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: .25s var(--ease); }
+  .runhead nav a { padding: 14px 4px; font-size: 16px; border-bottom: 1px solid var(--rule); border-radius: 0; }
+  .runhead nav a:hover { background: none; }
+  .runhead.open nav { transform: none; opacity: 1; pointer-events: auto; }
+  .menu-btn { display: inline-grid; }
+  .runhead .key { margin-top: 14px; text-align: center; justify-content: center; }
+}
+
+/* --------------------------------------------------------------------------
+   Botones como teclas: todo lo que se pulsa en esta web es una tecla
+   -------------------------------------------------------------------------- */
+.key {
+  --k: var(--sheet); --k-ink: var(--ink); --k-edge: var(--rule-strong);
+  display: inline-flex; align-items: center; gap: .55em;
+  font-family: var(--mono); font-size: 14px; font-weight: 500; line-height: 1;
+  padding: .78em 1.05em .82em;
+  color: var(--k-ink); background: var(--k);
+  border: 1px solid var(--k-edge); border-radius: 7px;
+  box-shadow: 0 2px 0 var(--k-edge), 0 3px 8px -4px rgba(0, 0, 0, .25);
+  text-decoration: none; cursor: pointer; user-select: none;
+  transition: transform .08s, box-shadow .08s, background .2s;
+}
+.key:hover { text-decoration: none; background: color-mix(in srgb, var(--k) 92%, var(--ink)); }
+.key:active, .key.is-down { transform: translateY(2px); box-shadow: 0 0 0 var(--k-edge), 0 1px 2px -1px rgba(0, 0, 0, .3); }
+.key.primary { --k: var(--blue); --k-ink: #fff; --k-edge: #00508a; }
+.key.primary:hover { background: #0a86d8; }
+.key.ghost { --k: transparent; box-shadow: none; }
+.key.small { font-size: 12px; padding: .6em .8em .64em; }
+.key .k-hint { opacity: .6; font-weight: 400; }
+.key svg { width: 1.15em; height: 1.15em; flex: none; }
+kbd {
+  display: inline-block; min-width: 1.7em; text-align: center;
+  padding: .12em .45em .16em; margin: 0 .05em;
+  font-family: var(--mono); font-size: .72em; line-height: 1.35;
+  color: var(--ink); background: var(--sheet);
+  border: 1px solid var(--rule-strong); border-radius: 4px;
+  box-shadow: 0 1.5px 0 var(--rule-strong);
+  white-space: nowrap; vertical-align: .08em;
+}
+
+/* --------------------------------------------------------------------------
+   Piezas de documento: etiqueta de capítulo, pies de figura, recuadros
+   -------------------------------------------------------------------------- */
+.eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .02em; color: var(--blue-ink); display: inline-flex; gap: .7em; align-items: baseline; }
+.eyebrow .n { color: var(--ink-3); }
+.caption { font-family: var(--sans); font-size: 15px; color: var(--ink-2); line-height: 1.45; }
+.caption b, .fig-num { font-family: var(--sans); font-weight: 700; color: var(--blue-ink); }
+.ui-btn { font-family: var(--sans); font-size: .82em; padding: .08em .45em; border-radius: 4px; background: var(--blue-wash); border: 1px solid color-mix(in srgb, var(--blue) 40%, transparent); white-space: nowrap; }
+.menu { font-family: var(--sans); font-weight: 700; font-size: .9em; }
+.numcirc { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 50%; background: #b3261e; color: #fff; font-family: var(--sans); font-weight: 700; font-size: .72em; vertical-align: .1em; }
+
+/* --------------------------------------------------------------------------
+   Pie de página: el colofón
+   -------------------------------------------------------------------------- */
+.colophon { border-top: 1px solid var(--rule); margin-top: 0; padding: 48px var(--gutter) 40px; font-family: var(--mono); font-size: 13px; color: var(--ink-3); }
+.colophon-inner { max-width: var(--wide); margin: 0 auto; display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 32px; }
+.colophon h2 { font: 500 12px var(--mono); color: var(--ink-2); margin: 0 0 12px; letter-spacing: .04em; text-transform: uppercase; }
+.colophon ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.colophon a { color: var(--ink-2); text-decoration: none; }
+.colophon a:hover { color: var(--blue-ink); text-decoration: underline; }
+.colophon .brand { font-size: 26px; margin-bottom: 10px; }
+.colophon p { margin: 0 0 8px; line-height: 1.6; max-width: 34ch; }
+.colophon .endmark { max-width: var(--wide); margin: 40px auto 0; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: 18px; }
+@media (max-width: 760px) { .colophon-inner { grid-template-columns: 1fr 1fr; } .colophon-inner > :first-child { grid-column: 1 / -1; } }
+
+/* --------------------------------------------------------------------------
+   Visor de imágenes (al pulsar una captura)
+   -------------------------------------------------------------------------- */
+.lightbox { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 4vmin; background: rgba(10, 10, 12, .82); opacity: 0; pointer-events: none; transition: opacity .25s; cursor: zoom-out; }
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox img { max-width: 100%; max-height: 86vh; border-radius: 6px; box-shadow: 0 30px 80px rgba(0, 0, 0, .6); transform: scale(.96); transition: transform .3s var(--ease); }
+.lightbox.open img { transform: none; }
+.lightbox p { color: #ddd; font-family: var(--sans); font-size: 15px; text-align: center; max-width: 70ch; margin: 14px auto 0; }
+
+/* Aparición al desplazarse */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* Páginas interiores (manual, novedades, privacidad) */
+.page-head { max-width: var(--wide); margin: 0 auto; padding: calc(var(--head-h) + clamp(40px, 8vw, 96px)) var(--gutter) 32px; }
+.page-head h1 { font-size: clamp(44px, 7vw, 96px); line-height: .98; letter-spacing: -.025em; margin: 14px 0 18px; font-weight: 400; }
+.page-head h1 em { color: var(--blue-ink); }
+.page-head .lede { font-size: clamp(19px, 1.2rem + .4vw, 25px); color: var(--ink-2); max-width: 44ch; margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+}

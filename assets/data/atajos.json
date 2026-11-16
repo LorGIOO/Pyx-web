@@ -1,0 +1,353 @@
+[
+ {
+  "grupo": "Archivo",
+  "teclas": [
+   "Ctrl",
+   "N"
+  ],
+  "texto": "Ctrl+N",
+  "accion": "Nuevo documento"
+ },
+ {
+  "grupo": "Archivo",
+  "teclas": [
+   "Ctrl",
+   "O"
+  ],
+  "texto": "Ctrl+O",
+  "accion": "Abrir"
+ },
+ {
+  "grupo": "Archivo",
+  "teclas": [
+   "Ctrl",
+   "S"
+  ],
+  "texto": "Ctrl+S",
+  "accion": "Guardar"
+ },
+ {
+  "grupo": "Archivo",
+  "teclas": [
+   "Ctrl",
+   "W"
+  ],
+  "texto": "Ctrl+W",
+  "accion": "Cerrar la pestaña"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl",
+   "Z",
+   "Ctrl",
+   "Y"
+  ],
+  "texto": "Ctrl+Z / Ctrl+Y",
+  "accion": "Deshacer / rehacer"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl",
+   "F"
+  ],
+  "texto": "Ctrl+F",
+  "accion": "Buscar (en el editor o en el PDF, según el foco)"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl",
+   "R"
+  ],
+  "texto": "Ctrl+R",
+  "accion": "Reemplazar (la palabra seleccionada, en todo el documento)"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl",
+   "Mayús",
+   "F"
+  ],
+  "texto": "Ctrl+Mayús+F",
+  "accion": "Buscar en todo el proyecto"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl",
+   "B",
+   "Ctrl",
+   "I"
+  ],
+  "texto": "Ctrl+B / Ctrl+I",
+  "accion": "Negrita / cursiva"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl",
+   "T"
+  ],
+  "texto": "Ctrl+T",
+  "accion": "Comentar o descomentar"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl",
+   "A"
+  ],
+  "texto": "Ctrl+A",
+  "accion": "Seleccionar todo (dentro de una celda: su código)"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl",
+   "Espacio"
+  ],
+  "texto": "Ctrl+Espacio",
+  "accion": "Mostrar el autocompletado"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Alt",
+   "↑",
+   "Alt",
+   "↓"
+  ],
+  "texto": "Alt+↑ / Alt+↓",
+  "accion": "Mover la línea o la celda"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Alt",
+   "←",
+   "Alt",
+   "→"
+  ],
+  "texto": "Alt+← / Alt+→",
+  "accion": "Posición anterior / siguiente del cursor"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl",
+   "F2"
+  ],
+  "texto": "Ctrl+F2",
+  "accion": "Poner o quitar un marcador"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "F2",
+   "Mayús",
+   "F2"
+  ],
+  "texto": "F2 / Mayús+F2",
+  "accion": "Marcador siguiente / anterior"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "F8",
+   "Mayús",
+   "F8"
+  ],
+  "texto": "F8 / Mayús+F8",
+  "accion": "Problema siguiente / anterior"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Ctrl"
+  ],
+  "texto": "Ctrl+clic en \\ref{}",
+  "accion": "Ir a su \\label"
+ },
+ {
+  "grupo": "Edición",
+  "teclas": [
+   "Alt",
+   "Mayús",
+   "1",
+   "9"
+  ],
+  "texto": "Alt+Mayús+1…9",
+  "accion": "Ejecutar una macro"
+ },
+ {
+  "grupo": "Python",
+  "teclas": [
+   "Ctrl",
+   "Intro"
+  ],
+  "texto": "Ctrl+Intro",
+  "accion": "Ejecutar la celda actual"
+ },
+ {
+  "grupo": "Python",
+  "teclas": [
+   "Mayús",
+   "Intro"
+  ],
+  "texto": "Mayús+Intro",
+  "accion": "Ejecutar la celda y avanzar"
+ },
+ {
+  "grupo": "Python",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "C"
+  ],
+  "texto": "Ctrl+Alt+C",
+  "accion": "Nueva celda"
+ },
+ {
+  "grupo": "Python",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "Intro"
+  ],
+  "texto": "Ctrl+Alt+Intro",
+  "accion": "Ejecutar todas las celdas"
+ },
+ {
+  "grupo": "Python",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "R"
+  ],
+  "texto": "Ctrl+Alt+R",
+  "accion": "Reiniciar el kernel"
+ },
+ {
+  "grupo": "Python",
+  "teclas": [
+   "Esc"
+  ],
+  "texto": "Esc",
+  "accion": "Cerrar la ayuda de una función"
+ },
+ {
+  "grupo": "Compilación",
+  "teclas": [
+   "Ctrl",
+   "Mayús",
+   "B"
+  ],
+  "texto": "Ctrl+Mayús+B",
+  "accion": "Compilar y ver"
+ },
+ {
+  "grupo": "Compilación",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "Mayús",
+   "B"
+  ],
+  "texto": "Ctrl+Alt+Mayús+B",
+  "accion": "Recompilar desde cero"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "F"
+  ],
+  "texto": "Ctrl+Alt+F",
+  "accion": "Ir a esta línea en el PDF"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [
+   "Ctrl"
+  ],
+  "texto": "Ctrl+clic en el PDF",
+  "accion": "Ir a ese punto del código"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "P"
+  ],
+  "texto": "Ctrl+Alt+P",
+  "accion": "Mostrar u ocultar el visor"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "D"
+  ],
+  "texto": "Ctrl+Alt+D",
+  "accion": "Dividir el editor"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "Z"
+  ],
+  "texto": "Ctrl+Alt+Z",
+  "accion": "Modo zen"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "T"
+  ],
+  "texto": "Ctrl+Alt+T",
+  "accion": "Terminal"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [
+   "Ctrl",
+   "Alt",
+   "L"
+  ],
+  "texto": "Ctrl+Alt+L",
+  "accion": "Registro de compilación"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [
+   "Ctrl",
+   "V"
+  ],
+  "texto": "Ctrl+V con una imagen",
+  "accion": "Insertarla como figura"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [],
+  "texto": "Botón derecho + arrastrar en el PDF",
+  "accion": "Mover la página"
+ },
+ {
+  "grupo": "Vista",
+  "teclas": [
+   "Ctrl"
+  ],
+  "texto": "Ctrl+rueda",
+  "accion": "Zoom del editor o del PDF"
+ }
+]
