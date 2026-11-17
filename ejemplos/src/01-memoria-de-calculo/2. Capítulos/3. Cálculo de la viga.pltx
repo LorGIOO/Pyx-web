@@ -1,0 +1,106 @@
+\section{Cálculo de la viga}\label{sec:viga}
+
+%#python
+import handcalcs.render
+import pint
+import numpy as np
+import matplotlib.pyplot as plt
+from pyx import figtex
+
+u = pint.UnitRegistry()
+
+# Perfiles candidatos: inercia (cm⁴) y módulo resistente (cm³), inventados
+# a partir de un catálogo IPE redondeado.
+perfiles = {"IPE 300": (8360, 557), "IPE 330": (11770, 713), "IPE 360": (16270, 904)}
+perfil = "IPE 330"
+I_cm4, W_cm3 = perfiles[perfil]
+%#end
+
+\subsection{Combinación de acciones}
+Lorem ipsum dolor sit amet. Se combinan las acciones con los coeficientes
+parciales habituales. El desarrollo lo escribe \emph{handcalcs}: la celda
+siguiente es una celda \verb|%%render|, que pone en el PDF cada fórmula con
+sus valores.
+
+%#python
+%%render params
+gamma_G = 1.35
+gamma_Q = 1.50
+%#end
+
+%#python
+%%render
+q_d = gamma_G * q_perm + gamma_Q * q_uso
+M_d = q_d * luz**2 / 8
+V_d = q_d * luz / 2
+%#end
+
+\subsection{Resistencia (ELU)}
+%#python
+# Con unidades (pint): las conversiones se hacen solas.
+fy = acero["fy"] * u.MPa
+W = W_cm3 * u.cm**3
+M_Rd = (W * fy / acero["gamma_M"]).to(u.kN * u.m)
+M_Ed = M_d * u.kN * u.m
+aprov_M = (M_Ed / M_Rd).to_base_units().magnitude
+%#end
+
+El perfil \textbf{\py{perfil}} resiste un momento de \py{f"{M_Rd.magnitude:.1f}"}~kN·m
+frente a los \py{f"{M_Ed.magnitude:.1f}"}~kN·m de cálculo: un aprovechamiento del
+\py{f"{100*aprov_M:.0f}"}~\%, por lo que el perfil \pyif{aprov_M <= 1}{\cumple}{\nocumple}
+a flexión.
+
+\subsection{Flecha (ELS)}
+%#python
+%%render
+E_s = 210000
+I_s = I_cm4 * 1e4
+q_k = q_perm + q_uso
+f = 5 * q_k * (luz*1000)**4 / (384 * E_s * I_s)
+f_lim = luz*1000 / 350
+%#end
+
+%#python
+x = np.linspace(0, luz, 200)
+y = -(q_k*(x*1000)*((luz*1000)**3 - 2*luz*1000*(x*1000)**2 + (x*1000)**3)) / (24*E_s*I_s)
+fig, ax = plt.subplots(figsize=(6.4, 2.6))
+ax.plot(x, y, color="#007acc", lw=2, label="deformada")
+ax.axhline(-f_lim, color="#cf222e", ls="--", lw=1, label=f"límite L/350 = {f_lim:.1f} mm")
+ax.set_xlabel("x (m)"); ax.set_ylabel("flecha (mm)")
+ax.legend(loc="lower right", frameon=False); ax.grid(alpha=0.3)
+fig.tight_layout()
+fig_flecha = figtex("flecha_viga", caption="Deformada de la viga con la carga característica.", label="fig:flecha", width=0.85)
+%#end
+
+La flecha máxima es de \py{f"{f:.1f}"}~mm, \pyif{f <= f_lim}{inferior}{superior} al
+límite de \py{f"{f_lim:.1f}"}~mm (figura~\ref{fig:flecha}): \pyif{f <= f_lim}{\cumple}{\nocumple}.
+
+\py{fig_flecha}
+
+\subsection{Comparación de perfiles}
+%#python
+filas = []
+for nombre, (I_i, W_i) in perfiles.items():
+    MR = W_i * acero["fy"] / acero["gamma_M"] / 1000          # kN·m
+    fl = 5 * q_k * (luz*1000)**4 / (384 * E_s * I_i * 1e4)    # mm
+    ok = MR >= M_d and fl <= f_lim
+    marca = r"\cumple" if ok else r"\nocumple"
+    filas.append(rf"{nombre} & {MR:.1f} & {fl:.1f} & {marca} \\")
+tabla_perfiles = "\n".join(filas)
+%#end
+
+La tabla~\ref{tab:perfiles} repite el cálculo para cada perfil. Sus filas las
+escribe un bucle de Python como texto \LaTeX{} corriente.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Comprobación de los perfiles candidatos ($M_d$ = \py{f"{M_d:.1f}"} kN·m, flecha límite \py{f"{f_lim:.1f}"} mm).}
+  \label{tab:perfiles}
+  \begin{tabular}{lccc}
+    \toprule
+    Perfil & $M_{Rd}$ (kN·m) & Flecha (mm) & Resultado \\
+    \midrule
+    \py{tabla_perfiles}
+    \bottomrule
+  \end{tabular}
+\end{table}

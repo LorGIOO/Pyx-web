@@ -1,0 +1,58 @@
+/* Pyx · página de ejemplos */
+.ej-layout { max-width: calc(var(--wide) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter) 120px; }
+
+.ej-steps { list-style: none; counter-reset: paso; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 8px 0 28px; padding: 0; }
+.ej-steps li { counter-increment: paso; position: relative; padding: 18px 18px 18px 58px; border: 1px solid var(--rule); border-radius: 10px; background: var(--sheet); color: var(--ink-2); font-size: 15px; line-height: 1.5; }
+.ej-steps li::before { content: counter(paso); position: absolute; left: 18px; top: 16px; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 500 13px var(--mono); color: #fff; background: var(--blue); }
+.ej-steps b { color: var(--ink); }
+
+.ej-index ol { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; padding: 0; }
+.ej-index a { display: inline-flex; gap: .55em; align-items: baseline; padding: 7px 12px; border: 1px solid var(--rule); border-radius: 99px; color: var(--ink-2); text-decoration: none; font-size: 14px; }
+.ej-index a span { font: 12px var(--mono); color: var(--blue-ink); }
+.ej-index a:hover { color: var(--ink); border-color: var(--rule-strong); background: var(--paper-2); }
+
+.ej { border-top: 1.4px solid var(--ink); padding: 44px 0 52px; scroll-margin-top: calc(var(--head-h) + 8px); }
+.ej + .ej { border-top: 1px solid var(--rule); }
+.ej-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 22px; align-items: start; margin-bottom: 26px; }
+.ej-num { font: 400 clamp(40px, 5vw, 64px)/1 var(--serif); color: var(--blue-ink); margin: 0; letter-spacing: -.02em; }
+.ej-head h2 { font-size: clamp(28px, 3.2vw, 42px); font-weight: 400; line-height: 1.08; letter-spacing: -.015em; margin: 2px 0 6px; }
+.ej-lema { margin: 0 0 12px; color: var(--ink-2); font-style: italic; }
+.ej-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; }
+.ej-tags li { font: 500 11.5px var(--mono); padding: 3px 9px; border-radius: 99px; background: var(--blue-wash); color: var(--blue-ink); }
+
+.ej-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.ej-text > p:first-child { margin-top: 0; }
+.ej-list { padding-left: 1.2em; color: var(--ink-2); }
+.ej-list li { margin: .4em 0; }
+.ej-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 12px; }
+.ej-open { font-size: 14px; color: var(--ink-3); margin: 0 0 16px; }
+.ej-tree summary { cursor: pointer; font: 500 13px var(--mono); color: var(--ink-2); }
+.ej-tree pre { margin: 10px 0 0; padding: 14px 16px; background: var(--paper-2); border-radius: 8px; font: 12.5px/1.65 var(--mono); color: var(--ink-2); overflow-x: auto; }
+.ej-tree .dir { color: var(--ink); font-weight: 500; }
+.ej-tree .main { color: var(--blue-ink); font-weight: 700; }
+
+/* las páginas del PDF: una tira que se desliza, la primera más grande */
+.ej-pages { display: grid; grid-auto-flow: column; grid-auto-columns: 46%; gap: 14px; overflow-x: auto; padding: 4px 4px 14px; scroll-snap-type: x mandatory; }
+.ej-pages[data-pages="1"] { grid-auto-columns: 70%; }
+.ej-page { scroll-snap-align: start; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 3px; }
+.ej-page img { display: block; width: 100%; height: auto; border-radius: 3px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 8px 24px -10px rgba(0,0,0,.28); transition: transform .2s var(--ease); }
+.ej-page:hover img { transform: translateY(-3px); }
+.ej-page:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+:root[data-theme="dark"] .ej-page img { box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 8px 24px -10px rgba(0,0,0,.7); }
+
+.ej .code { margin-top: 28px; }
+.ej .code + .code { margin-top: 14px; }
+.ej .code .code-lang { color: var(--editor-dim); }
+
+.ej-foot { margin-top: 40px; color: var(--ink-3); font-size: 14px; }
+
+.ej-lightbox { border: 0; padding: 0; background: transparent; max-width: min(96vw, 900px); max-height: 96vh; overflow: auto; }
+.ej-lightbox::backdrop { background: rgba(10, 11, 13, .78); }
+.ej-lightbox img { display: block; width: 100%; height: auto; background: #fff; border-radius: 4px; }
+.ej-lightbox [data-close] { position: sticky; top: 8px; float: right; margin: 8px; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); }
+
+@media (max-width: 860px) {
+  .ej-steps { grid-template-columns: minmax(0, 1fr); }
+  .ej-grid { grid-template-columns: minmax(0, 1fr); }
+  .ej-pages { grid-auto-columns: 62%; }
+}

@@ -30,17 +30,20 @@ Es una web estática: HTML, CSS y JavaScript sin dependencias ni paso de compila
 .
 ├── index.html            portada
 ├── manual/               manual (index.html se genera; plantilla.html es la plantilla) y el PDF
+├── ejemplos/             proyectos de ejemplo: src/ (fuentes), descargas/ (.zip), pdf/, img/ (vistas previas)
 ├── novedades/            historial de versiones
 ├── privacidad/           política de privacidad
 ├── 404.html
 ├── assets/
-│   ├── css/              base.css (común) · home.css (portada) · doc.css (manual, novedades, privacidad)
+│   ├── css/              base.css (común) · home.css (portada) · doc.css (manual, novedades, privacidad) · ejemplos.css
 │   ├── js/               common.js (común) · home.js (escenas de la portada) · manual.js
 │   ├── data/novedades.js las versiones
 │   ├── fonts/            CMU Serif, CMU Sans y JetBrains Mono (woff2)
 │   └── img/              capturas reales de Pyx, icono e imagen para redes sociales
 └── tools/
     ├── manual.py         genera el manual web a partir de manual-pyx.pltx
+    ├── ejemplos.py       empaqueta, compila y previsualiza los ejemplos
+    ├── ejemplos_pagina.py  escribe ejemplos/index.html (textos de cada ejemplo)
     ├── og.html · og.js   generan assets/img/og.png
 ```
 
@@ -50,6 +53,18 @@ Es una web estática: HTML, CSS y JavaScript sin dependencias ni paso de compila
 
 1. Abre `assets/data/novedades.js` y añade un objeto **al principio** de la lista (el archivo explica cada campo). La portada muestra la primera versión; `/novedades/` las muestra todas.
 2. Si cambia el número de versión, búscalo en `index.html` (aparece en la portada y en la sección de descargas) y en `manual/plantilla.html`.
+
+### Añadir o cambiar un ejemplo
+
+Los proyectos están en `ejemplos/src/<nombre>/`, con sus `.pltx` en texto plano para que se lean en GitHub. Al construirlos se convierten al formato que guarda Pyx, se comprimen, se compilan dos veces con el compilador real de Pyx (Python y XeLaTeX de verdad, con `test/e2e/real-compile.test.js` del repositorio de Pyx) y se hacen las vistas previas:
+
+```bash
+PYX_REPO=../Pyx python3 tools/ejemplos.py            # todos
+PYX_REPO=../Pyx python3 tools/ejemplos.py 03-cuaderno-de-jupyter
+python3 tools/ejemplos.py --pagina                   # solo la página
+```
+
+Un ejemplo nuevo necesita su documento principal en `RAIZ` (`tools/ejemplos.py`) y su texto en `EJEMPLOS` (`tools/ejemplos_pagina.py`); los fragmentos de código de la página se leen por líneas de los archivos reales. Todos los datos deben ser ficticios.
 
 ### Actualizar el manual
 

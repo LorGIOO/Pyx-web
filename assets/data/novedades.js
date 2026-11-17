@@ -13,6 +13,35 @@
    ========================================================================== */
 window.PYX_NOVEDADES = [
   {
+    version: "2.1.0",
+    fecha: "2026-11-17",
+    titulo: "Un visor que no salta, arrastre a tu gusto y proyectos de ejemplo",
+    grupos: [
+      {
+        nombre: "Visor de PDF",
+        cambios: [
+          "Al compilar, o tras un cambio grande, **el PDF ya no salta hacia la derecha**: la vista se queda donde estaba.",
+          "Elige con qué se arrastra la página: **botón derecho, rueda o los dos**, en `Configuración → Atajos de teclado`.",
+        ],
+      },
+      {
+        nombre: "Python",
+        cambios: [
+          "Las **funciones de un cuaderno** vinculado con `\\pynotebook{}` siguen funcionando al reutilizar los valores guardados.",
+          "En `tabletex()` y `tex()`, `prec` son siempre decimales, también en tablas de pandas: `41.2`, no `4e+01`.",
+          "Un `\\py{}` dentro del código de una celda o en un comentario de LaTeX ya no se evalúa ni avisa.",
+        ],
+      },
+      {
+        nombre: "Y además",
+        cambios: [
+          "**Compartir** queda en pausa mientras se mejora: ya no aparece en la interfaz.",
+          "En la web, una página de **ejemplos**: proyectos completos para descargar y compilar.",
+        ],
+      },
+    ],
+  },
+  {
     version: "2.0.0",
     fecha: "2026-11-13",
     titulo: "La nueva etapa: compilar más rápido, anotar de verdad y carpetas limpias",

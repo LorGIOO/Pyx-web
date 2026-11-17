@@ -264,4 +264,4 @@ kbd {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
 }
-@media (max-width: 860px) { .runhead [data-theme-toggle] { margin-left: auto; } }
+@media (max-width: 860px) { .runhead [data-theme-toggle] { margin-left: auto; } .runhead .gh-btn { margin-left: auto; } .runhead .gh-btn ~ [data-theme-toggle] { margin-left: 0; } }

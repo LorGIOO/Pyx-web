@@ -18,13 +18,46 @@
   settle();
   // otra vez al terminar de cargar (fuentes e imágenes), salvo que ya te hayas movido
   addEventListener('load', settle, { once: true });
+  /* Ir a una sección. La página crece mientras se recorre (las demostraciones
+     se montan al aparecer), así que el destino calculado al pulsar se queda
+     corto: «Descargar» acababa con la sección al pie de la pantalla. Se
+     persigue el destino hasta que se queda quieto, o hasta que tú te muevas. */
+  let chase = 0;
+  const goTo = (target) => {
+    cancelAnimationFrame(chase);
+    const behavior = reduceMotion ? 'auto' : 'smooth';
+    target.scrollIntoView({ behavior });
+    let moved = false;
+    const quit = () => { moved = true; };
+    const inputs = ['wheel', 'touchstart', 'keydown'];
+    inputs.forEach((t) => addEventListener(t, quit, { once: true, passive: true }));
+    const t0 = performance.now();
+    let lastY = -1, idle = 0, ok = 0;
+    const step = () => {
+      const done = () => inputs.forEach((t) => removeEventListener(t, quit));
+      if (moved || performance.now() - t0 > 6000) return done();
+      const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+      const off = target.getBoundingClientRect().top - margin;
+      const atEnd = scrollY >= root.scrollHeight - innerHeight - 1;
+      if (Math.abs(off) <= 2 || (off > 0 && atEnd)) {
+        if (++ok > 20) return done(); // quieto en su sitio un tercio de segundo
+      } else {
+        ok = 0;
+        idle = scrollY === lastY ? idle + 1 : 0;
+        if (idle > 6) { target.scrollIntoView({ behavior }); idle = 0; } // se paró antes de llegar
+      }
+      lastY = scrollY;
+      chase = requestAnimationFrame(step);
+    };
+    chase = requestAnimationFrame(step);
+  };
   document.addEventListener('click', (e) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
     const a = e.target.closest('a[href^="#"]');
     const target = a && byHash(a.getAttribute('href'));
     if (!target) return;
     e.preventDefault();
-    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    goTo(target);
     if (a.classList.contains('skip')) { target.tabIndex = -1; target.focus({ preventScroll: true }); }
   });
   const store = {

@@ -1,0 +1,163 @@
+% !TeX program = xelatex
+% =====================================================================
+%  TABLAS, GRÁFICAS Y CONDICIONALES (ejemplo de Pyx)
+%  · La tabla 1 se escribe en LaTeX, celda a celda: cada número lo pide el
+%    documento a un DataFrame de pandas normal. En Python no hay nada
+%    preparado para LaTeX: solo los datos.
+%  · La tabla 2 es la alternativa en una línea: tabletex(df).
+%  · La tabla 3 la escribe un bucle de Python.
+%  · Gráficas: figtex() (la figura entera) y figure() + \includegraphics
+%    (solo la imagen), dentro de la celda que las dibuja.
+%  · El texto cambia con los resultados: \pyif{condición}{sí}{no}.
+%  Todos los datos son ficticios.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-noshorthands,es-tabla]{babel}
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{amsmath,booktabs,graphicx,float,xcolor}
+\usepackage[hidelinks]{hyperref}
+\definecolor{bien}{HTML}{1A7F37}
+\definecolor{mal}{HTML}{CF222E}
+
+\title{Consumo energético de un edificio de oficinas\\\large Tablas de pandas, gráficas y texto condicional}
+\author{Ejemplo de Pyx}
+\date{}
+
+\begin{document}
+\maketitle
+
+%#python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pyx import figtex, tabletex, figure   # ayudas de Pyx (opcionales)
+
+# Datos mensuales inventados: demanda de calefacción y refrigeración (MWh),
+# producción fotovoltaica (MWh) y ocupación media (%).
+meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+         "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+df = pd.DataFrame({
+    "calefaccion":   [41.2, 35.8, 24.1, 12.6, 4.3, 0.0, 0.0, 0.0, 1.9, 10.8, 27.5, 38.9],
+    "refrigeracion": [0.0, 0.0, 1.2, 4.8, 11.5, 22.4, 31.9, 30.2, 18.7, 6.1, 0.8, 0.0],
+    "fotovoltaica":  [8.1, 10.4, 14.9, 19.6, 20.6, 24.8, 26.5, 25.0, 21.3, 12.7, 8.9, 7.2],
+    "ocupacion":     [82, 85, 88, 86, 84, 78, 52, 31, 80, 87, 89, 74],
+}, index=meses)
+df["total"] = df["calefaccion"] + df["refrigeracion"]
+df["neto"] = df["total"] - df["fotovoltaica"]
+df
+%#end
+
+\section{Datos mensuales}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. La tabla~\ref{tab:trimestre}
+está escrita a mano en LaTeX; cada número es un \texttt{\textbackslash py\{\}} que lee
+una celda del DataFrame, por ejemplo \texttt{\textbackslash py\{df.at["Ene", "total"]\}}.
+
+\begin{table}[H]
+  \centering
+  \caption{Primer trimestre (MWh), celda a celda.}
+  \label{tab:trimestre}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Mes & Calefacción & Refrigeración & Fotovoltaica & Neto \\
+    \midrule
+    Enero   & \py{df.at["Ene", "calefaccion"]} & \py{df.at["Ene", "refrigeracion"]} & \py{df.at["Ene", "fotovoltaica"]} & \py{round(df.at["Ene", "neto"], 1)} \\
+    Febrero & \py{df.at["Feb", "calefaccion"]} & \py{df.at["Feb", "refrigeracion"]} & \py{df.at["Feb", "fotovoltaica"]} & \py{round(df.at["Feb", "neto"], 1)} \\
+    Marzo   & \py{df.at["Mar", "calefaccion"]} & \py{df.at["Mar", "refrigeracion"]} & \py{df.at["Mar", "fotovoltaica"]} & \py{round(df.at["Mar", "neto"], 1)} \\
+    \midrule
+    Total   & \py{df.loc["Ene":"Mar", "calefaccion"].sum().round(1)} & \py{df.loc["Ene":"Mar", "refrigeracion"].sum().round(1)} & \py{df.loc["Ene":"Mar", "fotovoltaica"].sum().round(1)} & \py{df.loc["Ene":"Mar", "neto"].sum().round(1)} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+El año completo cabe en una línea con \texttt{tabletex}, que convierte el DataFrame
+entero en una tabla (tabla~\ref{tab:anual}).
+
+\py{tabletex(df[["calefaccion", "refrigeracion", "fotovoltaica", "neto"]].rename(columns={"calefaccion": "Calefacción", "refrigeracion": "Refrigeración", "fotovoltaica": "Fotovoltaica", "neto": "Neto"}).reset_index(names="Mes"), caption="Año completo (MWh), con tabletex.", label="tab:anual", prec=1, placement="H")}
+
+\section{Balance anual}
+
+%#python
+anual = df[["calefaccion", "refrigeracion", "fotovoltaica"]].sum()
+cobertura = 100 * anual["fotovoltaica"] / df["total"].sum()
+mes_pico = df["total"].idxmax()
+meses_excedente = list(df.index[df["neto"] < 0])
+objetivo = 40.0          # % de la demanda cubierta con fotovoltaica
+%#end
+
+La demanda anual es de \py{df["total"].sum().round(1)}~MWh: \py{anual["calefaccion"].round(1)}~MWh
+de calefacción y \py{anual["refrigeracion"].round(1)}~MWh de refrigeración. El mes de
+mayor demanda es \py{mes_pico}, con \py{df.at[mes_pico, "total"]}~MWh.
+
+La fotovoltaica produce \py{anual["fotovoltaica"].round(1)}~MWh y cubre el
+\py{f"{cobertura:.1f}"}\,\% de la demanda:
+\pyif{cobertura >= objetivo}{\textcolor{bien}{\textbf{se alcanza}}}{\textcolor{mal}{\textbf{no se alcanza}}}
+el objetivo del \py{objetivo}\,\%.
+\pyif{len(meses_excedente) > 0}{Hay excedente en \py{len(meses_excedente)}~\pyif{len(meses_excedente) == 1}{mes}{meses} (\py{", ".join(meses_excedente)}), que se vierte a la red.}{En ningún mes hay excedente.}
+
+%#python
+# Gráfica de la figura 1: figtex() la guarda y devuelve la figura entera
+# de LaTeX; el documento la coloca con \py{figura_balance}.
+fig, ax = plt.subplots(figsize=(6.4, 3.0))
+x = np.arange(12)
+ax.bar(x - 0.2, df["calefaccion"], 0.4, label="calefacción", color="#cf222e")
+ax.bar(x + 0.2, df["refrigeracion"], 0.4, label="refrigeración", color="#007acc")
+ax.plot(x, df["fotovoltaica"], "o-", color="#d4a017", label="fotovoltaica")
+ax.set_xticks(x, meses); ax.set_ylabel("MWh")
+ax.legend(frameon=False, ncols=3); ax.grid(axis="y", alpha=0.3)
+fig.tight_layout()
+figura_balance = figtex("balance", caption="Demanda y producción mensual (figtex).",
+                        label="fig:balance", width=0.85, placement="H")
+%#end
+
+\py{figura_balance}
+
+\section{Mes a mes}
+La tabla~\ref{tab:meses} la escribe un bucle de Python; la última columna es un
+condicional por mes.
+
+%#python
+filas = []
+for mes, r in df.iterrows():
+    estado = r"\textcolor{bien}{excedente}" if r["neto"] < 0 else r"\textcolor{mal}{déficit}"
+    filas.append(f"{mes} & {r['ocupacion']:.0f} & {r['total']:.1f} & {r['neto']:+.1f} & {estado} \\\\")
+tabla_meses = "\n".join(filas)
+%#end
+
+\begin{table}[H]
+  \centering
+  \caption{Estado mensual.}
+  \label{tab:meses}
+  \begin{tabular}{lrrrl}
+    \toprule
+    Mes & Ocupación (\%) & Demanda (MWh) & Neto (MWh) & Estado \\
+    \midrule
+    \py{tabla_meses}
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%#python
+# Dos gráficas en una imagen: figure() la guarda y devuelve su ruta.
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.2, 2.8))
+a1.scatter(df["ocupacion"], df["total"], color="#007acc")
+a1.set_xlabel("ocupación (%)"); a1.set_ylabel("demanda (MWh)")
+a2.fill_between(x, df["neto"], 0, where=df["neto"] >= 0, color="#cf222e", alpha=0.5, label="déficit", interpolate=True)
+a2.fill_between(x, df["neto"], 0, where=df["neto"] < 0, color="#1a7f37", alpha=0.5, label="excedente", interpolate=True)
+a2.set_xticks(x[::2], meses[::2]); a2.legend(frameon=False)
+for a in (a1, a2): a.grid(alpha=0.3)
+fig.tight_layout()
+ruta = figure("ocupacion_y_neto")
+correlacion = df["ocupacion"].corr(df["total"])
+%#end
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{\py{ruta}}
+  \caption{Demanda frente a ocupación y balance neto (figure() + \texttt{\textbackslash includegraphics}).}
+\end{figure}
+
+La correlación entre ocupación y demanda es de \py{f"{correlacion:.2f}"}:
+\pyif{abs(correlacion) > 0.5}{la ocupación explica buena parte del consumo}{el clima pesa más que la ocupación}.
+Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum.
+\end{document}

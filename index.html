@@ -19,8 +19,8 @@
   <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="preload" href="assets/fonts/cmu-serif-500-roman.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/base.css?v=20261116c">
-  <link rel="stylesheet" href="assets/css/home.css?v=20261116c">
+  <link rel="stylesheet" href="assets/css/base.css?v=20261117a">
+  <link rel="stylesheet" href="assets/css/home.css?v=20261117a">
 </head>
 <body>
 <a class="skip" href="#por-que">Saltar al contenido</a>
@@ -47,10 +47,12 @@
   <a class="brand" href="./" aria-label="Pyx, inicio"><svg aria-hidden="true"><use href="#logo"/></svg></a>
   <nav aria-label="Principal">
     <a href="#laboratorio">Laboratorio</a>
+    <a href="ejemplos/">Ejemplos</a>
     <a href="manual/">Manual</a>
     <a href="novedades/">Novedades</a>
     <a class="key small primary" href="#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar</a>
   </nav>
+  <a class="icon-btn gh-btn" href="https://github.com/LorGIOO/Pyx" aria-label="El código de Pyx en GitHub" title="El código de Pyx en GitHub"><svg aria-hidden="true"><use href="#i-gh"/></svg></a>
   <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar el tema"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
   <button class="icon-btn menu-btn" type="button" aria-label="Menú" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
 </header>
@@ -64,7 +66,7 @@
   <div class="hero-stage">
     <div class="hero-copy">
       <div class="hero-step is-on" data-step="0">
-        <p class="eyebrow"><span>v2.0.0</span><span class="n">Windows · Linux · Libre (MIT)</span></p>
+        <p class="eyebrow"><span>v2.1.0</span><span class="n">Windows · Linux · Libre (MIT)</span></p>
         <h1 class="hero-title">
           <span class="glyphs" aria-hidden="true"><i class="g-cursor"></i><svg class="g-int" viewBox="10 -4 62 106"><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74"/></svg><i class="g-run"></i></span>
           <span class="word">Pyx</span>
@@ -205,7 +207,7 @@
       </div>
       <div class="gest-visual" aria-hidden="true">
         <div class="win">
-          <div class="win-bar"><span></span><span></span><span></span><b>informe.pltx — Pyx 2.0.0</b></div>
+          <div class="win-bar"><span></span><span></span><span></span><b>informe.pltx — Pyx 2.1.0</b></div>
           <div class="win-body">
             <div class="win-editor">
               <div class="wl"><em>14</em><span class="tk-cmd">\section</span>{Datos de partida}</div>
@@ -636,7 +638,7 @@
         <span class="key dl-key">Descargar para Linux</span>
       </a>
     </div>
-    <p class="dl-req caption reveal">Requisitos: 4&nbsp;GB de memoria y unos 600&nbsp;MB de disco si Pyx prepara su propio Python (200&nbsp;MB si usas uno que ya tengas). Internet solo la primera vez y para buscar actualizaciones. ¿Primera vez? Empieza por el <a href="manual/#cap-instalacion-y-primer-arranque">capítulo 2 del manual</a>.</p>
+    <p class="dl-req caption reveal">Requisitos: 4&nbsp;GB de memoria y unos 600&nbsp;MB de disco si Pyx prepara su propio Python (200&nbsp;MB si usas uno que ya tengas). Internet solo la primera vez y para buscar actualizaciones. ¿Primera vez? Empieza por el <a href="manual/#cap-instalacion-y-primer-arranque">capítulo 2 del manual</a> y abre uno de los <a href="ejemplos/">proyectos de ejemplo</a>.</p>
   </div>
 </section>
 
@@ -649,15 +651,15 @@
       <p>El cálculo y el documento, en un mismo archivo.</p>
       <p>Esta página está compuesta en Computer Modern, la letra de <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>, y JetBrains Mono. No usa cookies ni rastreadores.</p>
     </div>
-    <div><h2>Producto</h2><ul><li><a href="#laboratorio">Laboratorio</a></li><li><a href="#descargar">Descargar</a></li><li><a href="novedades/">Novedades</a></li></ul></div>
+    <div><h2>Producto</h2><ul><li><a href="#laboratorio">Laboratorio</a></li><li><a href="ejemplos/">Ejemplos</a></li><li><a href="#descargar">Descargar</a></li><li><a href="novedades/">Novedades</a></li></ul></div>
     <div><h2>Ayuda</h2><ul><li><a href="manual/">Manual de usuario</a></li><li><a href="manual/manual-pyx.pdf">Manual en PDF</a></li><li><a href="manual/#cap-atajos-de-teclado">Atajos de teclado</a></li><li><a href="https://github.com/LorGIOO/Pyx/issues">Informar de un fallo</a></li></ul></div>
     <div><h2>Proyecto</h2><ul><li><a href="https://github.com/LorGIOO/Pyx">Código fuente</a></li><li><a href="privacidad/">Privacidad</a></li><li><a href="firma/">Firma de código</a></li><li><a href="https://github.com/LorGIOO/Pyx/blob/main/LICENSE">Licencia MIT</a></li></ul></div>
   </div>
   <div class="endmark"><span>© <span data-year>2026</span> Pyx · Software libre</span><span>∎</span></div>
 </footer>
 
-<script src="assets/data/novedades.js?v=20261116c"></script>
-<script src="assets/js/common.js?v=20261116c"></script>
-<script src="assets/js/home.js?v=20261116c"></script>
+<script src="assets/data/novedades.js?v=20261117a"></script>
+<script src="assets/js/common.js?v=20261117a"></script>
+<script src="assets/js/home.js?v=20261117a"></script>
 </body>
 </html>

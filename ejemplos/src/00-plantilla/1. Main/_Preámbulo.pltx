@@ -1,0 +1,20 @@
+% !TeX program = xelatex
+% =====================================================================
+%  PLANTILLA DE PYX — documento principal (el que se compila)
+%  · El aspecto está en memoria.sty (junto a este archivo).
+%  · Cada capítulo es un documento aparte en «2. Capítulos».
+%  · Imágenes, datos y cálculos, en «999. Recursos».
+%  Las rutas son siempre relativas a ESTA carpeta.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{memoria}
+\titulocorto{Plantilla de Pyx}
+
+\begin{document}
+\portada{Título del documento}{Subtítulo o asignatura}{Nombre del autor}{\today}
+\tableofcontents
+\clearpage
+
+\input{../2. Capítulos/1. Introducción}
+\input{../2. Capítulos/2. Cálculos}
+\end{document}

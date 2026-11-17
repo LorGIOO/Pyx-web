@@ -1,0 +1,33 @@
+% !TeX program = xelatex
+% =====================================================================
+%  MEMORIA DE CÁLCULO (ejemplo de Pyx) — documento principal
+%  Pasarela peatonal ficticia: todos los datos son inventados.
+%
+%  Estructura del proyecto:
+%    1. Main/          este archivo y el estilo (memoria.sty)
+%    2. Capítulos/     un .pltx por capítulo, cada uno con sus celdas
+%    3. Anejos/        el anejo usa un cuaderno de Jupyter
+%    999. Recursos/    datos (CSV, Excel) y cálculos (.ipynb)
+%
+%  Las celdas de todos los archivos se ejecutan en el orden en que aparecen
+%  en el documento completo, con las rutas relativas a ESTA carpeta.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{memoria}
+\titulocorto{Pasarela peatonal sobre el barranco (ficticia)}
+
+\begin{document}
+\portada{Memoria de cálculo}{Pasarela peatonal sobre el barranco\\\small(proyecto ficticio de ejemplo)}{Oficina técnica}{Noviembre de 2026}
+
+\tableofcontents
+\clearpage
+
+\input{../2. Capítulos/1. Introducción}
+\input{../2. Capítulos/2. Datos de partida}
+\input{../2. Capítulos/3. Cálculo de la viga}
+\input{../2. Capítulos/4. Conclusiones}
+
+\appendix
+\clearpage
+\input{../3. Anejos/Anejo A. Viento}
+\end{document}

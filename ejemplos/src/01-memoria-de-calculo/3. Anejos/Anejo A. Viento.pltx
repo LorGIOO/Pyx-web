@@ -1,0 +1,31 @@
+\section{Anejo A. Presión de viento}\label{sec:viento}
+
+% Este anejo no tiene celdas propias: todo el cálculo está en un cuaderno de
+% Jupyter. \pynotebook lo vincula y, desde aquí, sus variables y sus
+% funciones se usan como si fueran del documento.
+\pynotebook{../999. Recursos/2. Cálculos/viento.ipynb}
+
+Las presiones de viento se calculan en el cuaderno \texttt{viento.ipynb}, que se
+puede abrir y ejecutar también en Jupyter o en VS Code. Con una velocidad básica de
+\py{v_b}~m/s y una densidad del aire de \py{rho_aire}~kg/m$^3$, la presión básica es
+de \py{f"{q_b:.3f}"}~kN/m$^2$.
+
+La tabla~\ref{tab:viento} la escribe una función del cuaderno, \texttt{filas\_presion},
+llamada desde aquí con las alturas que interesan.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Presión de viento según la altura sobre el terreno (valores ficticios).}
+  \label{tab:viento}
+  \begin{tabular}{ccc}
+    \toprule
+    Altura $z$ (m) & Coeficiente $c_e(z)$ & Presión $q_e$ (kN/m$^2$) \\
+    \midrule
+    \py{filas_presion([2, 5, 10, 15, 20])}
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+A la altura del tablero (\py{z_tablero}~m), la presión es de
+\py{f"{presion(z_tablero):.3f}"}~kN/m$^2$: \pyif{presion(z_tablero) < 1.0}{moderada}{elevada}.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.

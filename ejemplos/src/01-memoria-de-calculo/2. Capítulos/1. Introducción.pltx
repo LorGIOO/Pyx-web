@@ -1,0 +1,21 @@
+\section{Introducción}
+
+\subsection{Objeto}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Se justifica la
+estructura de una pasarela peatonal \emph{ficticia}: una viga metálica simplemente
+apoyada sobre dos estribos. Todos los datos de este documento son inventados y
+sirven solo para enseñar cómo se organiza una memoria de cálculo en Pyx.
+
+\subsection{Descripción de la estructura}
+Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras
+mattis consectetur purus sit amet fermentum.
+\begin{itemize}
+  \item Tablero de madera sobre dos vigas metálicas de perfil IPE.
+  \item Luz entre apoyos y cargas en el capítulo~\ref{sec:datos}.
+  \item Comprobaciones de resistencia (ELU) y de flecha (ELS) en el capítulo~\ref{sec:viga}.
+\end{itemize}
+
+\subsection{Cómo está hecho este documento}
+Cada número de los capítulos siguientes lo calcula una celda de Python al
+compilar: si cambia un dato de partida, cambian a la vez los valores del texto,
+las tablas, las figuras y las conclusiones.

@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ejemplos · Pyx</title>
+  <meta name="description" content="Proyectos de Pyx para descargar, compilar y copiar: memoria de cálculo, handcalcs y pint, cuadernos de Jupyter, tablas de pandas y gráficas.">
+  <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Ejemplos de Pyx">
+  <meta property="og:image" content="../assets/img/og.png">
+  <link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+    <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261117a">
+  <link rel="stylesheet" href="../assets/css/doc.css?v=20261117a">
+  <link rel="stylesheet" href="../assets/css/ejemplos.css?v=20261117a">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="logo" viewBox="-2 -4 86 104"><rect x=".5" y="11.15" width="6.25" height="74.4" rx="3.1" fill="var(--blue)"/><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M80.06 84.77 58.5 95.28V74.26Z" fill="var(--blue)"/></symbol>
+  <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2Z" fill="currentColor"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v13M6 12l6 6 6-6M5 21h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 2.3a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.2-.4-1.2.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.5 4.9.4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.3Z" fill="currentColor"/></symbol>
+</defs></svg>
+
+<header class="runhead">
+  <a class="brand" href="../" aria-label="Pyx, inicio"><svg aria-hidden="true"><use href="#logo"/></svg></a>
+  <nav aria-label="Principal">
+    <a href="../#laboratorio">Laboratorio</a>
+    <a href="./" aria-current="page">Ejemplos</a>
+    <a href="../manual/">Manual</a>
+    <a href="../novedades/">Novedades</a>
+    <a class="key small primary" href="../#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar</a>
+  </nav>
+  <a class="icon-btn gh-btn" href="https://github.com/LorGIOO/Pyx" aria-label="El código de Pyx en GitHub" title="El código de Pyx en GitHub"><svg aria-hidden="true"><use href="#i-gh"/></svg></a>
+  <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar el tema"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
+  <button class="icon-btn menu-btn" type="button" aria-label="Menú" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+</header>
+
+<header class="page-head">
+  <p class="eyebrow"><span>Ejemplos</span><span class="n">5 proyectos para descargar</span></p>
+  <h1>Proyectos para <em>abrir, compilar y copiar.</em></h1>
+  <p class="lede">Proyectos completos de Pyx con datos inventados. Descarga uno, ábrelo y compílalo tal cual; luego cambia un dato y mira cómo se rehace el documento entero. Cópialos, rómpelos, úsalos de plantilla.</p>
+</header>
+
+<div class="ej-layout">
+  <main id="contenido">
+    <ol class="ej-steps" aria-label="Cómo se usan">
+      <li><b>Descarga</b> el <code>.zip</code> y descomprímelo donde quieras.</li>
+      <li><b>Abre</b> en Pyx el archivo principal que se indica en cada uno.</li>
+      <li><b>Compila</b> con <span class="menu">Compilar y ver</span> (Ctrl+Mayús+B). Las librerías que usan las trae el Python que prepara Pyx.</li>
+    </ol>
+    <nav class="ej-index" aria-label="Ejemplos"><ol><li><a href="#00-plantilla"><span>00</span>Plantilla vacía</a></li><li><a href="#01-memoria-de-calculo"><span>01</span>Memoria de cálculo</a></li><li><a href="#02-handcalcs-y-unidades"><span>02</span>Handcalcs y unidades</a></li><li><a href="#03-cuaderno-de-jupyter"><span>03</span>Solo un cuaderno de Jupyter</a></li><li><a href="#04-tablas-graficas-y-condicionales"><span>04</span>Tablas, gráficas y condicionales</a></li></ol></nav>
+
+<article class="ej" id="00-plantilla" data-chapter="<b>00</b> · Plantilla vacía">
+  <header class="ej-head">
+    <p class="ej-num">00</p>
+    <div>
+      <h2>Plantilla vacía</h2>
+      <p class="ej-lema">El punto de partida para un trabajo nuevo.</p>
+      <ul class="ej-tags"><li>preámbulo .pltx</li><li>estilo .sty</li><li>subdocumentos</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>La misma estructura que la memoria de cálculo, sin contenido: un documento principal que solo reúne capítulos, un archivo <code>.sty</code> con todo el aspecto (márgenes, colores, portada, <code>\cumple</code> y <code>\nocumple</code>) y una carpeta de recursos para imágenes, datos y cálculos.</p>
+      <ul class="ej-list"><li><code>_Preámbulo.pltx</code> solo tiene la portada, el índice y un <code>\input</code> por capítulo.</li><li>Cada capítulo es un <code>.pltx</code> aparte, con sus propias celdas de Python.</li><li><code>memoria.sty</code> guarda el estilo: cámbialo una vez y cambia todo el documento.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="descargas/00-plantilla.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar .zip <span class="k-hint">4 KB</span></a>
+        <a class="key" href="pdf/00-plantilla.pdf">Ver el PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src/00-plantilla">Ver en GitHub</a>
+      </div>
+      <p class="ej-open">Abre <code>1. Main/_Preámbulo.pltx</code> y pulsa <b>Compilar y ver</b>.</p>
+      <details class="ej-tree"><summary>Archivos del proyecto</summary><pre>├─ <span class="dir">1. Main/</span>
+│  ├─ <span class="main">_Preámbulo.pltx</span>
+│  └─ <span class="">memoria.sty</span>
+├─ <span class="dir">2. Capítulos/</span>
+│  ├─ <span class="">1. Introducción.pltx</span>
+│  └─ <span class="">2. Cálculos.pltx</span>
+├─ <span class="dir">999. Recursos/</span>
+│  └─ <span class="dir">1. Imágenes/</span>
+│     └─ <span class="">LEEME.txt</span>
+└─ <span class="">LEEME.md</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="3"><button class="ej-page" type="button" data-full="img/00-plantilla-1.webp" aria-label="Ampliar la página 1"><img src="img/00-plantilla-1.webp" alt="Plantilla vacía, página 1" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/00-plantilla-2.webp" aria-label="Ampliar la página 2"><img src="img/00-plantilla-2.webp" alt="Plantilla vacía, página 2" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/00-plantilla-3.webp" aria-label="Ampliar la página 3"><img src="img/00-plantilla-3.webp" alt="Plantilla vacía, página 3" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">1. Main/_Preámbulo.pltx</span><pre><code><span class="tk-cmd">\documentclass</span>[11pt,a4paper]{article}
+<span class="tk-cmd">\usepackage</span>{memoria}
+<span class="tk-cmd">\titulocorto</span>{Plantilla de Pyx}
+
+<span class="tk-cmd">\begin</span>{document}
+<span class="tk-cmd">\portada</span>{Título del documento}{Subtítulo o asignatura}{Nombre del autor}{<span class="tk-cmd">\today</span>}
+<span class="tk-cmd">\tableofcontents</span>
+<span class="tk-cmd">\clearpage</span>
+
+<span class="tk-cmd">\input</span>{../2. Capítulos/1. Introducción}
+<span class="tk-cmd">\input</span>{../2. Capítulos/2. Cálculos}
+<span class="tk-cmd">\end</span>{document}</code></pre></figure>
+</article>
+<article class="ej" id="01-memoria-de-calculo" data-chapter="<b>01</b> · Memoria de cálculo">
+  <header class="ej-head">
+    <p class="ej-num">01</p>
+    <div>
+      <h2>Memoria de cálculo</h2>
+      <p class="ej-lema">Una pasarela peatonal ficticia, de los datos a las conclusiones.</p>
+      <ul class="ej-tags"><li>capítulos</li><li>CSV y Excel</li><li>handcalcs</li><li>pint</li><li>gráficas</li><li>\pyif</li><li>Jupyter</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>Un trabajo grande organizado como se haría en la vida real. Los datos se leen de un CSV y de un Excel; la viga se calcula con <em>handcalcs</em>, que escribe cada fórmula con sus valores, y con <em>pint</em> para las unidades; el texto dice «CUMPLE» o «NO CUMPLE» según el resultado. El anejo de viento no tiene celdas: llama a las funciones de un cuaderno de Jupyter.</p>
+      <ul class="ej-list"><li>Las variables de un capítulo se usan en los siguientes.</li><li>Una tabla con un <code>\py{}</code> en cada celda y otra entera con <code>tabletex</code>.</li><li>Una tabla cuyas filas escribe un bucle, comparando tres perfiles.</li><li>Cambia <code>perfil = "IPE 330"</code> por <code>"IPE 300"</code> y mira cómo cambian el texto, la gráfica y las tablas.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="descargas/01-memoria-de-calculo.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar .zip <span class="k-hint">15 KB</span></a>
+        <a class="key" href="pdf/01-memoria-de-calculo.pdf">Ver el PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src/01-memoria-de-calculo">Ver en GitHub</a>
+      </div>
+      <p class="ej-open">Abre <code>1. Main/_Preámbulo.pltx</code> y pulsa <b>Compilar y ver</b>.</p>
+      <details class="ej-tree"><summary>Archivos del proyecto</summary><pre>├─ <span class="dir">1. Main/</span>
+│  ├─ <span class="main">_Preámbulo.pltx</span>
+│  └─ <span class="">memoria.sty</span>
+├─ <span class="dir">2. Capítulos/</span>
+│  ├─ <span class="">1. Introducción.pltx</span>
+│  ├─ <span class="">2. Datos de partida.pltx</span>
+│  ├─ <span class="">3. Cálculo de la viga.pltx</span>
+│  └─ <span class="">4. Conclusiones.pltx</span>
+├─ <span class="dir">3. Anejos/</span>
+│  └─ <span class="">Anejo A. Viento.pltx</span>
+├─ <span class="dir">999. Recursos/</span>
+│  ├─ <span class="dir">1. Datos/</span>
+│  │  ├─ <span class="">cargas.xlsx</span>
+│  │  └─ <span class="">materiales.csv</span>
+│  └─ <span class="dir">2. Cálculos/</span>
+│     └─ <span class="">viento.ipynb</span>
+└─ <span class="">LEEME.md</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="6"><button class="ej-page" type="button" data-full="img/01-memoria-de-calculo-4.webp" aria-label="Ampliar la página 4"><img src="img/01-memoria-de-calculo-4.webp" alt="Memoria de cálculo, página 4" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/01-memoria-de-calculo-3.webp" aria-label="Ampliar la página 3"><img src="img/01-memoria-de-calculo-3.webp" alt="Memoria de cálculo, página 3" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/01-memoria-de-calculo-5.webp" aria-label="Ampliar la página 5"><img src="img/01-memoria-de-calculo-5.webp" alt="Memoria de cálculo, página 5" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/01-memoria-de-calculo-6.webp" aria-label="Ampliar la página 6"><img src="img/01-memoria-de-calculo-6.webp" alt="Memoria de cálculo, página 6" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/01-memoria-de-calculo-2.webp" aria-label="Ampliar la página 2"><img src="img/01-memoria-de-calculo-2.webp" alt="Memoria de cálculo, página 2" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/01-memoria-de-calculo-1.webp" aria-label="Ampliar la página 1"><img src="img/01-memoria-de-calculo-1.webp" alt="Memoria de cálculo, página 1" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">2. Capítulos/3. Cálculo de la viga.pltx</span><pre><code><span class="tk-cell">%#python</span>
+<span class="tk-magic">%%render</span>
+q_d = gamma_G * q_perm + gamma_Q * q_uso
+M_d = q_d * luz**<span class="tk-num">2</span> / <span class="tk-num">8</span>
+V_d = q_d * luz / <span class="tk-num">2</span>
+<span class="tk-cell">%#end</span>
+
+<span class="tk-cmd">\subsection</span>{Resistencia (ELU)}
+<span class="tk-cell">%#python</span>
+<span class="tk-com"># Con unidades (pint): las conversiones se hacen solas.</span>
+fy = acero[<span class="tk-str">&quot;fy&quot;</span>] * u.MPa
+W = W_cm3 * u.cm**<span class="tk-num">3</span>
+M_Rd = (W * fy / acero[<span class="tk-str">&quot;gamma_M&quot;</span>]).to(u.kN * u.m)
+M_Ed = M_d * u.kN * u.m
+aprov_M = (M_Ed / M_Rd).to_base_units().magnitude
+<span class="tk-cell">%#end</span>
+
+El perfil <span class="tk-cmd">\textbf</span>{<span class="tk-py">\py</span>{perfil}} resiste un momento de <span class="tk-py">\py</span>{f&quot;{M_Rd.magnitude:.1f}&quot;}~kN·m
+frente a los <span class="tk-py">\py</span>{f&quot;{M_Ed.magnitude:.1f}&quot;}~kN·m de cálculo: un aprovechamiento del
+<span class="tk-py">\py</span>{f&quot;{100*aprov_M:.0f}&quot;}~<span class="tk-cmd">\%</span>, por lo que el perfil <span class="tk-py">\pyif</span>{aprov_M &lt;= 1}{<span class="tk-cmd">\cumple</span>}{<span class="tk-cmd">\nocumple</span>}
+a flexión.</code></pre></figure>
+</article>
+<article class="ej" id="02-handcalcs-y-unidades" data-chapter="<b>02</b> · Handcalcs y unidades">
+  <header class="ej-head">
+    <p class="ej-num">02</p>
+    <div>
+      <h2>Handcalcs y unidades</h2>
+      <p class="ej-lema">Cálculos a mano, sin escribirlos a mano.</p>
+      <ul class="ej-tags"><li>handcalcs</li><li>pint</li><li>\pyif</li><li>gráficas</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>Un solo archivo con lo más vistoso para un cálculo técnico: una zapata y un pilar. Las celdas <code>%%render</code> ponen en el PDF el desarrollo completo de cada fórmula; <code>%%render params</code> escribe los datos en columnas. Cada magnitud lleva sus unidades y las conversiones se hacen solas.</p>
+      <ul class="ej-list"><li>Letras griegas y subíndices a partir de los nombres: <code>lamb_r</code> se escribe λ<sub>r</sub>.</li><li><code>\pyif</code> compara kPa con MPa sin conversiones a mano.</li><li>Una curva de pandeo con el punto del pilar y una tabla resumen.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="descargas/02-handcalcs-y-unidades.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar .zip <span class="k-hint">3 KB</span></a>
+        <a class="key" href="pdf/02-handcalcs-y-unidades.pdf">Ver el PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src/02-handcalcs-y-unidades">Ver en GitHub</a>
+      </div>
+      <p class="ej-open">Abre <code>calculo-con-unidades.pltx</code> y pulsa <b>Compilar y ver</b>.</p>
+      <details class="ej-tree"><summary>Archivos del proyecto</summary><pre>├─ <span class="main">calculo-con-unidades.pltx</span>
+└─ <span class="">LEEME.md</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="2"><button class="ej-page" type="button" data-full="img/02-handcalcs-y-unidades-1.webp" aria-label="Ampliar la página 1"><img src="img/02-handcalcs-y-unidades-1.webp" alt="Handcalcs y unidades, página 1" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/02-handcalcs-y-unidades-2.webp" aria-label="Ampliar la página 2"><img src="img/02-handcalcs-y-unidades-2.webp" alt="Handcalcs y unidades, página 2" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">calculo-con-unidades.pltx</span><pre><code><span class="tk-cell">%#python</span>
+<span class="tk-magic">%%render</span>
+A = B**<span class="tk-num">2</span>
+W = B**<span class="tk-num">3</span> / <span class="tk-num">6</span>
+sigma_max = (N / A + M / W).to(u.kPa)
+sigma_min = (N / A - M / W).to(u.kPa)
+<span class="tk-cell">%#end</span>
+
+La tensión máxima es <span class="tk-py">\py</span>{round(sigma_max, 1)} y la admisible <span class="tk-py">\py</span>{sigma_adm.to(u.kPa)}:
+<span class="tk-py">\pyif</span>{sigma_max &lt;= sigma_adm}{la zapata <span class="tk-cmd">\cumple</span>.}{la zapata <span class="tk-cmd">\nocumple</span>: hay que agrandarla.}</code></pre></figure>
+</article>
+<article class="ej" id="03-cuaderno-de-jupyter" data-chapter="<b>03</b> · Solo un cuaderno de Jupyter">
+  <header class="ej-head">
+    <p class="ej-num">03</p>
+    <div>
+      <h2>Solo un cuaderno de Jupyter</h2>
+      <p class="ej-lema">Un informe sin ninguna celda: todo el cálculo vive en el cuaderno.</p>
+      <ul class="ej-tags"><li>\pynotebook</li><li>\pyfile</li><li>.ipynb</li><li>.py con # %%</li><li>pandas</li><li>\pyif</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>Para quien ya calcula en Jupyter o en VS Code. El documento vincula un cuaderno (<code>\pynotebook</code>) y un script con bloques <code># %%</code> (<code>\pyfile</code>) y, a partir de ahí, usa sus variables y <strong>llama a sus funciones</strong> con los argumentos que quiere. La gráfica la guarda el cuaderno y el documento la incluye con <code>\includegraphics</code>.</p>
+      <ul class="ej-list"><li>Una tabla entera escrita por una función del cuaderno: <code>\py{filas_periodos([2, 5, 10])}</code>.</li><li>Una tabla de pandas consultada celda a celda: <code>\py{cuantiles.loc[100, 'P']}</code>.</li><li>Si el cuaderno está abierto y ejecutado, Pyx copia sus valores sin ejecutar nada.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="descargas/03-cuaderno-de-jupyter.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar .zip <span class="k-hint">5 KB</span></a>
+        <a class="key" href="pdf/03-cuaderno-de-jupyter.pdf">Ver el PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src/03-cuaderno-de-jupyter">Ver en GitHub</a>
+      </div>
+      <p class="ej-open">Abre <code>informe.pltx</code> y pulsa <b>Compilar y ver</b>.</p>
+      <details class="ej-tree"><summary>Archivos del proyecto</summary><pre>├─ <span class="dir">calculos/</span>
+│  ├─ <span class="">datos_estacion.py</span>
+│  └─ <span class="">lluvias.ipynb</span>
+├─ <span class="dir">datos/</span>
+│  └─ <span class="">maximos_anuales.csv</span>
+├─ <span class="main">informe.pltx</span>
+└─ <span class="">LEEME.md</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="2"><button class="ej-page" type="button" data-full="img/03-cuaderno-de-jupyter-1.webp" aria-label="Ampliar la página 1"><img src="img/03-cuaderno-de-jupyter-1.webp" alt="Solo un cuaderno de Jupyter, página 1" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/03-cuaderno-de-jupyter-2.webp" aria-label="Ampliar la página 2"><img src="img/03-cuaderno-de-jupyter-2.webp" alt="Solo un cuaderno de Jupyter, página 2" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">informe.pltx</span><pre><code><span class="tk-py">\pyfile</span>{calculos/datos_estacion.py}
+<span class="tk-py">\pynotebook</span>{calculos/lluvias.ipynb}
+<span class="tk-com">% …</span>
+  <span class="tk-cmd">\begin</span>{tabular}{rrr}
+    <span class="tk-cmd">\toprule</span>
+    $T$ (años) &amp; Probabilidad anual (<span class="tk-cmd">\%</span>) &amp; $P_d$ (mm) <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\midrule</span>
+    <span class="tk-py">\py</span>{filas_periodos([2, 5, 10, 25, 50, 100, 500])}
+    <span class="tk-cmd">\bottomrule</span>
+  <span class="tk-cmd">\end</span>{tabular}</code></pre></figure><figure class="code"><span class="code-lang">calculos/lluvias.ipynb</span><pre><code><span class="tk-kw">def</span> filas_periodos(lista):
+    <span class="tk-str">&quot;&quot;</span><span class="tk-str">&quot;Filas de una tabla LaTeX: periodo, probabilidad anual y precipitación.&quot;</span><span class="tk-str">&quot;&quot;</span>
+    filas = []
+    <span class="tk-kw">for</span> T <span class="tk-kw">in</span> lista:
+        filas.append(f<span class="tk-str">&#x27;{T} &amp; {100 / T:.1f} &amp; {cuantil(T):.1f} \\\\&#x27;</span>)
+    <span class="tk-kw">return</span> <span class="tk-str">&#x27;\n&#x27;</span>.join(filas)</code></pre></figure>
+</article>
+<article class="ej" id="04-tablas-graficas-y-condicionales" data-chapter="<b>04</b> · Tablas, gráficas y condicionales">
+  <header class="ej-head">
+    <p class="ej-num">04</p>
+    <div>
+      <h2>Tablas, gráficas y condicionales</h2>
+      <p class="ej-lema">Un DataFrame normal y un documento que le pregunta.</p>
+      <ul class="ej-tags"><li>pandas</li><li>tabletex</li><li>bucles</li><li>matplotlib</li><li>\pyif</li><li>celdas</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>Datos ficticios de consumo energético en un DataFrame de pandas sin nada preparado para LaTeX. La primera tabla se escribe en LaTeX y cada número lo pide el documento: <code>\py{df.at["Ene", "total"]}</code>. La segunda es el mismo DataFrame en una línea con <code>tabletex</code>, y la tercera la escribe un bucle.</p>
+      <ul class="ej-list"><li>Dos formas de llevar una gráfica: <code>figtex()</code> (la figura entera) y <code>figure()</code> + <code>\includegraphics</code>.</li><li>Frases que cambian con los datos, con colores y hasta el plural: «1 mes» o «4 meses».</li><li>Cambia un dato del DataFrame: tablas, gráficas y frases cambian a la vez.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="descargas/04-tablas-graficas-y-condicionales.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar .zip <span class="k-hint">4 KB</span></a>
+        <a class="key" href="pdf/04-tablas-graficas-y-condicionales.pdf">Ver el PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src/04-tablas-graficas-y-condicionales">Ver en GitHub</a>
+      </div>
+      <p class="ej-open">Abre <code>estudio.pltx</code> y pulsa <b>Compilar y ver</b>.</p>
+      <details class="ej-tree"><summary>Archivos del proyecto</summary><pre>├─ <span class="main">estudio.pltx</span>
+└─ <span class="">LEEME.md</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="3"><button class="ej-page" type="button" data-full="img/04-tablas-graficas-y-condicionales-1.webp" aria-label="Ampliar la página 1"><img src="img/04-tablas-graficas-y-condicionales-1.webp" alt="Tablas, gráficas y condicionales, página 1" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/04-tablas-graficas-y-condicionales-2.webp" aria-label="Ampliar la página 2"><img src="img/04-tablas-graficas-y-condicionales-2.webp" alt="Tablas, gráficas y condicionales, página 2" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="img/04-tablas-graficas-y-condicionales-3.webp" aria-label="Ampliar la página 3"><img src="img/04-tablas-graficas-y-condicionales-3.webp" alt="Tablas, gráficas y condicionales, página 3" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">estudio.pltx</span><pre><code>  <span class="tk-cmd">\begin</span>{tabular}{lrrrr}
+    <span class="tk-cmd">\toprule</span>
+    Mes &amp; Calefacción &amp; Refrigeración &amp; Fotovoltaica &amp; Neto <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\midrule</span>
+    Enero   &amp; <span class="tk-py">\py</span>{df.at[&quot;Ene&quot;, &quot;calefaccion&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Ene&quot;, &quot;refrigeracion&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Ene&quot;, &quot;fotovoltaica&quot;]} &amp; <span class="tk-py">\py</span>{round(df.at[&quot;Ene&quot;, &quot;neto&quot;], 1)} <span class="tk-cmd">\\</span>
+    Febrero &amp; <span class="tk-py">\py</span>{df.at[&quot;Feb&quot;, &quot;calefaccion&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Feb&quot;, &quot;refrigeracion&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Feb&quot;, &quot;fotovoltaica&quot;]} &amp; <span class="tk-py">\py</span>{round(df.at[&quot;Feb&quot;, &quot;neto&quot;], 1)} <span class="tk-cmd">\\</span>
+    Marzo   &amp; <span class="tk-py">\py</span>{df.at[&quot;Mar&quot;, &quot;calefaccion&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Mar&quot;, &quot;refrigeracion&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Mar&quot;, &quot;fotovoltaica&quot;]} &amp; <span class="tk-py">\py</span>{round(df.at[&quot;Mar&quot;, &quot;neto&quot;], 1)} <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\midrule</span>
+    Total   &amp; <span class="tk-py">\py</span>{df.loc[&quot;Ene&quot;:&quot;Mar&quot;, &quot;calefaccion&quot;].sum().round(1)} &amp; <span class="tk-py">\py</span>{df.loc[&quot;Ene&quot;:&quot;Mar&quot;, &quot;refrigeracion&quot;].sum().round(1)} &amp; <span class="tk-py">\py</span>{df.loc[&quot;Ene&quot;:&quot;Mar&quot;, &quot;fotovoltaica&quot;].sum().round(1)} &amp; <span class="tk-py">\py</span>{df.loc[&quot;Ene&quot;:&quot;Mar&quot;, &quot;neto&quot;].sum().round(1)} <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\bottomrule</span>
+  <span class="tk-cmd">\end</span>{tabular}</code></pre></figure>
+</article>
+    <p class="ej-foot">Todos los datos, nombres y resultados son ficticios. Los ejemplos se compilan con el propio Pyx cada vez que se publican; si alguno no te compila, <a href="https://github.com/LorGIOO/Pyx/issues">cuéntanoslo</a>.</p>
+  </main>
+</div>
+
+<dialog class="ej-lightbox" aria-label="Página ampliada"><button type="button" class="icon-btn" data-close aria-label="Cerrar">✕</button><img alt=""></dialog>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div>
+      <a class="brand" href="../"><svg aria-hidden="true"><use href="#logo"/></svg>Pyx</a>
+      <p>El cálculo y el documento, en un mismo archivo.</p>
+      <p>No usa cookies ni rastreadores.</p>
+    </div>
+    <div><h2>Producto</h2><ul><li><a href="../#laboratorio">Laboratorio</a></li><li><a href="./">Ejemplos</a></li><li><a href="../#descargar">Descargar</a></li><li><a href="../novedades/">Novedades</a></li></ul></div>
+    <div><h2>Ayuda</h2><ul><li><a href="../manual/">Manual de usuario</a></li><li><a href="../manual/manual-pyx.pdf">Manual en PDF</a></li><li><a href="https://github.com/LorGIOO/Pyx/issues">Informar de un fallo</a></li></ul></div>
+    <div><h2>Proyecto</h2><ul><li><a href="https://github.com/LorGIOO/Pyx">Código fuente</a></li><li><a href="../privacidad/">Privacidad</a></li><li><a href="../firma/">Firma de código</a></li><li><a href="https://github.com/LorGIOO/Pyx/blob/main/LICENSE">Licencia MIT</a></li></ul></div>
+  </div>
+  <div class="endmark"><span>© <span data-year>2026</span> Pyx · Software libre</span><span>∎</span></div>
+</footer>
+
+<script src="../assets/js/common.js?v=20261117a"></script>
+<script>
+(() => {
+  const box = document.querySelector('.ej-lightbox');
+  const img = box.querySelector('img');
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('.ej-page');
+    if (b) { img.src = b.dataset.full; img.alt = b.querySelector('img').alt; box.showModal(); return; }
+    if (e.target === box || e.target.closest('[data-close]')) box.close();
+  });
+})();
+</script>
+</body>
+</html>

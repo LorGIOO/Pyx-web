@@ -1,0 +1,14 @@
+\section{Cálculos}
+
+% Una celda de Python: se ejecuta al compilar y no aparece en el PDF.
+%#python
+area_parcela = 25.0 * 40.0      # m²
+ocupacion = 0.35                # coeficiente de ocupación
+superficie = area_parcela * ocupacion
+%#end
+
+La parcela tiene \py{area_parcela}~m$^2$ y, con una ocupación del
+\py{round(ocupacion*100)}~\%, admite \py{superficie}~m$^2$ construidos.
+\pyif{superficie > 300}{Es una superficie amplia.}{Es una superficie reducida.}
+
+Cambia los números de la celda y vuelve a compilar: el texto se ajusta solo.

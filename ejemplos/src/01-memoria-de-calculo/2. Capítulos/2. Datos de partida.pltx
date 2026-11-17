@@ -1,0 +1,54 @@
+\section{Datos de partida}\label{sec:datos}
+
+%#python
+import pandas as pd
+
+# Geometría (inventada)
+luz = 9.0             # m, entre apoyos
+ancho = 2.5           # m, ancho útil del tablero
+
+# Materiales: una tabla CSV en los recursos del proyecto. La ruta es relativa
+# a la carpeta del documento principal («1. Main»).
+mat = pd.read_csv("../999. Recursos/1. Datos/materiales.csv", index_col="material")
+acero = mat.loc["S275"]
+
+# Cargas: una hoja de Excel (se lee igual que en Jupyter).
+cargas = pd.read_excel("../999. Recursos/1. Datos/cargas.xlsx", index_col="carga")
+q_perm = cargas.loc[["Peso propio", "Tablero de madera", "Barandillas"], "valor"].sum()
+q_uso = cargas.loc["Sobrecarga de uso", "valor"]
+%#end
+
+\subsection{Geometría}
+La pasarela salva una luz de \py{luz}~m con un ancho útil de \py{ancho}~m.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+
+\subsection{Materiales}
+Los valores de la tabla~\ref{tab:materiales} se leen del archivo
+\texttt{materiales.csv}. Cada celda de la tabla es un \texttt{\textbackslash py\{\}}
+que pide un valor concreto a la tabla de pandas: \texttt{mat.loc["S275", "fy"]}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Materiales (leídos de \texttt{materiales.csv}).}
+  \label{tab:materiales}
+  \begin{tabular}{lccc}
+    \toprule
+    Material & $f_y$ (MPa) & $E$ (GPa) & $\gamma_M$ \\
+    \midrule
+    Acero S235 & \py{mat.loc["S235", "fy"]} & \py{mat.loc["S235", "E"]} & \py{mat.loc["S235", "gamma_M"]} \\
+    Acero S275 & \py{mat.loc["S275", "fy"]} & \py{mat.loc["S275", "E"]} & \py{mat.loc["S275", "gamma_M"]} \\
+    Acero S355 & \py{mat.loc["S355", "fy"]} & \py{mat.loc["S355", "E"]} & \py{mat.loc["S355", "gamma_M"]} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Se emplea acero \textbf{S275}, con un límite elástico de \py{acero["fy"]}~MPa.
+
+\subsection{Acciones}
+Las cargas por metro de viga están en la hoja \texttt{cargas.xlsx}. Esta vez la
+tabla entera la escribe Python con \texttt{tabletex} (tabla~\ref{tab:cargas}).
+
+\py{tabletex(cargas.reset_index(), caption="Cargas por metro lineal de viga (leídas de \\texttt{cargas.xlsx}).", label="tab:cargas", prec=2)}
+
+Suman \py{f"{q_perm:.2f}"}~kN/m de cargas permanentes y \py{f"{q_uso:.2f}"}~kN/m de
+sobrecarga de uso.

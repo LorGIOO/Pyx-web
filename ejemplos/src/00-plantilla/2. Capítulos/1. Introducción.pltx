@@ -1,0 +1,9 @@
+\section{Introducción}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat
+a ante venenatis dapibus. Este capítulo es solo texto: un archivo \texttt{.pltx}
+puede no tener ninguna celda de Python.
+
+\subsection{Objeto}
+Sed posuere consectetur est at lobortis. Vestibulum id ligula porta felis
+euismod semper. Donec ullamcorper nulla non metus auctor fringilla.

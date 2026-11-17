@@ -1,0 +1,9 @@
+\section{Conclusiones}
+
+\resultado{La viga de la pasarela se resuelve con un perfil \textbf{\py{perfil}} de acero
+S275, con un aprovechamiento a flexión del \py{f"{100*aprov_M:.0f}"}~\% y una flecha de
+\py{f"{f:.1f}"}~mm (límite \py{f"{f_lim:.1f}"}~mm).}
+
+\pyif{aprov_M <= 1 and f <= f_lim}{Todas las comprobaciones se cumplen.}{Alguna comprobación no se cumple: hay que cambiar de perfil.}
+Nulla vitae elit libero, a pharetra augue. Curabitur blandit tempus porttitor.
+Donec sed odio dui. Maecenas faucibus mollis interdum.

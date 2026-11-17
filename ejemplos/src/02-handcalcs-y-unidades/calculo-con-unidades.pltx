@@ -1,0 +1,140 @@
+% !TeX program = xelatex
+% =====================================================================
+%  HANDCALCS Y UNIDADES (ejemplo de Pyx) — un solo archivo
+%  · handcalcs: las celdas %%render escriben en el PDF el desarrollo de
+%    cada fórmula, como se haría a mano, con los valores sustituidos.
+%  · pint: cada magnitud lleva sus unidades y las conversiones son solas.
+%  Todos los datos son ficticios.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-noshorthands,es-tabla]{babel}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,graphicx,xcolor,float}
+\usepackage[hidelinks]{hyperref}
+\definecolor{ok}{HTML}{1A7F37}\definecolor{ko}{HTML}{CF222E}
+\newcommand{\cumple}{\textcolor{ok}{\textbf{CUMPLE}}}
+\newcommand{\nocumple}{\textcolor{ko}{\textbf{NO CUMPLE}}}
+
+\title{Cálculos a mano, sin escribirlos a mano\\\large handcalcs y unidades con pint}
+\author{Ejemplo de Pyx}
+\date{}
+
+\begin{document}
+\maketitle
+
+%#python
+# Las librerías se importan en las celdas, como en Jupyter.
+from math import pi, sqrt
+import pint
+import handcalcs
+import handcalcs.render          # activa las celdas %%render y %%tex
+import numpy as np
+import matplotlib.pyplot as plt
+from pyx import figtex
+
+u = pint.UnitRegistry()
+u.formatter.default_format = "~"   # unidades abreviadas en \py{}: kN, m, MPa
+handcalcs.set_option("preferred_string_formatter", "~L")   # …y en handcalcs
+handcalcs.set_option("display_precision", 2)
+%#end
+
+\section{Zapata aislada}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Una zapata cuadrada
+recibe el axil y el momento de un pilar. Los datos van con sus unidades:
+\texttt{N = 850 * u.kN}, \texttt{B = 2.2 * u.m}\ldots
+
+\subsection{Datos}
+La celda \verb|%%render params| los escribe en columnas, sin desarrollo.
+
+%#python
+%%render params
+N = 850 * u.kN
+M = 60 * u.kN * u.m
+B = 2.2 * u.m
+sigma_adm = 0.25 * u.MPa
+%#end
+
+\subsection{Tensiones en el terreno}
+Con \verb|%%render| cada línea es una fórmula con sus valores. Las unidades
+se simplifican solas: kN/m$^2$ pasa a la unidad pedida con \texttt{.to()}.
+
+%#python
+%%render
+A = B**2
+W = B**3 / 6
+sigma_max = (N / A + M / W).to(u.kPa)
+sigma_min = (N / A - M / W).to(u.kPa)
+%#end
+
+La tensión máxima es \py{round(sigma_max, 1)} y la admisible \py{sigma_adm.to(u.kPa)}:
+\pyif{sigma_max <= sigma_adm}{la zapata \cumple.}{la zapata \nocumple: hay que agrandarla.}
+\pyif{sigma_min > 0 * u.kPa}{Toda la base está comprimida.}{Parte de la base se levanta: la excentricidad es grande.}
+
+Al comparar magnitudes de pint en un \texttt{\textbackslash pyif} no hay que
+preocuparse por las unidades: \texttt{sigma\_max <= sigma\_adm} compara kPa con MPa
+correctamente.
+
+\section{Pandeo de un pilar}
+Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Un pilar
+metálico biarticulado. Los nombres con letras griegas (\texttt{lamb\_r},
+\texttt{chi}) se escriben como símbolos.
+
+%#python
+%%render params
+L_p = 4.5 * u.m
+E = 210 * u.GPa
+f_y = 275 * u.MPa
+A_p = 53.8 * u.cm**2
+I_z = 1318 * u.cm**4
+alpha = 0.34
+gamma_M1 = 1.05
+%#end
+
+%#python
+%%render
+N_cr = (pi**2 * E * I_z / L_p**2).to(u.kN)
+lamb_r = sqrt(A_p * f_y / N_cr)
+phi = 0.5 * (1 + alpha * (lamb_r - 0.2) + lamb_r**2)
+chi = 1 / (phi + sqrt(phi**2 - lamb_r**2))
+N_bRd = (chi * A_p * f_y / gamma_M1).to(u.kN)
+%#end
+
+%#python
+N_Ed = 420 * u.kN
+aprov = (N_Ed / N_bRd).to_base_units().magnitude
+lam = np.linspace(0, 3, 300)
+ph = 0.5 * (1 + alpha * (lam - 0.2) + lam**2)
+curva = np.minimum(1, 1 / (ph + np.sqrt(ph**2 - lam**2)))
+fig, ax = plt.subplots(figsize=(6, 3))
+ax.plot(lam, curva, color="#007acc", lw=2, label="curva de pandeo (α = %.2f)" % alpha)
+ax.plot([lamb_r], [chi], "o", color="#cf222e", label="este pilar")
+ax.set_xlabel(r"esbeltez reducida $\bar\lambda$"); ax.set_ylabel(r"$\chi$")
+ax.grid(alpha=0.3); ax.legend(frameon=False)
+fig.tight_layout()
+fig_pandeo = figtex("curva_pandeo", caption="El pilar sobre la curva de pandeo.", label="fig:pandeo", width=0.75)
+%#end
+
+El pilar resiste \py{round(N_bRd.to(u.kN).magnitude, 1)}~kN frente a un axil de cálculo de
+\py{N_Ed.magnitude}~kN: aprovechamiento del \py{f"{100*aprov:.0f}"}~\%, \pyif{aprov <= 1}{\cumple}{\nocumple}.
+Su posición en la curva de pandeo está en la figura~\ref{fig:pandeo}.
+
+\py{fig_pandeo}
+
+\section{Resumen}
+\begin{table}[H]
+  \centering
+  \caption{Resumen de comprobaciones.}
+  \begin{tabular}{lrrl}
+    \toprule
+    Comprobación & Solicitación & Capacidad & Resultado \\
+    \midrule
+    Tensión en el terreno (kPa) & \py{round(sigma_max.magnitude, 1)} & \py{round(sigma_adm.to(u.kPa).magnitude, 1)} & \pyif{sigma_max <= sigma_adm}{\cumple}{\nocumple} \\
+    Pandeo del pilar (kN) & \py{round(N_Ed.magnitude, 1)} & \py{round(N_bRd.magnitude, 1)} & \pyif{aprov <= 1}{\cumple}{\nocumple} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Cambia \texttt{B = 2.2 * u.m} por \texttt{1.8 * u.m}, o el axil del pilar, y vuelve a
+compilar: el desarrollo, las conclusiones, la gráfica y la tabla cambian a la vez.
+\end{document}

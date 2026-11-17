@@ -1,0 +1,3 @@
+# Lo que generan los ejemplos al compilar (las gráficas se rehacen solas)
+ejemplos/src/**/xref/
+ejemplos/src/**/figuras/

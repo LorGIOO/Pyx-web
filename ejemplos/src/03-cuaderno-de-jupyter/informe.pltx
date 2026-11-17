@@ -1,0 +1,73 @@
+% !TeX program = xelatex
+% =====================================================================
+%  INFORME SIN CELDAS (ejemplo de Pyx)
+%  Este documento no tiene ni una celda de Python. Todo el cálculo está en:
+%    calculos/lluvias.ipynb      un cuaderno de Jupyter
+%    calculos/datos_estacion.py  un archivo .py con bloques # %%
+%  \pyfile y \pynotebook los vinculan; desde ese punto, \py{} y \pyif usan
+%  sus variables y LLAMAN a sus funciones como si fueran del documento.
+%  Si el cuaderno está abierto y ejecutado en Jupyter o VS Code, Pyx toma
+%  los valores de allí sin ejecutar nada. Todos los datos son ficticios.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-noshorthands,es-tabla]{babel}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,booktabs,graphicx,float}
+\usepackage[hidelinks]{hyperref}
+
+\title{Lluvias máximas en la cuenca de Valle Lorem\\\large Un informe que solo llama a un cuaderno de Jupyter}
+\author{Ejemplo de Pyx}
+\date{}
+
+\begin{document}
+\maketitle
+
+\pyfile{calculos/datos_estacion.py}
+\pynotebook{calculos/lluvias.ipynb}
+
+\section{Datos}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Se analiza la serie de
+precipitaciones máximas diarias de la \py{estacion["nombre"]}
+(código \py{estacion["codigo"]}, a \py{estacion["altitud"]}~m de altitud), que
+cubre \py{n_anos}~años, de \py{serie["anio"].min()} a \py{serie["anio"].max()}.
+
+La media de la serie es de \py{f"{media:.1f}"}~mm y su desviación típica de
+\py{f"{desv:.1f}"}~mm. La serie \pyif{tendencia > 0.2}{muestra una tendencia creciente
+de \py{f"{tendencia:.2f}"}~mm al año}{no muestra una tendencia apreciable} en el periodo.
+
+\section{Ajuste de Gumbel}
+El ajuste por el método de los momentos da una escala $\alpha =
+\py{f"{alfa:.2f}"}$~mm y una posición $u = \py{f"{u:.2f}"}$~mm. La tabla~\ref{tab:periodos}
+la escribe la función \texttt{filas\_periodos} del cuaderno, llamada desde aquí con los
+periodos que interesan.
+
+\begin{table}[H]
+  \centering
+  \caption{Precipitación máxima diaria según el periodo de retorno.}
+  \label{tab:periodos}
+  \begin{tabular}{rrr}
+    \toprule
+    $T$ (años) & Probabilidad anual (\%) & $P_d$ (mm) \\
+    \midrule
+    \py{filas_periodos([2, 5, 10, 25, 50, 100, 500])}
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\linewidth]{calculos/figuras/gumbel.png}
+  \caption{Serie anual y ajuste de Gumbel (gráfica guardada por el cuaderno).}
+\end{figure}
+
+\section{Caudal de diseño}
+Una tabla de pandas también se consulta celda a celda: para $T = 100$ años, la
+precipitación es de \py{f"{cuantiles.loc[100, 'P']:.1f}"}~mm. Con un tiempo de
+concentración de \py{f"{t_c:.2f}"}~h (del archivo \texttt{datos\_estacion.py}), la
+intensidad de cálculo para $T = 100$ años es de \py{f"{intensidad(100, t_c * 60):.1f}"}~mm/h,
+y para $T = 500$ años, de \py{f"{intensidad(500, t_c * 60):.1f}"}~mm/h.
+
+\pyif{estacion["cuenca"] > 15}{La cuenca, de \py{estacion["cuenca"]}~km$^2$, es mediana: conviene contrastar el resultado con un modelo hidrológico.}{La cuenca es pequeña: el método racional es suficiente.}
+Nulla vitae elit libero, a pharetra augue.
+\end{document}
