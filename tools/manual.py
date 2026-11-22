@@ -265,7 +265,7 @@ class Conversor:
         return "".join(out)
 
     def mate(self, m: str) -> str:
-        m = m.replace("\\ln", "ln ")
+        m = m.replace("\\ln", "ln ").replace("\\times", "×").replace("\\cdot", "·")
         m = re.sub(r"_\{([^}]*)\}", r"<sub>\1</sub>", m)
         m = re.sub(r"_(\w)", r"<sub>\1</sub>", m)
         m = re.sub(r"\^\{([^}]*)\}", r"<sup>\1</sup>", m)

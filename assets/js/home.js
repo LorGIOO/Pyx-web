@@ -1054,7 +1054,7 @@
      ------------------------------------------------------------------------ */
   (function detectOS() {
     const ua = (navigator.userAgentData?.platform || navigator.platform || '') + ' ' + navigator.userAgent;
-    const os = /win/i.test(ua) ? 'windows' : /linux|x11/i.test(ua) && !/android/i.test(ua) ? 'linux' : null;
+    const os = /win/i.test(ua) ? 'windows' : /mac/i.test(ua) && !/iphone|ipad/i.test(ua) ? 'mac' : /linux|x11/i.test(ua) && !/android/i.test(ua) ? 'linux' : null;
     if (os) $(`.dl-card[data-os="${os}"]`)?.classList.add('is-you');
   })();
 })();

@@ -19,8 +19,8 @@
   <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="preload" href="assets/fonts/cmu-serif-500-roman.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/base.css?v=20261117a">
-  <link rel="stylesheet" href="assets/css/home.css?v=20261117a">
+  <link rel="stylesheet" href="assets/css/base.css?v=20261122c">
+  <link rel="stylesheet" href="assets/css/home.css?v=20261122c">
   <link rel="alternate" hreflang="es" href="https://lorgioo.github.io/Pyx-web/">
   <link rel="alternate" hreflang="en" href="https://lorgioo.github.io/Pyx-web/en/">
 </head>
@@ -38,6 +38,7 @@
     <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2Z" fill="currentColor"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
     <symbol id="i-win" viewBox="0 0 24 24"><path d="M3 5.3 10.4 4.3v7.1H3Zm8.4-1.2L21 2.8v8.6h-9.6ZM3 12.6h7.4v7.1L3 18.7Zm8.4 0H21v8.6l-9.6-1.3Z" fill="currentColor"/></symbol>
+    <symbol id="i-mac" viewBox="0 0 24 24"><path d="M16.4 12.7c0-2.2 1.8-3.2 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.9-.8-1.5 0-2.9.9-3.6 2.2-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.8 2.2 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.9-1.2 1.2-2.4 1.2-2.5-.1 0-2.5-.9-2.5-3.6ZM14.2 6.1c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2.1-.5 2.8-1.3Z" fill="currentColor"/></symbol>
     <symbol id="i-linux" viewBox="0 0 24 24"><path d="M12 2.5c-2.2 0-3.3 1.9-3.3 4.4 0 1.2.3 2.1-.6 3.4-1 1.4-2.6 3.6-2.6 6 0 .7.2 1.3.5 1.8-.8.4-1.6 1-1.4 1.8.3 1 2 .7 3.2 1.4 1 .6 2.3.6 2.9-.2h2.6c.6.8 1.9.8 2.9.2 1.2-.7 2.9-.4 3.2-1.4.2-.8-.6-1.4-1.4-1.8.3-.5.5-1.1.5-1.8 0-2.4-1.6-4.6-2.6-6-.9-1.3-.6-2.2-.6-3.4 0-2.5-1.1-4.4-3.3-4.4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10.6" cy="7.4" r=".9" fill="currentColor"/><circle cx="13.4" cy="7.4" r=".9" fill="currentColor"/></symbol>
     <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 2.3a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.2-.4-1.2.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.5 4.9.4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.3Z" fill="currentColor"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -69,7 +70,7 @@
   <div class="hero-stage">
     <div class="hero-copy">
       <div class="hero-step is-on" data-step="0">
-        <p class="eyebrow"><span>v2.2.0</span><span class="n">Windows · Linux · Libre (MIT)</span></p>
+        <p class="eyebrow"><span>v2.2.0</span><span class="n">Windows · macOS · Linux · Libre (MIT)</span></p>
         <h1 class="hero-title">
           <span class="glyphs" aria-hidden="true"><i class="g-cursor"></i><svg class="g-int" viewBox="10 -4 62 106"><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74"/></svg><i class="g-run"></i></span>
           <span class="word">Pyx</span>
@@ -640,6 +641,13 @@
         <span class="dl-note">Ubuntu y Debian, Fedora, o cualquier distribución con el AppImage.</span>
         <span class="key dl-key">Descargar para Linux</span>
       </a>
+      <a class="dl-card" href="https://github.com/LorGIOO/Pyx/releases/latest" data-os="mac">
+        <svg aria-hidden="true"><use href="#i-mac"/></svg>
+        <span class="dl-os">macOS</span>
+        <span class="dl-meta mono">11 o posterior · Intel y Apple Silicon · <b>.dmg</b></span>
+        <span class="dl-note">Arrastra Pyx a Aplicaciones. La primera vez, ábrelo con clic derecho → Abrir.</span>
+        <span class="key dl-key">Descargar para macOS</span>
+      </a>
     </div>
     <p class="dl-req caption reveal">Requisitos: 4&nbsp;GB de memoria y unos 600&nbsp;MB de disco si Pyx prepara su propio Python (200&nbsp;MB si usas uno que ya tengas). Internet solo la primera vez y para buscar actualizaciones. ¿Primera vez? Empieza por el <a href="manual/#cap-instalacion-y-primer-arranque">capítulo 2 del manual</a> y abre uno de los <a href="ejemplos/">proyectos de ejemplo</a>.</p>
   </div>
@@ -661,8 +669,8 @@
   <div class="endmark"><span>© <span data-year>2026</span> Pyx · Software libre</span><span>∎</span></div>
 </footer>
 
-<script src="assets/data/novedades.js?v=20261117a"></script>
-<script src="assets/js/common.js?v=20261117a"></script>
-<script src="assets/js/home.js?v=20261117a"></script>
+<script src="assets/data/novedades.js?v=20261122c"></script>
+<script src="assets/js/common.js?v=20261122c"></script>
+<script src="assets/js/home.js?v=20261122c"></script>
 </body>
 </html>

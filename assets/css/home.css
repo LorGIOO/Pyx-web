@@ -505,7 +505,7 @@ input[type="range"] { flex: 1; accent-color: var(--blue); height: 28px; cursor: 
 .dl-logo { width: 54px; height: 66px; color: var(--ink); margin-bottom: 18px; }
 .dl-head h2 { font-size: clamp(48px, 8vw, 120px); line-height: .95; letter-spacing: -.035em; font-weight: 400; margin: 0; }
 .dl-head .chap-sub { margin-inline: auto; text-align: center; }
-.dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 920px; margin: 56px auto 0; }
+.dl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1180px; margin: 56px auto 0; }
 .dl-card { position: relative; display: grid; gap: 8px; justify-items: start; padding: 30px 28px; border: 1px solid var(--rule); border-radius: 14px; background: var(--sheet); color: var(--ink); text-decoration: none; transition: transform .25s var(--ease), box-shadow .25s, border-color .25s; }
 .dl-card:hover { text-decoration: none; transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--rule-strong); }
 .dl-card > svg { width: 34px; height: 34px; margin-bottom: 8px; }
@@ -516,8 +516,9 @@ input[type="range"] { flex: 1; accent-color: var(--blue); height: 28px; cursor: 
 .dl-key { margin-top: auto; }
 .dl-card.is-you { border-color: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 14%, transparent); }
 .dl-card.is-you::before { content: "Tu sistema"; position: absolute; top: 18px; right: 18px; font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 99px; background: var(--blue-wash); color: var(--blue-ink); }
+html[lang="en"] .dl-card.is-you::before { content: "Your system"; }
 .dl-req { text-align: center; max-width: 60ch; margin: 28px auto 0; }
-@media (max-width: 720px) { .dl-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1000px) { .dl-grid { grid-template-columns: 1fr; max-width: 560px; } }
 
 /* --------------------------------------------------------------------------
    Campos de código: en Pyx los datos se cambian escribiendo

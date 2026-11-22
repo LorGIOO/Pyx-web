@@ -23,6 +23,16 @@ window.PYX_NOVEDADES = [
         cambios: [
           "`\\hoja[Hoja]{libro.xlsx}` vincula un libro y su hoja; `\\celda{E4}` coloca una celda y `\\celda{A2:E7}` un rango entero, listo para una tabla. `\\celda[T]{…}` lo transpone.",
           "Pyx lee el archivo en cada compilación: cambia un número en Excel, guarda y compila. También CSV con «;» y coma decimal.",
+          "**Formato como en Python**: `\\celda[.2f]{E4}`, `\\celda[,.0f]{…}`, `\\celda[abs,.1%]{…}` o `\\celda[{:.2f}\\,kN]{E4}`. Y cualquier LaTeX alrededor: `\\textbf{\\celda{E27:K27}}` pone en negrita toda la fila.",
+          "Lee los nombres definidos en Excel: `\\celda{Caudal}`.",
+        ],
+      },
+      {
+        nombre: "Insertar y arrastrar archivos",
+        cambios: [
+          "**El clip** de Inicio → Insertar inserta un Excel (eligiendo la hoja), un CSV, un cuaderno de Jupyter, un `.py`, un PDF, una imagen o un `.tex`.",
+          "**Arrastra** cualquiera de ellos al editor y se escribe su llamada donde lo sueltes.",
+          "**Biblioteca de plantillas** de tablas, figuras y llamadas: edita el código de los asistentes a mano, guárdalo como plantilla y márcala por defecto.",
         ],
       },
       {
@@ -30,6 +40,8 @@ window.PYX_NOVEDADES = [
         cambios: [
           "**Abrir carpeta**: la carpeta del proyecto queda fija en el explorador, que ahora se ve como el de VS Code.",
           "Autocompletado y panel de problemas con el aspecto de VS Code.",
+          "**Tema personalizado** con un único `theme.css`; pestañas que se reordenan arrastrando y se cierran con la rueda; Copiar ruta y ruta relativa en el explorador.",
+          "Desplegables con el estilo de la app, panel de símbolos con la letra de las fórmulas y **Mis símbolos**, y toda la interfaz en inglés cuando se elige inglés.",
           "Ctrl+T sobre una palabra comenta solo esa palabra; la negrita con el cursor en un `\\py{}` se aplica al comando entero.",
         ],
       },
@@ -37,7 +49,7 @@ window.PYX_NOVEDADES = [
         nombre: "Y además",
         cambios: [
           "**Modo noche del PDF**: el papel se oscurece y el texto se aclara, pero los colores y las imágenes se conservan.",
-          "Los archivos de trabajo de LaTeX se borran al cerrar Pyx. La configuración se guarda también en un `config.json` legible.",
+          "Los archivos de trabajo de LaTeX se borran al cerrar Pyx. La configuración, el tema, las plantillas, las macros y los símbolos se guardan solos en la carpeta `config` de la instalación.",
           "El manual y los proyectos de ejemplo, en español y en inglés, y un ejemplo nuevo con Excel.",
           "Los números de línea ya no se desalinean al hacer zoom en el editor; un documento nuevo empieza vacío.",
         ],
@@ -51,6 +63,16 @@ window.PYX_NOVEDADES = [
           cambios: [
             "`\\hoja[Sheet]{workbook.xlsx}` links a workbook and its sheet; `\\celda{E4}` places a cell and `\\celda{A2:E7}` a whole range, ready for a table. `\\celda[T]{…}` transposes it.",
             "Pyx reads the file at every compile: change a number in Excel, save and compile. CSV with «;» and decimal comma too.",
+            "**Formatting like Python**: `\\celda[.2f]{E4}`, `\\celda[,.0f]{…}`, `\\celda[abs,.1%]{…}` or `\\celda[{:.2f}\\,kN]{E4}`. And any LaTeX around it: `\\textbf{\\celda{E27:K27}}` makes the whole row bold.",
+            "It reads the names defined in Excel: `\\celda{Flow}`.",
+          ],
+        },
+        {
+          nombre: "Insert and drag files",
+          cambios: [
+            "**The paper clip** in Home → Insert inserts a workbook (choosing the sheet), a CSV, a Jupyter notebook, a `.py`, a PDF, an image or a `.tex`.",
+            "**Drag** any of them onto the editor and its call is written where you drop it.",
+            "**A template library** of tables, figures and calls: edit the wizards' code by hand, save it as a template and make it the default.",
           ],
         },
         {
@@ -58,6 +80,8 @@ window.PYX_NOVEDADES = [
           cambios: [
             "**Open folder**: the project folder stays in the explorer, which now looks like VS Code's.",
             "Completion and the problems panel look like VS Code's.",
+            "**A custom theme** with a single `theme.css`; tabs that can be reordered by dragging and closed with the wheel; Copy path and relative path in the explorer.",
+            "Drop-downs in the app's style, a symbol panel in the formulas' typeface with **My symbols**, and the whole interface in English when English is chosen.",
             "Ctrl+T on a word comments only that word; bold with the caret in a `\\py{}` applies to the whole command.",
           ],
         },
@@ -65,7 +89,7 @@ window.PYX_NOVEDADES = [
           nombre: "And also",
           cambios: [
             "**PDF night mode**: the paper darkens and the text lightens, but colours and pictures are kept.",
-            "LaTeX's working files are deleted when Pyx closes. The settings are also saved in a readable `config.json`.",
+            "LaTeX's working files are deleted when Pyx closes. The settings, theme, templates, macros and symbols are saved by themselves in the installation's `config` folder.",
             "The manual and the example projects, in Spanish and English, and a new example with Excel.",
             "Line numbers no longer drift when zooming the editor; a new document starts empty.",
           ],
