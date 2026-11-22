@@ -1,0 +1,161 @@
+% !TeX program = xelatex
+% =====================================================================
+%  TABLES, PLOTS AND CONDITIONALS (Pyx example)
+%  · Table 1 is written in LaTeX, cell by cell: the document asks a normal
+%    pandas DataFrame for each number. Python has nothing prepared for
+%    LaTeX: only the data.
+%  · Table 2 is the one-line alternative: tabletex(df).
+%  · Table 3 is written by a Python loop.
+%  · Plots: figtex() (the whole figure) and figure() + \includegraphics
+%    (only the image), inside the cell that draws them.
+%  · The text changes with the results: \pyif{condition}{yes}{no}.
+%  Every datum is fictitious.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{amsmath,booktabs,graphicx,float,xcolor}
+\usepackage[hidelinks]{hyperref}
+\definecolor{good}{HTML}{1A7F37}
+\definecolor{bad}{HTML}{CF222E}
+
+\title{Energy use of an office building\\\large pandas tables, plots and conditional text}
+\author{Pyx example}
+\date{}
+
+\begin{document}
+\maketitle
+
+%#python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pyx import figtex, tabletex, figure   # Pyx's helpers (optional)
+
+# Made-up monthly data: heating and cooling demand (MWh), photovoltaic
+# production (MWh) and mean occupancy (%).
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+df = pd.DataFrame({
+    "heating":      [41.2, 35.8, 24.1, 12.6, 4.3, 0.0, 0.0, 0.0, 1.9, 10.8, 27.5, 38.9],
+    "cooling":      [0.0, 0.0, 1.2, 4.8, 11.5, 22.4, 31.9, 30.2, 18.7, 6.1, 0.8, 0.0],
+    "photovoltaic": [8.1, 10.4, 14.9, 19.6, 20.6, 24.8, 26.5, 25.0, 21.3, 12.7, 8.9, 7.2],
+    "occupancy":    [82, 85, 88, 86, 84, 78, 52, 31, 80, 87, 89, 74],
+}, index=months)
+df["total"] = df["heating"] + df["cooling"]
+df["net"] = df["total"] - df["photovoltaic"]
+df
+%#end
+
+\section{Monthly data}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Table~\ref{tab:quarter}
+is written by hand in LaTeX; each number is a \texttt{\textbackslash py\{\}} that reads
+a cell of the DataFrame, for instance \texttt{\textbackslash py\{df.at["Jan", "total"]\}}.
+
+\begin{table}[H]
+  \centering
+  \caption{First quarter (MWh), cell by cell.}
+  \label{tab:quarter}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Month & Heating & Cooling & Photovoltaic & Net \\
+    \midrule
+    January  & \py{df.at["Jan", "heating"]} & \py{df.at["Jan", "cooling"]} & \py{df.at["Jan", "photovoltaic"]} & \py{round(df.at["Jan", "net"], 1)} \\
+    February & \py{df.at["Feb", "heating"]} & \py{df.at["Feb", "cooling"]} & \py{df.at["Feb", "photovoltaic"]} & \py{round(df.at["Feb", "net"], 1)} \\
+    March    & \py{df.at["Mar", "heating"]} & \py{df.at["Mar", "cooling"]} & \py{df.at["Mar", "photovoltaic"]} & \py{round(df.at["Mar", "net"], 1)} \\
+    \midrule
+    Total    & \py{df.loc["Jan":"Mar", "heating"].sum().round(1)} & \py{df.loc["Jan":"Mar", "cooling"].sum().round(1)} & \py{df.loc["Jan":"Mar", "photovoltaic"].sum().round(1)} & \py{df.loc["Jan":"Mar", "net"].sum().round(1)} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The whole year fits in one line with \texttt{tabletex}, which turns the whole
+DataFrame into a table (table~\ref{tab:year}).
+
+\py{tabletex(df[["heating", "cooling", "photovoltaic", "net"]].rename(columns=str.capitalize).reset_index(names="Month"), caption="The whole year (MWh), with tabletex.", label="tab:year", prec=1, placement="H")}
+
+\section{Annual balance}
+
+%#python
+annual = df[["heating", "cooling", "photovoltaic"]].sum()
+coverage = 100 * annual["photovoltaic"] / df["total"].sum()
+peak_month = df["total"].idxmax()
+surplus_months = list(df.index[df["net"] < 0])
+target = 40.0          # % of the demand covered by photovoltaics
+%#end
+
+The annual demand is \py{df["total"].sum().round(1)}~MWh: \py{annual["heating"].round(1)}~MWh
+of heating and \py{annual["cooling"].round(1)}~MWh of cooling. The month of
+highest demand is \py{peak_month}, with \py{df.at[peak_month, "total"]}~MWh.
+
+Photovoltaics produce \py{annual["photovoltaic"].round(1)}~MWh and cover
+\py{f"{coverage:.1f}"}\,\% of the demand:
+the target of \py{target}\,\% \pyif{coverage >= target}{\textcolor{good}{\textbf{is met}}}{\textcolor{bad}{\textbf{is not met}}}.
+\pyif{len(surplus_months) > 0}{There is a surplus in \py{len(surplus_months)}~\pyif{len(surplus_months) == 1}{month}{months} (\py{", ".join(surplus_months)}), which goes to the grid.}{There is no surplus in any month.}
+
+%#python
+# Plot of figure 1: figtex() saves it and returns the whole LaTeX figure;
+# the document places it with \py{balance_figure}.
+fig, ax = plt.subplots(figsize=(6.4, 3.0))
+x = np.arange(12)
+ax.bar(x - 0.2, df["heating"], 0.4, label="heating", color="#cf222e")
+ax.bar(x + 0.2, df["cooling"], 0.4, label="cooling", color="#007acc")
+ax.plot(x, df["photovoltaic"], "o-", color="#d4a017", label="photovoltaic")
+ax.set_xticks(x, months); ax.set_ylabel("MWh")
+ax.legend(frameon=False, ncols=3); ax.grid(axis="y", alpha=0.3)
+fig.tight_layout()
+balance_figure = figtex("balance", caption="Monthly demand and production (figtex).",
+                        label="fig:balance", width=0.85, placement="H")
+%#end
+
+\py{balance_figure}
+\section{Month by month}
+Table~\ref{tab:months} is written by a Python loop; the last column is a
+conditional per month.
+
+%#python
+rows = []
+for month, r in df.iterrows():
+    state = r"\textcolor{good}{surplus}" if r["net"] < 0 else r"\textcolor{bad}{deficit}"
+    rows.append(f"{month} & {r['occupancy']:.0f} & {r['total']:.1f} & {r['net']:+.1f} & {state} \\\\")
+month_table = "\n".join(rows)
+%#end
+
+\begin{table}[H]
+  \centering
+  \caption{Monthly state.}
+  \label{tab:months}
+  \begin{tabular}{lrrrl}
+    \toprule
+    Month & Occupancy (\%) & Demand (MWh) & Net (MWh) & State \\
+    \midrule
+    \py{month_table}
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+%#python
+# Two plots in one image: figure() saves it and returns its path.
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.2, 2.8))
+a1.scatter(df["occupancy"], df["total"], color="#007acc")
+a1.set_xlabel("occupancy (%)"); a1.set_ylabel("demand (MWh)")
+a2.fill_between(x, df["net"], 0, where=df["net"] >= 0, color="#cf222e", alpha=0.5, label="deficit", interpolate=True)
+a2.fill_between(x, df["net"], 0, where=df["net"] < 0, color="#1a7f37", alpha=0.5, label="surplus", interpolate=True)
+a2.set_xticks(x[::2], months[::2]); a2.legend(frameon=False)
+for a in (a1, a2): a.grid(alpha=0.3)
+fig.tight_layout()
+path = figure("occupancy_and_net")
+correlation = df["occupancy"].corr(df["total"])
+%#end
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{\py{path}}
+  \caption{Demand against occupancy and net balance (figure() + \texttt{\textbackslash includegraphics}).}
+\end{figure}
+
+The correlation between occupancy and demand is \py{f"{correlation:.2f}"}:
+\pyif{abs(correlation) > 0.5}{occupancy explains much of the consumption}{the climate weighs more than occupancy}.
+Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum.
+\end{document}

@@ -1,0 +1,33 @@
+% !TeX program = xelatex
+% =====================================================================
+%  CALCULATION REPORT (Pyx example) — main document
+%  A fictitious footbridge: every datum is made up.
+%
+%  Project structure:
+%    1. Main/          this file and the style (pyxstyle.sty)
+%    2. Chapters/      one .pltx per chapter, each with its own cells
+%    3. Annexes/       the annex uses a Jupyter notebook
+%    999. Resources/   data (CSV, Excel) and calculations (.ipynb)
+%
+%  The cells of every file run in the order they appear in the whole
+%  document, with paths relative to THIS folder.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{pyxstyle}
+\shorttitle{Footbridge over the ravine (fictitious)}
+
+\begin{document}
+\cover{Calculation report}{Footbridge over the ravine\\\small(fictitious example project)}{Engineering office}{November 2026}
+
+\tableofcontents
+\clearpage
+
+\input{../2. Chapters/1. Introduction}
+\input{../2. Chapters/2. Input data}
+\input{../2. Chapters/3. Beam design}
+\input{../2. Chapters/4. Conclusions}
+
+\appendix
+\clearpage
+\input{../3. Annexes/Annex A. Wind}
+\end{document}

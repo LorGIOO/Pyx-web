@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Examples · Pyx</title>
+  <meta name="description" content="Pyx projects to download, compile and copy: a calculation report, handcalcs and pint, Jupyter notebooks, pandas tables, plots and Excel data.">
+  <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Pyx examples">
+  <meta property="og:image" content="../../assets/img/og.png">
+  <link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+    <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="../../assets/css/base.css?v=20261117a">
+  <link rel="stylesheet" href="../../assets/css/doc.css?v=20261117a">
+  <link rel="stylesheet" href="../../assets/css/ejemplos.css?v=20261117a">
+  <link rel="alternate" hreflang="es" href="https://lorgioo.github.io/Pyx-web/ejemplos/">
+  <link rel="alternate" hreflang="en" href="https://lorgioo.github.io/Pyx-web/en/examples/">
+</head>
+<body>
+<a class="skip" href="#contenido">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="logo" viewBox="-2 -4 86 104"><rect x=".5" y="11.15" width="6.25" height="74.4" rx="3.1" fill="var(--blue)"/><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M80.06 84.77 58.5 95.28V74.26Z" fill="var(--blue)"/></symbol>
+  <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2Z" fill="currentColor"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v13M6 12l6 6 6-6M5 21h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 2.3a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.2-.4-1.2.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.5 4.9.4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.3Z" fill="currentColor"/></symbol>
+</defs></svg>
+
+<header class="runhead">
+  <a class="brand" href="../" aria-label="Pyx, home"><svg aria-hidden="true"><use href="#logo"/></svg></a>
+  <nav aria-label="Main">
+    <a href="../#laboratorio">Lab</a>
+    <a href="./" aria-current="page">Examples</a>
+    <a href="../manual/">Manual</a>
+    <a href="../news/">What’s new</a>
+    <a class="key small primary" href="../#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Download</a>
+  </nav>
+  <a class="icon-btn lang-btn" href="../../ejemplos/" hreflang="es" lang="es" title="Ver en español" aria-label="Ver en español">ES</a>
+  <a class="icon-btn gh-btn" href="https://github.com/LorGIOO/Pyx" aria-label="Pyx’s code on GitHub" title="Pyx’s code on GitHub"><svg aria-hidden="true"><use href="#i-gh"/></svg></a>
+  <button class="icon-btn" type="button" data-theme-toggle aria-label="Change the theme"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
+  <button class="icon-btn menu-btn" type="button" aria-label="Menu" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+</header>
+
+<header class="page-head">
+  <p class="eyebrow"><span>Examples</span><span class="n">6 projects to download</span></p>
+  <h1>Projects to <em>open, compile and copy.</em></h1>
+  <p class="lede">Complete Pyx projects with made-up data. Download one, open it and compile it as it is; then change a datum and watch the whole document rebuild itself. Copy them, break them, use them as templates.</p>
+</header>
+
+<div class="ej-layout">
+  <main id="contenido">
+    <ol class="ej-steps" aria-label="How to use them">
+      <li><b>Download</b> the <code>.zip</code> and unzip it wherever you like.</li>
+      <li><b>Open</b> in Pyx the main file each one names.</li>
+      <li><b>Compile</b> with <span class="menu">Compile &amp; view</span> (Ctrl+Shift+B). The libraries they use come with the Python Pyx sets up.</li>
+    </ol>
+    <nav class="ej-index" aria-label="Examples"><ol><li><a href="#00-template"><span>00</span>Empty template</a></li><li><a href="#01-calculation-report"><span>01</span>Calculation report</a></li><li><a href="#02-handcalcs-and-units"><span>02</span>Handcalcs and units</a></li><li><a href="#03-jupyter-notebook"><span>03</span>Only a Jupyter notebook</a></li><li><a href="#04-tables-plots-and-conditionals"><span>04</span>Tables, plots and conditionals</a></li><li><a href="#05-excel-data"><span>05</span>Excel and CSV data</a></li></ol></nav>
+
+<article class="ej" id="00-template" data-chapter="<b>00</b> · Empty template">
+  <header class="ej-head">
+    <p class="ej-num">00</p>
+    <div>
+      <h2>Empty template</h2>
+      <p class="ej-lema">The starting point for a new piece of work.</p>
+      <ul class="ej-tags"><li>.pltx preamble</li><li>.sty style</li><li>subdocuments</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>The same structure as the calculation report, without content: a main document that only gathers chapters, a <code>.sty</code> file with the whole look (margins, colours, cover, <code>\pass</code> and <code>\fail</code>) and a resources folder for images, data and calculations.</p>
+      <ul class="ej-list"><li><code>_Preamble.pltx</code> only has the cover, the table of contents and one <code>\input</code> per chapter.</li><li>Each chapter is a separate <code>.pltx</code>, with its own Python cells.</li><li><code>pyxstyle.sty</code> keeps the style: change it once and the whole document changes.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="../../ejemplos/descargas/00-template.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Download .zip <span class="k-hint">4 KB</span></a>
+        <a class="key" href="../../ejemplos/pdf/00-template.pdf">View the PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src-en/00-template">View on GitHub</a>
+      </div>
+      <p class="ej-open">Open <code>1. Main/_Preamble.pltx</code> and press <b>Compile &amp; view</b>.</p>
+      <details class="ej-tree"><summary>Project files</summary><pre>├─ <span class="dir">1. Main/</span>
+│  ├─ <span class="main">_Preamble.pltx</span>
+│  └─ <span class="">pyxstyle.sty</span>
+├─ <span class="dir">2. Chapters/</span>
+│  ├─ <span class="">1. Introduction.pltx</span>
+│  └─ <span class="">2. Calculations.pltx</span>
+├─ <span class="dir">999. Resources/</span>
+│  └─ <span class="dir">1. Images/</span>
+│     └─ <span class="">README.txt</span>
+└─ <span class="">README.md</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="3"><button class="ej-page" type="button" data-full="../../ejemplos/img/00-template-1.webp" aria-label="Enlarge page 1"><img src="../../ejemplos/img/00-template-1.webp" alt="Empty template, page 1" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/00-template-2.webp" aria-label="Enlarge page 2"><img src="../../ejemplos/img/00-template-2.webp" alt="Empty template, page 2" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/00-template-3.webp" aria-label="Enlarge page 3"><img src="../../ejemplos/img/00-template-3.webp" alt="Empty template, page 3" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">1. Main/_Preamble.pltx</span><pre><code><span class="tk-cmd">\documentclass</span>[11pt,a4paper]{article}
+<span class="tk-cmd">\usepackage</span>{pyxstyle}
+<span class="tk-cmd">\shorttitle</span>{Pyx template}
+
+<span class="tk-cmd">\begin</span>{document}
+<span class="tk-cmd">\cover</span>{Document title}{Subtitle or course}{Author&#x27;s name}{<span class="tk-cmd">\today</span>}
+<span class="tk-cmd">\tableofcontents</span>
+<span class="tk-cmd">\clearpage</span>
+
+<span class="tk-cmd">\input</span>{../2. Chapters/1. Introduction}
+<span class="tk-cmd">\input</span>{../2. Chapters/2. Calculations}
+<span class="tk-cmd">\end</span>{document}</code></pre></figure>
+</article>
+<article class="ej" id="01-calculation-report" data-chapter="<b>01</b> · Calculation report">
+  <header class="ej-head">
+    <p class="ej-num">01</p>
+    <div>
+      <h2>Calculation report</h2>
+      <p class="ej-lema">A fictitious footbridge, from the input data to the conclusions.</p>
+      <ul class="ej-tags"><li>chapters</li><li>CSV and Excel</li><li>handcalcs</li><li>pint</li><li>plots</li><li>\pyif</li><li>Jupyter</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>A large piece of work organised as it would be in real life. The data is read from a CSV and an Excel file; the beam is designed with <em>handcalcs</em>, which writes every formula with its values, and with <em>pint</em> for units; the text says «PASSES» or «FAILS» depending on the result. The wind annex has no cells: it calls the functions of a Jupyter notebook.</p>
+      <ul class="ej-list"><li>The variables of one chapter are used in the following ones.</li><li>One table with a <code>\py{}</code> in each cell and another written whole with <code>tabletex</code>.</li><li>A table whose rows a loop writes, comparing three sections.</li><li>Change <code>section = "IPE 330"</code> to <code>"IPE 300"</code> and watch the text, the plot and the tables change.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="../../ejemplos/descargas/01-calculation-report.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Download .zip <span class="k-hint">15 KB</span></a>
+        <a class="key" href="../../ejemplos/pdf/01-calculation-report.pdf">View the PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src-en/01-calculation-report">View on GitHub</a>
+      </div>
+      <p class="ej-open">Open <code>1. Main/_Preamble.pltx</code> and press <b>Compile &amp; view</b>.</p>
+      <details class="ej-tree"><summary>Project files</summary><pre>├─ <span class="dir">1. Main/</span>
+│  ├─ <span class="main">_Preamble.pltx</span>
+│  └─ <span class="">pyxstyle.sty</span>
+├─ <span class="dir">2. Chapters/</span>
+│  ├─ <span class="">1. Introduction.pltx</span>
+│  ├─ <span class="">2. Input data.pltx</span>
+│  ├─ <span class="">3. Beam design.pltx</span>
+│  └─ <span class="">4. Conclusions.pltx</span>
+├─ <span class="dir">3. Annexes/</span>
+│  └─ <span class="">Annex A. Wind.pltx</span>
+├─ <span class="dir">999. Resources/</span>
+│  ├─ <span class="dir">1. Data/</span>
+│  │  ├─ <span class="">loads.xlsx</span>
+│  │  └─ <span class="">materials.csv</span>
+│  └─ <span class="dir">2. Calculations/</span>
+│     └─ <span class="">wind.ipynb</span>
+└─ <span class="">README.md</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="6"><button class="ej-page" type="button" data-full="../../ejemplos/img/01-calculation-report-4.webp" aria-label="Enlarge page 4"><img src="../../ejemplos/img/01-calculation-report-4.webp" alt="Calculation report, page 4" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/01-calculation-report-3.webp" aria-label="Enlarge page 3"><img src="../../ejemplos/img/01-calculation-report-3.webp" alt="Calculation report, page 3" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/01-calculation-report-5.webp" aria-label="Enlarge page 5"><img src="../../ejemplos/img/01-calculation-report-5.webp" alt="Calculation report, page 5" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/01-calculation-report-6.webp" aria-label="Enlarge page 6"><img src="../../ejemplos/img/01-calculation-report-6.webp" alt="Calculation report, page 6" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/01-calculation-report-2.webp" aria-label="Enlarge page 2"><img src="../../ejemplos/img/01-calculation-report-2.webp" alt="Calculation report, page 2" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/01-calculation-report-1.webp" aria-label="Enlarge page 1"><img src="../../ejemplos/img/01-calculation-report-1.webp" alt="Calculation report, page 1" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">2. Chapters/3. Beam design.pltx</span><pre><code><span class="tk-cell">%#python</span>
+<span class="tk-magic">%%render</span>
+q_d = gamma_G * q_perm + gamma_Q * q_imp
+M_d = q_d * span**<span class="tk-num">2</span> / <span class="tk-num">8</span>
+V_d = q_d * span / <span class="tk-num">2</span>
+<span class="tk-cell">%#end</span>
+
+<span class="tk-cmd">\subsection</span>{Strength (ULS)}
+<span class="tk-cell">%#python</span>
+<span class="tk-com"># With units (pint): conversions happen by themselves.</span>
+fy = steel[<span class="tk-str">&quot;fy&quot;</span>] * u.MPa
+W = W_cm3 * u.cm**<span class="tk-num">3</span>
+M_Rd = (W * fy / steel[<span class="tk-str">&quot;gamma_M&quot;</span>]).to(u.kN * u.m)
+M_Ed = M_d * u.kN * u.m
+util_M = (M_Ed / M_Rd).to_base_units().magnitude
+<span class="tk-cell">%#end</span>
+
+Section <span class="tk-cmd">\textbf</span>{<span class="tk-py">\py</span>{section}} resists a moment of <span class="tk-py">\py</span>{f&quot;{M_Rd.magnitude:.1f}&quot;}~kN·m
+against the design <span class="tk-py">\py</span>{f&quot;{M_Ed.magnitude:.1f}&quot;}~kN·m: a utilisation of
+<span class="tk-py">\py</span>{f&quot;{100*util_M:.0f}&quot;}~<span class="tk-cmd">\%</span>, so the section <span class="tk-py">\pyif</span>{util_M &lt;= 1}{<span class="tk-cmd">\pass</span>}{<span class="tk-cmd">\fail</span>}
+in bending.</code></pre></figure>
+</article>
+<article class="ej" id="02-handcalcs-and-units" data-chapter="<b>02</b> · Handcalcs and units">
+  <header class="ej-head">
+    <p class="ej-num">02</p>
+    <div>
+      <h2>Handcalcs and units</h2>
+      <p class="ej-lema">Hand calculations, without writing them by hand.</p>
+      <ul class="ej-tags"><li>handcalcs</li><li>pint</li><li>\pyif</li><li>plots</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>A single file with the most striking side of Pyx for a technical calculation: a footing and a column. <code>%%render</code> cells put the full development of each formula in the PDF; <code>%%render params</code> writes the data in columns. Every quantity carries its units and conversions happen by themselves.</p>
+      <ul class="ej-list"><li>Greek letters and subscripts from the names: <code>lamb_r</code> is written λ<sub>r</sub>.</li><li><code>\pyif</code> compares kPa with MPa without manual conversions.</li><li>A buckling curve with the column's point and a summary table.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="../../ejemplos/descargas/02-handcalcs-and-units.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Download .zip <span class="k-hint">3 KB</span></a>
+        <a class="key" href="../../ejemplos/pdf/02-handcalcs-and-units.pdf">View the PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src-en/02-handcalcs-and-units">View on GitHub</a>
+      </div>
+      <p class="ej-open">Open <code>calculation-with-units.pltx</code> and press <b>Compile &amp; view</b>.</p>
+      <details class="ej-tree"><summary>Project files</summary><pre>├─ <span class="main">calculation-with-units.pltx</span>
+└─ <span class="">README.md</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="2"><button class="ej-page" type="button" data-full="../../ejemplos/img/02-handcalcs-and-units-1.webp" aria-label="Enlarge page 1"><img src="../../ejemplos/img/02-handcalcs-and-units-1.webp" alt="Handcalcs and units, page 1" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/02-handcalcs-and-units-2.webp" aria-label="Enlarge page 2"><img src="../../ejemplos/img/02-handcalcs-and-units-2.webp" alt="Handcalcs and units, page 2" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">calculation-with-units.pltx</span><pre><code><span class="tk-cell">%#python</span>
+<span class="tk-magic">%%render</span>
+A = B**<span class="tk-num">2</span>
+W = B**<span class="tk-num">3</span> / <span class="tk-num">6</span>
+sigma_max = (N / A + M / W).to(u.kPa)
+sigma_min = (N / A - M / W).to(u.kPa)
+<span class="tk-cell">%#end</span>
+
+The maximum pressure is <span class="tk-py">\py</span>{round(sigma_max, 1)} and the allowable one <span class="tk-py">\py</span>{sigma_adm.to(u.kPa)}:
+<span class="tk-py">\pyif</span>{sigma_max &lt;= sigma_adm}{the footing <span class="tk-cmd">\pass</span>.}{the footing <span class="tk-cmd">\fail</span>: it must be enlarged.}</code></pre></figure>
+</article>
+<article class="ej" id="03-jupyter-notebook" data-chapter="<b>03</b> · Only a Jupyter notebook">
+  <header class="ej-head">
+    <p class="ej-num">03</p>
+    <div>
+      <h2>Only a Jupyter notebook</h2>
+      <p class="ej-lema">A report without a single cell: all the calculation lives in the notebook.</p>
+      <ul class="ej-tags"><li>\pynotebook</li><li>\pyfile</li><li>.ipynb</li><li>.py with # %%</li><li>pandas</li><li>\pyif</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>For whoever already calculates in Jupyter or VS Code. The document links a notebook (<code>\pynotebook</code>) and a script with <code># %%</code> blocks (<code>\pyfile</code>) and, from there, uses their variables and <strong>calls their functions</strong> with the arguments it wants. The plot is saved by the notebook and the document includes it with <code>\includegraphics</code>.</p>
+      <ul class="ej-list"><li>A whole table written by a function of the notebook: <code>\py{period_rows([2, 5, 10])}</code>.</li><li>A pandas table queried cell by cell: <code>\py{quantiles.loc[100, 'P']}</code>.</li><li>If the notebook is open and run, Pyx copies its values without running anything.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="../../ejemplos/descargas/03-jupyter-notebook.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Download .zip <span class="k-hint">5 KB</span></a>
+        <a class="key" href="../../ejemplos/pdf/03-jupyter-notebook.pdf">View the PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src-en/03-jupyter-notebook">View on GitHub</a>
+      </div>
+      <p class="ej-open">Open <code>report.pltx</code> and press <b>Compile &amp; view</b>.</p>
+      <details class="ej-tree"><summary>Project files</summary><pre>├─ <span class="dir">calcs/</span>
+│  ├─ <span class="">rainfall.ipynb</span>
+│  └─ <span class="">station_data.py</span>
+├─ <span class="dir">data/</span>
+│  └─ <span class="">annual_maxima.csv</span>
+├─ <span class="">README.md</span>
+└─ <span class="main">report.pltx</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="2"><button class="ej-page" type="button" data-full="../../ejemplos/img/03-jupyter-notebook-1.webp" aria-label="Enlarge page 1"><img src="../../ejemplos/img/03-jupyter-notebook-1.webp" alt="Only a Jupyter notebook, page 1" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/03-jupyter-notebook-2.webp" aria-label="Enlarge page 2"><img src="../../ejemplos/img/03-jupyter-notebook-2.webp" alt="Only a Jupyter notebook, page 2" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">report.pltx</span><pre><code><span class="tk-py">\pyfile</span>{calcs/station_data.py}
+<span class="tk-py">\pynotebook</span>{calcs/rainfall.ipynb}
+<span class="tk-com">% …</span>
+  <span class="tk-cmd">\begin</span>{tabular}{rrr}
+    <span class="tk-cmd">\toprule</span>
+    $T$ (years) &amp; Annual probability (<span class="tk-cmd">\%</span>) &amp; $P_d$ (mm) <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\midrule</span>
+    <span class="tk-py">\py</span>{period_rows([2, 5, 10, 25, 50, 100, 500])}
+    <span class="tk-cmd">\bottomrule</span>
+  <span class="tk-cmd">\end</span>{tabular}</code></pre></figure><figure class="code"><span class="code-lang">calcs/rainfall.ipynb</span><pre><code><span class="tk-kw">def</span> period_rows(periods):
+    <span class="tk-str">&quot;&quot;</span><span class="tk-str">&quot;Rows of a LaTeX table: period, annual probability and rainfall.&quot;</span><span class="tk-str">&quot;&quot;</span>
+    rows = []
+    <span class="tk-kw">for</span> T <span class="tk-kw">in</span> periods:
+        rows.append(f<span class="tk-str">&#x27;{T} &amp; {100 / T:.1f} &amp; {quantile(T):.1f} \\\\&#x27;</span>)
+    <span class="tk-kw">return</span> <span class="tk-str">&#x27;\n&#x27;</span>.join(rows)</code></pre></figure>
+</article>
+<article class="ej" id="04-tables-plots-and-conditionals" data-chapter="<b>04</b> · Tables, plots and conditionals">
+  <header class="ej-head">
+    <p class="ej-num">04</p>
+    <div>
+      <h2>Tables, plots and conditionals</h2>
+      <p class="ej-lema">A normal DataFrame and a document that asks it questions.</p>
+      <ul class="ej-tags"><li>pandas</li><li>tabletex</li><li>loops</li><li>matplotlib</li><li>\pyif</li><li>cells</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>Fictitious energy data in a pandas DataFrame with nothing prepared for LaTeX. The first table is written in LaTeX and the document asks for each number: <code>\py{df.at["Jan", "total"]}</code>. The second is the same DataFrame in one line with <code>tabletex</code>, and the third is written by a loop.</p>
+      <ul class="ej-list"><li>Two ways to place a plot: <code>figtex()</code> (the whole figure) and <code>figure()</code> + <code>\includegraphics</code>.</li><li>Sentences that change with the data, with colours and even the plural: «1 month» or «4 months».</li><li>Change a datum of the DataFrame: tables, plots and sentences change at once.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="../../ejemplos/descargas/04-tables-plots-and-conditionals.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Download .zip <span class="k-hint">4 KB</span></a>
+        <a class="key" href="../../ejemplos/pdf/04-tables-plots-and-conditionals.pdf">View the PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src-en/04-tables-plots-and-conditionals">View on GitHub</a>
+      </div>
+      <p class="ej-open">Open <code>study.pltx</code> and press <b>Compile &amp; view</b>.</p>
+      <details class="ej-tree"><summary>Project files</summary><pre>├─ <span class="">README.md</span>
+└─ <span class="main">study.pltx</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="3"><button class="ej-page" type="button" data-full="../../ejemplos/img/04-tables-plots-and-conditionals-1.webp" aria-label="Enlarge page 1"><img src="../../ejemplos/img/04-tables-plots-and-conditionals-1.webp" alt="Tables, plots and conditionals, page 1" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/04-tables-plots-and-conditionals-2.webp" aria-label="Enlarge page 2"><img src="../../ejemplos/img/04-tables-plots-and-conditionals-2.webp" alt="Tables, plots and conditionals, page 2" loading="lazy" width="910" height="1287"></button><button class="ej-page" type="button" data-full="../../ejemplos/img/04-tables-plots-and-conditionals-3.webp" aria-label="Enlarge page 3"><img src="../../ejemplos/img/04-tables-plots-and-conditionals-3.webp" alt="Tables, plots and conditionals, page 3" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">study.pltx</span><pre><code>  <span class="tk-cmd">\begin</span>{tabular}{lrrrr}
+    <span class="tk-cmd">\toprule</span>
+    Month &amp; Heating &amp; Cooling &amp; Photovoltaic &amp; Net <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\midrule</span>
+    January  &amp; <span class="tk-py">\py</span>{df.at[&quot;Jan&quot;, &quot;heating&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Jan&quot;, &quot;cooling&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Jan&quot;, &quot;photovoltaic&quot;]} &amp; <span class="tk-py">\py</span>{round(df.at[&quot;Jan&quot;, &quot;net&quot;], 1)} <span class="tk-cmd">\\</span>
+    February &amp; <span class="tk-py">\py</span>{df.at[&quot;Feb&quot;, &quot;heating&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Feb&quot;, &quot;cooling&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Feb&quot;, &quot;photovoltaic&quot;]} &amp; <span class="tk-py">\py</span>{round(df.at[&quot;Feb&quot;, &quot;net&quot;], 1)} <span class="tk-cmd">\\</span>
+    March    &amp; <span class="tk-py">\py</span>{df.at[&quot;Mar&quot;, &quot;heating&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Mar&quot;, &quot;cooling&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Mar&quot;, &quot;photovoltaic&quot;]} &amp; <span class="tk-py">\py</span>{round(df.at[&quot;Mar&quot;, &quot;net&quot;], 1)} <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\midrule</span>
+    Total    &amp; <span class="tk-py">\py</span>{df.loc[&quot;Jan&quot;:&quot;Mar&quot;, &quot;heating&quot;].sum().round(1)} &amp; <span class="tk-py">\py</span>{df.loc[&quot;Jan&quot;:&quot;Mar&quot;, &quot;cooling&quot;].sum().round(1)} &amp; <span class="tk-py">\py</span>{df.loc[&quot;Jan&quot;:&quot;Mar&quot;, &quot;photovoltaic&quot;].sum().round(1)} &amp; <span class="tk-py">\py</span>{df.loc[&quot;Jan&quot;:&quot;Mar&quot;, &quot;net&quot;].sum().round(1)} <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\bottomrule</span>
+  <span class="tk-cmd">\end</span>{tabular}</code></pre></figure>
+</article>
+<article class="ej" id="05-excel-data" data-chapter="<b>05</b> · Excel and CSV data">
+  <header class="ej-head">
+    <p class="ej-num">05</p>
+    <div>
+      <h2>Excel and CSV data</h2>
+      <p class="ej-lema">A budget whose numbers live in Excel, without a line of Python.</p>
+      <ul class="ej-tags"><li>\hoja</li><li>\celda</li><li>.xlsx</li><li>.csv</li><li>no Python</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>The document links an Excel workbook with <code>\hoja[Quantities]{data/works.xlsx}</code> and places its cells with <code>\celda{E4}</code>, or a whole range with <code>\celda{A2:E7}</code>, which comes out as the body of a table. A chapter reads a CSV with the <code>;</code> and decimal comma of Excel in many European languages. Change a number in Excel, save and compile: the document changes by itself.</p>
+      <ul class="ej-list"><li>A single cell in a sentence: <code>\celda{B3}</code>; another sheet: <code>\celda{Summary!B5}</code>.</li><li>A whole table from Excel: header <code>\celda{A1:E1}</code> and body <code>\celda{A2:E7}</code>.</li><li><code>\celda[T]{B2:B6}</code> places a column as a row (and the other way round).</li><li>It reads what Excel saved, including the results of formulas.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="../../ejemplos/descargas/05-excel-data.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Download .zip <span class="k-hint">8 KB</span></a>
+        <a class="key" href="../../ejemplos/pdf/05-excel-data.pdf">View the PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src-en/05-excel-data">View on GitHub</a>
+      </div>
+      <p class="ej-open">Open <code>report.pltx</code> and press <b>Compile &amp; view</b>.</p>
+      <details class="ej-tree"><summary>Project files</summary><pre>├─ <span class="dir">chapters/</span>
+│  └─ <span class="">tests.pltx</span>
+├─ <span class="dir">data/</span>
+│  ├─ <span class="">tests.csv</span>
+│  └─ <span class="">works.xlsx</span>
+├─ <span class="">README.md</span>
+└─ <span class="main">report.pltx</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="1"><button class="ej-page" type="button" data-full="../../ejemplos/img/05-excel-data-1.webp" aria-label="Enlarge page 1"><img src="../../ejemplos/img/05-excel-data-1.webp" alt="Excel and CSV data, page 1" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">report.pltx</span><pre><code>
+<span class="tk-com">% …</span>
+<span class="tk-py">\hoja</span>[Quantities]{data/works.xlsx}
+Table~<span class="tk-cmd">\ref</span>{tab:budget} is the workbook&#x27;s «Quantities» sheet: the header is
+row 1 and the body, range A2:E7. Every number comes from Excel.
+
+<span class="tk-cmd">\begin</span>{table}[H]
+  <span class="tk-cmd">\centering</span>
+  <span class="tk-cmd">\caption</span>{Budget by chapter.}
+  <span class="tk-cmd">\label</span>{tab:budget}
+  <span class="tk-cmd">\begin</span>{tabular}{llrrr}
+    <span class="tk-cmd">\toprule</span>
+    <span class="tk-py">\celda</span>{A1:E1} <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\midrule</span>
+    <span class="tk-py">\celda</span>{A2:E7}
+    <span class="tk-cmd">\midrule</span>
+    <span class="tk-cmd">\multicolumn</span>{4}{l}{<span class="tk-cmd">\textbf</span>{<span class="tk-py">\celda</span>{A8}}} &amp; <span class="tk-cmd">\textbf</span>{<span class="tk-py">\celda</span>{E8}} <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\bottomrule</span>
+  <span class="tk-cmd">\end</span>{tabular}
+<span class="tk-cmd">\end</span>{table}</code></pre></figure>
+</article>
+    <p class="ej-foot">Every datum, name and result is fictitious. The examples are compiled with Pyx itself each time they are published; if one does not compile for you, <a href="https://github.com/LorGIOO/Pyx/issues">tell us</a>.</p>
+  </main>
+</div>
+
+<dialog class="ej-lightbox" aria-label="Enlarged page"><button type="button" class="icon-btn" data-close aria-label="Close">✕</button><img alt=""></dialog>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div>
+      <a class="brand" href="../"><svg aria-hidden="true"><use href="#logo"/></svg>Pyx</a>
+      <p>The calculation and the document, in one file.</p>
+      <p>No cookies or trackers.</p>
+    </div>
+    <div><h2>Product</h2><ul><li><a href="../#laboratorio">Lab</a></li><li><a href="./">Examples</a></li><li><a href="../#descargar">Download</a></li><li><a href="../news/">What’s new</a></li></ul></div>
+    <div><h2>Help</h2><ul><li><a href="../manual/">User manual</a></li><li><a href="../manual/pyx-user-manual.pdf">Manual as PDF</a></li><li><a href="https://github.com/LorGIOO/Pyx/issues">Report a bug</a></li></ul></div>
+    <div><h2>Project</h2><ul><li><a href="https://github.com/LorGIOO/Pyx">Source code</a></li><li><a href="../privacy/">Privacy</a></li><li><a href="../signing/">Code signing</a></li><li><a href="https://github.com/LorGIOO/Pyx/blob/main/LICENSE">MIT licence</a></li></ul></div>
+  </div>
+  <div class="endmark"><span>© <span data-year>2026</span> Pyx · Free software</span><span>∎</span></div>
+</footer>
+
+<script src="../../assets/js/common.js?v=20261117a"></script>
+<script>
+(() => {
+  const box = document.querySelector('.ej-lightbox');
+  const img = box.querySelector('img');
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('.ej-page');
+    if (b) { img.src = b.dataset.full; img.alt = b.querySelector('img').alt; box.showModal(); return; }
+    if (e.target === box || e.target.closest('[data-close]')) box.close();
+  });
+})();
+</script>
+</body>
+</html>

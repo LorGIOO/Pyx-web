@@ -1,0 +1,20 @@
+\section{Ensayos del hormigón}
+% Otro archivo: un CSV, con el «;» y la coma decimal del Excel en español.
+\hoja{datos/ensayos.csv}
+Las probetas se ensayaron a los \celda{C2}~días. La columna de resistencias
+(B2:B6) se coloca como una fila con \texttt{[T]}:
+
+\begin{table}[H]
+  \centering
+  \caption{Resistencia a compresión de las probetas (MPa).}
+  \begin{tabular}{ccccc}
+    \toprule
+    \celda[T]{A2:A6} \\
+    \midrule
+    \celda[T]{B2:B6} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Nulla vitae elit libero, a pharetra augue. Si cambias una resistencia en
+\texttt{ensayos.csv} y compilas, la tabla cambia.

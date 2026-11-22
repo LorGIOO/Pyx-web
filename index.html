@@ -21,6 +21,8 @@
   <link rel="preload" href="assets/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/base.css?v=20261117a">
   <link rel="stylesheet" href="assets/css/home.css?v=20261117a">
+  <link rel="alternate" hreflang="es" href="https://lorgioo.github.io/Pyx-web/">
+  <link rel="alternate" hreflang="en" href="https://lorgioo.github.io/Pyx-web/en/">
 </head>
 <body>
 <a class="skip" href="#por-que">Saltar al contenido</a>
@@ -52,6 +54,7 @@
     <a href="novedades/">Novedades</a>
     <a class="key small primary" href="#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar</a>
   </nav>
+  <a class="icon-btn lang-btn" href="en/" hreflang="en" lang="en" title="View in English" aria-label="View in English">EN</a>
   <a class="icon-btn gh-btn" href="https://github.com/LorGIOO/Pyx" aria-label="El código de Pyx en GitHub" title="El código de Pyx en GitHub"><svg aria-hidden="true"><use href="#i-gh"/></svg></a>
   <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar el tema"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
   <button class="icon-btn menu-btn" type="button" aria-label="Menú" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
@@ -66,7 +69,7 @@
   <div class="hero-stage">
     <div class="hero-copy">
       <div class="hero-step is-on" data-step="0">
-        <p class="eyebrow"><span>v2.1.0</span><span class="n">Windows · Linux · Libre (MIT)</span></p>
+        <p class="eyebrow"><span>v2.2.0</span><span class="n">Windows · Linux · Libre (MIT)</span></p>
         <h1 class="hero-title">
           <span class="glyphs" aria-hidden="true"><i class="g-cursor"></i><svg class="g-int" viewBox="10 -4 62 106"><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74"/></svg><i class="g-run"></i></span>
           <span class="word">Pyx</span>
@@ -207,7 +210,7 @@
       </div>
       <div class="gest-visual" aria-hidden="true">
         <div class="win">
-          <div class="win-bar"><span></span><span></span><span></span><b>informe.pltx — Pyx 2.1.0</b></div>
+          <div class="win-bar"><span></span><span></span><span></span><b>informe.pltx — Pyx 2.2.0</b></div>
           <div class="win-body">
             <div class="win-editor">
               <div class="wl"><em>14</em><span class="tk-cmd">\section</span>{Datos de partida}</div>
@@ -386,7 +389,7 @@
           <li data-nb-step="once"><b>Ejecutándolo una vez.</b> Solo si no hay ninguna de las dos cosas. Sus valores quedan guardados para la siguiente.<em class="mono">lo que tarde, una vez</em></li>
           <li data-nb-step="diff"><b>Solo lo que ha cambiado.</b> Recupera lo que dejó la última ejecución y repite solo las celdas modificadas y las que dependen de ellas.<em class="mono">lo que tarde esa celda</em></li>
         </ol>
-        <p class="caption">También con archivos <code>.py</code> (<code>\pyfile{datos.py}</code>), enteros o por bloques <code># %%</code>. Si los guardas desde VS Code, o cambia el Excel que leen, el PDF se actualiza solo.</p>
+        <p class="caption">También con archivos <code>.py</code> (<code>\pyfile{datos.py}</code>), enteros o por bloques <code># %%</code>. Si los guardas desde VS Code, o cambia el Excel que leen, el PDF se actualiza solo. Y con <code>\hoja{…}</code> y <code>\celda{E4}</code> las celdas de un libro de Excel van al texto sin nada de Python.</p>
       </div>
     </div>
   </div>
@@ -568,7 +571,7 @@
         <div class="folder clean">
           <p class="mono folder-name">informe/ <small>Pyx</small></p>
           <ul class="mono"><li>informe.pltx <small>6 KB</small></li></ul>
-          <p class="caption">Un <code>.pltx</code> guarda tu texto y los resultados de las celdas: al reabrirlo se ven los números, las tablas y las figuras sin ejecutar nada, incluso en un equipo sin Python. Lo demás vive en la carpeta de trabajo de Pyx, que se limpia sola.</p>
+          <p class="caption">Un <code>.pltx</code> guarda tu texto y los resultados de las celdas: al reabrirlo se ven los números, las tablas y las figuras sin ejecutar nada, incluso en un equipo sin Python. Lo demás vive en la carpeta de trabajo de Pyx solo mientras Pyx está abierto: se borra al cerrarlo.</p>
         </div>
       </div>
     </div>

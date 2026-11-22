@@ -30,6 +30,7 @@ from pathlib import Path
 
 WEB = Path(__file__).resolve().parent.parent
 SRC = WEB / "ejemplos" / "src"
+SRC_EN = WEB / "ejemplos" / "src-en"   # the same projects, in English
 ZIPS = WEB / "ejemplos" / "descargas"
 PDFS = WEB / "ejemplos" / "pdf"
 IMGS = WEB / "ejemplos" / "img"
@@ -42,8 +43,16 @@ RAIZ = {
     "02-handcalcs-y-unidades": "calculo-con-unidades.pltx",
     "03-cuaderno-de-jupyter": "informe.pltx",
     "04-tablas-graficas-y-condicionales": "estudio.pltx",
+    "05-datos-de-excel": "informe.pltx",
+    # English
+    "00-template": "1. Main/_Preamble.pltx",
+    "01-calculation-report": "1. Main/_Preamble.pltx",
+    "02-handcalcs-and-units": "calculation-with-units.pltx",
+    "03-jupyter-notebook": "report.pltx",
+    "04-tables-plots-and-conditionals": "study.pltx",
+    "05-excel-data": "report.pltx",
 }
-GENERADO = {"xref", "figuras", "__pycache__", ".ipynb_checkpoints"}
+GENERADO = {"xref", "figuras", "figures", "__pycache__", ".ipynb_checkpoints"}
 MAX_PAGINAS = 6
 
 
@@ -59,7 +68,8 @@ def a_pltx(ruta: Path) -> None:
 
 def copiar(nombre: str, destino: Path) -> Path:
     raiz = destino / nombre
-    shutil.copytree(SRC / nombre, raiz,
+    src = SRC / nombre if (SRC / nombre).is_dir() else SRC_EN / nombre
+    shutil.copytree(src, raiz,
                     ignore=lambda d, fs: [f for f in fs if f in GENERADO])
     for p in raiz.rglob("*.pltx"):
         a_pltx(p)

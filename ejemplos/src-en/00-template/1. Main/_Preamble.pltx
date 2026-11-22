@@ -1,0 +1,20 @@
+% !TeX program = xelatex
+% =====================================================================
+%  PYX TEMPLATE — main document (the one that is compiled)
+%  · The look is in pyxstyle.sty (next to this file).
+%  · Each chapter is a separate document in «2. Chapters».
+%  · Images, data and calculations go in «999. Resources».
+%  Paths are always relative to THIS folder.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{pyxstyle}
+\shorttitle{Pyx template}
+
+\begin{document}
+\cover{Document title}{Subtitle or course}{Author's name}{\today}
+\tableofcontents
+\clearpage
+
+\input{../2. Chapters/1. Introduction}
+\input{../2. Chapters/2. Calculations}
+\end{document}

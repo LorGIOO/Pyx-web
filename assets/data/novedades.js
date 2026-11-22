@@ -13,6 +13,67 @@
    ========================================================================== */
 window.PYX_NOVEDADES = [
   {
+    version: "2.2.0",
+    fecha: "2026-11-22",
+    titulo: "Excel en el documento, abrir carpeta y un modo noche que respeta los colores",
+    destacada: true,
+    grupos: [
+      {
+        nombre: "Datos de Excel y CSV, sin Python",
+        cambios: [
+          "`\\hoja[Hoja]{libro.xlsx}` vincula un libro y su hoja; `\\celda{E4}` coloca una celda y `\\celda{A2:E7}` un rango entero, listo para una tabla. `\\celda[T]{…}` lo transpone.",
+          "Pyx lee el archivo en cada compilación: cambia un número en Excel, guarda y compila. También CSV con «;» y coma decimal.",
+        ],
+      },
+      {
+        nombre: "Como en VS Code",
+        cambios: [
+          "**Abrir carpeta**: la carpeta del proyecto queda fija en el explorador, que ahora se ve como el de VS Code.",
+          "Autocompletado y panel de problemas con el aspecto de VS Code.",
+          "Ctrl+T sobre una palabra comenta solo esa palabra; la negrita con el cursor en un `\\py{}` se aplica al comando entero.",
+        ],
+      },
+      {
+        nombre: "Y además",
+        cambios: [
+          "**Modo noche del PDF**: el papel se oscurece y el texto se aclara, pero los colores y las imágenes se conservan.",
+          "Los archivos de trabajo de LaTeX se borran al cerrar Pyx. La configuración se guarda también en un `config.json` legible.",
+          "El manual y los proyectos de ejemplo, en español y en inglés, y un ejemplo nuevo con Excel.",
+          "Los números de línea ya no se desalinean al hacer zoom en el editor; un documento nuevo empieza vacío.",
+        ],
+      },
+    ],
+    en: {
+      titulo: "Excel in the document, open folder and a night mode that respects colours",
+      grupos: [
+        {
+          nombre: "Excel and CSV data, without Python",
+          cambios: [
+            "`\\hoja[Sheet]{workbook.xlsx}` links a workbook and its sheet; `\\celda{E4}` places a cell and `\\celda{A2:E7}` a whole range, ready for a table. `\\celda[T]{…}` transposes it.",
+            "Pyx reads the file at every compile: change a number in Excel, save and compile. CSV with «;» and decimal comma too.",
+          ],
+        },
+        {
+          nombre: "Like VS Code",
+          cambios: [
+            "**Open folder**: the project folder stays in the explorer, which now looks like VS Code's.",
+            "Completion and the problems panel look like VS Code's.",
+            "Ctrl+T on a word comments only that word; bold with the caret in a `\\py{}` applies to the whole command.",
+          ],
+        },
+        {
+          nombre: "And also",
+          cambios: [
+            "**PDF night mode**: the paper darkens and the text lightens, but colours and pictures are kept.",
+            "LaTeX's working files are deleted when Pyx closes. The settings are also saved in a readable `config.json`.",
+            "The manual and the example projects, in Spanish and English, and a new example with Excel.",
+            "Line numbers no longer drift when zooming the editor; a new document starts empty.",
+          ],
+        },
+      ],
+    },
+  },
+  {
     version: "2.1.0",
     fecha: "2026-11-17",
     titulo: "Un visor que no salta, arrastre a tu gusto y proyectos de ejemplo",
@@ -40,6 +101,14 @@ window.PYX_NOVEDADES = [
         ],
       },
     ],
+    en: {
+      titulo: "A viewer that does not jump, dragging your way and example projects",
+      grupos: [
+        { nombre: "PDF viewer", cambios: ["When compiling, or after a big change, **the PDF no longer jumps to the right**.", "Choose what drags the page: **right button, wheel or both**, in `Settings → Keyboard shortcuts`."] },
+        { nombre: "Python", cambios: ["The **functions of a notebook** linked with `\\pynotebook{}` keep working when the saved values are reused.", "In `tabletex()` and `tex()`, `prec` is always decimals, also in pandas tables: `41.2`, not `4e+01`.", "A `\\py{}` inside a cell's code or in a LaTeX comment is no longer evaluated nor reported."] },
+        { nombre: "And also", cambios: ["**Sharing** is paused while it is improved: it no longer appears in the interface.", "On the website, an **examples** page: complete projects to download and compile."] },
+      ],
+    },
   },
   {
     version: "2.0.0",

@@ -1,3 +1,6 @@
 # Lo que generan los ejemplos al compilar (las gráficas se rehacen solas)
 ejemplos/src/**/xref/
 ejemplos/src/**/figuras/
+ejemplos/src-en/**/xref/
+ejemplos/src-en/**/figures/
+__pycache__/

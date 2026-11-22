@@ -1,0 +1,21 @@
+\section{Introduction}
+
+\subsection{Purpose}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. This report justifies
+the structure of a \emph{fictitious} footbridge: a steel beam simply supported
+on two abutments. Every datum in this document is made up and serves only to
+show how a calculation report is organised in Pyx.
+
+\subsection{Description of the structure}
+Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras
+mattis consectetur purus sit amet fermentum.
+\begin{itemize}
+  \item Timber deck on two steel IPE beams.
+  \item Span and loads in chapter~\ref{sec:data}.
+  \item Strength (ULS) and deflection (SLS) checks in chapter~\ref{sec:beam}.
+\end{itemize}
+
+\subsection{How this document is made}
+Every number in the following chapters is computed by a Python cell when
+compiling: if an input changes, the values in the text, the tables, the figures
+and the conclusions change at the same time.

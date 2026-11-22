@@ -1,0 +1,9 @@
+\section{Conclusions}
+
+\result{The footbridge beam is solved with an S275 steel \textbf{\py{section}}
+section, with a bending utilisation of \py{f"{100*util_M:.0f}"}~\% and a deflection of
+\py{f"{f:.1f}"}~mm (limit \py{f"{f_lim:.1f}"}~mm).}
+
+\pyif{util_M <= 1 and f <= f_lim}{Every check passes.}{Some check fails: the section must change.}
+Nulla vitae elit libero, a pharetra augue. Curabitur blandit tempus porttitor.
+Donec sed odio dui. Maecenas faucibus mollis interdum.

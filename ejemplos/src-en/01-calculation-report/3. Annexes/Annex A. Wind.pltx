@@ -1,0 +1,31 @@
+\section{Annex A. Wind pressure}\label{sec:wind}
+
+% This annex has no cells of its own: the whole calculation is in a Jupyter
+% notebook. \pynotebook links it and, from here on, its variables and its
+% functions are used as if they belonged to the document.
+\pynotebook{../999. Resources/2. Calculations/wind.ipynb}
+
+The wind pressures are computed in the notebook \texttt{wind.ipynb}, which can
+also be opened and run in Jupyter or VS Code. With a basic wind speed of
+\py{v_b}~m/s and an air density of \py{rho_air}~kg/m$^3$, the basic pressure is
+\py{f"{q_b:.3f}"}~kN/m$^2$.
+
+Table~\ref{tab:wind} is written by a function of the notebook, \texttt{pressure\_rows},
+called from here with the heights of interest.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Wind pressure by height above ground (fictitious values).}
+  \label{tab:wind}
+  \begin{tabular}{ccc}
+    \toprule
+    Height $z$ (m) & Factor $c_e(z)$ & Pressure $q_e$ (kN/m$^2$) \\
+    \midrule
+    \py{pressure_rows([2, 5, 10, 15, 20])}
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+At the height of the deck (\py{z_deck}~m), the pressure is
+\py{f"{pressure(z_deck):.3f}"}~kN/m$^2$: \pyif{pressure(z_deck) < 1.0}{moderate}{high}.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.

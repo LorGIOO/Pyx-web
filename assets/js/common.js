@@ -1,6 +1,7 @@
 /* Pyx · comportamiento común a todas las páginas */
 (() => {
   const root = document.documentElement;
+  const EN = root.lang === 'en';
 
   /* ---------- abrir o recargar una página siempre la empieza por arriba ----------
      El navegador no restaura la posición anterior, y los enlaces internos (#…)
@@ -71,7 +72,7 @@
   const paintThemeBtn = () => {
     if (!themeBtn) return;
     themeBtn.setAttribute('aria-pressed', String(dark()));
-    themeBtn.title = dark() ? 'Pasar al tema claro' : 'Pasar al tema oscuro';
+    themeBtn.title = EN ? (dark() ? 'Switch to the light theme' : 'Switch to the dark theme') : (dark() ? 'Pasar al tema claro' : 'Pasar al tema oscuro');
   };
   themeBtn?.addEventListener('click', () => {
     root.dataset.theme = dark() ? 'light' : 'dark';
@@ -126,7 +127,7 @@
   box.className = 'lightbox';
   box.setAttribute('role', 'dialog');
   box.setAttribute('aria-modal', 'true');
-  box.setAttribute('aria-label', 'Imagen ampliada');
+  box.setAttribute('aria-label', EN ? 'Enlarged image' : 'Imagen ampliada');
   box.innerHTML = '<figure style="margin:0"><img alt=""><p></p></figure>';
   document.body.appendChild(box);
   let lastFocus = null;

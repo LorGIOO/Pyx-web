@@ -1,0 +1,56 @@
+% !TeX program = xelatex
+% =====================================================================
+%  DATOS DE EXCEL Y CSV, SIN PYTHON (ejemplo de Pyx)
+%  · \hoja[Hoja]{libro.xlsx} vincula un libro y su hoja, desde ese punto.
+%  · \celda{E4} coloca una celda; \celda{A2:E7}, un rango (fila, columna o
+%    tabla, listo para un tabular); \celda[T]{…} lo transpone.
+%  · Pyx lee el archivo al compilar: cambia un número en Excel, guarda
+%    (Ctrl+S) y compila. No hace falta ninguna celda de Python.
+%  Todos los datos son ficticios.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[spanish,es-noshorthands,es-tabla]{babel}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{booktabs,array,float}
+\usepackage[hidelinks]{hyperref}
+
+\hoja[Resumen]{datos/obra.xlsx}
+
+\title{Presupuesto de la obra\\\large Datos leídos de un libro de Excel y de un CSV}
+\author{Ejemplo de Pyx}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Datos generales}
+Obra: \celda{B1}; promotor: \celda{B2}; superficie construida de
+\celda{B3}~m$^2$, plazo de ejecución de \celda{B4}~meses y presupuesto de
+ejecución material de \celda{B5}~€. Lorem ipsum dolor sit amet, consectetur
+adipiscing elit.
+
+\section{Mediciones y presupuesto}
+\hoja[Mediciones]{datos/obra.xlsx}
+La tabla~\ref{tab:presupuesto} es la hoja «Mediciones» del libro: la cabecera
+es la fila 1 y el cuerpo, el rango A2:E7. Cada número sale de Excel.
+
+\begin{table}[H]
+  \centering
+  \caption{Presupuesto por capítulos.}
+  \label{tab:presupuesto}
+  \begin{tabular}{llrrr}
+    \toprule
+    \celda{A1:E1} \\
+    \midrule
+    \celda{A2:E7}
+    \midrule
+    \multicolumn{4}{l}{\textbf{\celda{A8}}} & \textbf{\celda{E8}} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+La \celda{A4} supone \celda{E4}~€: \celda{C4}~\celda{B4} a \celda{D4}~€ cada uno.
+
+\input{capitulos/ensayos}
+\end{document}

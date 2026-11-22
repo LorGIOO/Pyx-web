@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pyx · The calculation and the document, in one file</title>
+  <meta name="description" content="Pyx is a LaTeX editor with Python cells inside. You write the report, calculate in it and the PDF comes out with the numbers already in place. Change a datum and everything updates.">
+  <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pyx · The calculation and the document, in one file">
+  <meta property="og:description" content="A LaTeX editor with Python cells inside. Change a datum and the whole PDF catches up.">
+  <meta property="og:image" content="../assets/img/og.png">
+  <meta property="og:locale" content="en_GB">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/icon.png">
+  <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="preload" href="../assets/fonts/cmu-serif-500-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261117a">
+  <link rel="stylesheet" href="../assets/css/home.css?v=20261117a">
+  <link rel="alternate" hreflang="es" href="https://lorgioo.github.io/Pyx-web/">
+  <link rel="alternate" hreflang="en" href="https://lorgioo.github.io/Pyx-web/en/">
+</head>
+<body>
+<a class="skip" href="#por-que">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="-2 -4 86 104">
+      <rect x=".5" y="11.15" width="6.25" height="74.4" rx="3.1" fill="var(--blue)"/>
+      <path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      <path d="M80.06 84.77 58.5 95.28V74.26Z" fill="var(--blue)"/>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 12m0-8.6v0M12 2.2v2.2M12 19.6v2.2M2.2 12h2.2M19.6 12h2.2M5 5l1.6 1.6M17.4 17.4 19 19M5 19l1.6-1.6M17.4 6.6 19 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2Z" fill="currentColor"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-win" viewBox="0 0 24 24"><path d="M3 5.3 10.4 4.3v7.1H3Zm8.4-1.2L21 2.8v8.6h-9.6ZM3 12.6h7.4v7.1L3 18.7Zm8.4 0H21v8.6l-9.6-1.3Z" fill="currentColor"/></symbol>
+    <symbol id="i-linux" viewBox="0 0 24 24"><path d="M12 2.5c-2.2 0-3.3 1.9-3.3 4.4 0 1.2.3 2.1-.6 3.4-1 1.4-2.6 3.6-2.6 6 0 .7.2 1.3.5 1.8-.8.4-1.6 1-1.4 1.8.3 1 2 .7 3.2 1.4 1 .6 2.3.6 2.9-.2h2.6c.6.8 1.9.8 2.9.2 1.2-.7 2.9-.4 3.2-1.4.2-.8-.6-1.4-1.4-1.8.3-.5.5-1.1.5-1.8 0-2.4-1.6-4.6-2.6-6-.9-1.3-.6-2.2-.6-3.4 0-2.5-1.1-4.4-3.3-4.4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10.6" cy="7.4" r=".9" fill="currentColor"/><circle cx="13.4" cy="7.4" r=".9" fill="currentColor"/></symbol>
+    <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 2.3a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.2-.4-1.2.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.5 4.9.4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.3Z" fill="currentColor"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v13M6 12l6 6 6-6M5 21h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="runhead">
+  <a class="brand" href="./" aria-label="Pyx, home"><svg aria-hidden="true"><use href="#logo"/></svg></a>
+  <nav aria-label="Main">
+    <a href="#laboratorio">Lab</a>
+    <a href="examples/">Examples</a>
+    <a href="manual/">Manual</a>
+    <a href="news/">What’s new</a>
+    <a class="key small primary" href="#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Download</a>
+  </nav>
+  <a class="icon-btn lang-btn" href="../" hreflang="es" lang="es" title="Ver en español" aria-label="Ver en español">ES</a>
+  <a class="icon-btn gh-btn" href="https://github.com/LorGIOO/Pyx" aria-label="Pyx’s code on GitHub" title="Pyx’s code on GitHub"><svg aria-hidden="true"><use href="#i-gh"/></svg></a>
+  <button class="icon-btn" type="button" data-theme-toggle aria-label="Change the theme"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
+  <button class="icon-btn menu-btn" type="button" aria-label="Menu" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+</header>
+
+<main>
+
+<!-- =====================================================================
+     PORTADA — una hoja que se gira: todo PDF tiene un reverso
+     ===================================================================== -->
+<section class="hero" id="portada" aria-label="Cover">
+  <div class="hero-stage">
+    <div class="hero-copy">
+      <div class="hero-step is-on" data-step="0">
+        <p class="eyebrow"><span>v2.2.0</span><span class="n">Windows · Linux · Free (MIT)</span></p>
+        <h1 class="hero-title">
+          <span class="glyphs" aria-hidden="true"><i class="g-cursor"></i><svg class="g-int" viewBox="10 -4 62 106"><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74"/></svg><i class="g-run"></i></span>
+          <span class="word">Pyx</span>
+        </h1>
+        <p class="hero-lede">The calculation and the document, <em>in one file.</em></p>
+        <p class="hero-sub">A <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> editor with Python cells inside. You write the report, calculate in it and the PDF comes out with the numbers already in place.</p>
+        <div class="hero-actions">
+          <a class="key primary" href="#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Download <span class="k-hint">free</span></a>
+          <a class="key" href="#laboratorio">Try it here <span class="k-hint">↓</span></a>
+        </div>
+      </div>
+      <div class="hero-step" data-step="1">
+        <p class="eyebrow"><span>¶ The back</span></p>
+        <h2 class="hero-h">Every report has a&nbsp;back.</h2>
+        <p class="hero-sub">Turn the sheet over: every number in the PDF is a line of Python that ran. Cells are <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> comments, so the file is still valid <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>.</p>
+      </div>
+      <div class="hero-step" data-step="2">
+        <p class="eyebrow"><span>¶ A datum changes</span></p>
+        <h2 class="hero-h">You change the load. The whole report&nbsp;notices.</h2>
+        <p class="hero-sub">The number in the paragraph, the conclusion and the plot. Without copying anything from anywhere: you only change one line of code.</p>
+        <div class="hero-edit code-line mono"><label for="hero-p">P = </label><input class="code-in" id="hero-p" value="15.0" inputmode="decimal" spellcheck="false" autocomplete="off" data-hero-p><span class="tk-com">  # load (kN)</span></div>
+        <p class="hero-note mono" data-hero-note>Type another load in the line above.</p>
+      </div>
+    </div>
+
+    <div class="hero-scene" aria-hidden="true">
+      <div class="sheet3d" data-sheet>
+        <div class="face face-front">
+          <div class="pdf-page">
+            <div class="pdf-runhead"><span>Calculation report</span><span>Cantilever</span></div>
+            <h3 class="pdf-h"><span>1</span>Steel cantilever</h3>
+            <p class="pdf-p">With a span of <span class="v">3</span>&nbsp;m and a load of <span class="v" data-h="P">15</span>&nbsp;kN at the tip, the deflection is <span class="v" data-h="f">7.69</span>&nbsp;mm, which <span class="v verdict" data-h="ok">passes</span> the limit <i>L</i>/300&nbsp;=&nbsp;<span class="v">10</span>&nbsp;mm.</p>
+            <svg class="pdf-plot" viewBox="0 0 300 120" data-h="plot"></svg>
+            <p class="pdf-cap"><b>Figure 1:</b> Deflected shape of the cantilever.</p>
+            <p class="pdf-p pdf-ghost"></p>
+            <div class="pdf-foot">1</div>
+          </div>
+        </div>
+        <div class="face face-back">
+          <div class="editor-mini">
+            <div class="ed-tabs"><span class="on">cantilever.pltx</span></div>
+            <ol class="ed-lines">
+              <li><span class="tk-cmd">\section</span>{Steel cantilever}</li>
+              <li class="cell-start"><span class="tk-cell">%#python</span></li>
+              <li class="cell">P = <span class="tk-num" data-h="Pcode">15.0</span>   <span class="tk-com"># load (kN)</span></li>
+              <li class="cell">L = <span class="tk-num">3.0</span>    <span class="tk-com"># span (m)</span></li>
+              <li class="cell">E, I = <span class="tk-num">210e3</span>, <span class="tk-num">8356e4</span></li>
+              <li class="cell">flecha = P*<span class="tk-num">1e3</span>*(L*<span class="tk-num">1e3</span>)**<span class="tk-num">3</span> / (<span class="tk-num">3</span>*E*I)</li>
+              <li class="cell">admisible = L*<span class="tk-num">1e3</span> / <span class="tk-num">300</span></li>
+              <li class="cell-end"><span class="tk-cell">%#end</span></li>
+              <li>With a span of <span class="tk-py">\py</span>{L} m and a load of</li>
+              <li><span class="tk-py">\py</span>{P} kN at the tip, the deflection is</li>
+              <li><span class="tk-py">\py</span>{f"{flecha:.2f}"} mm, which</li>
+              <li><span class="tk-py">\pyif</span>{flecha &lt;= admisible}{passes}{fails}</li>
+              <li>the limit $L/300$ = <span class="tk-py">\py</span>{admisible} mm.</li>
+              <li><span class="tk-py">\py</span>{figtex(<span class="tk-str">"flecha"</span>)}</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint mono"><span>scroll</span><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 1 — Por qué existe Pyx
+     ===================================================================== -->
+<section class="chapter" id="por-que" data-chapter="<b>§ 1</b> · Why">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 1</span><span class="n">Why</span></p>
+      <h2>The report that <em>lies</em> without anyone&nbsp;noticing.</h2>
+    </header>
+    <div class="prose reveal">
+      <p>You calculate in a spreadsheet or in Jupyter. You copy the result into the document. A week later a datum changes: you recalculate, but that number in section 4 stays as it was. The PDF and the calculations no longer agree, and nobody knows until someone&nbsp;checks.</p>
+      <p>Try it yourself. Both columns start from the same calculation. Change the load, in the spreadsheet or in the line of Python, and see which of the two documents tells the&nbsp;truth.</p>
+    </div>
+
+    <div class="errata reveal" data-errata>
+      <div class="errata-cols">
+        <article class="errata-col old">
+          <header><span class="mono">Spreadsheet + word processor</span></header>
+          <div class="sheet-mini">
+            <div class="xl-row xl-head"><span></span><span>A</span><span>B</span></div>
+            <div class="xl-row"><span>1</span><span>Load (kN)</span><span class="xl-edit"><input class="xl-in" value="15,0" inputmode="decimal" spellcheck="false" autocomplete="off" aria-label="Load in the spreadsheet, in kilonewtons" data-xl-p></span></div>
+            <div class="xl-row"><span>2</span><span>Deflection (mm)</span><span data-xl-f>7.69</span></div>
+          </div>
+          <div class="doc-mini">
+            <p>The deflection at the tip is <span class="stale" data-old-f>7.69</span>&nbsp;mm, <span class="stale" data-old-v>within</span> the limit <i>L</i>/300.</p>
+          </div>
+          <footer class="errata-count mono"><span data-errata-n>0</span> errors in the PDF</footer>
+        </article>
+        <article class="errata-col new">
+          <header><span class="mono">Pyx</span></header>
+          <div class="code-line mono"><label for="errata-p">P = </label><input class="code-in" id="errata-p" value="15.0" inputmode="decimal" spellcheck="false" autocomplete="off" data-new-p><span class="tk-com">  # kN</span></div>
+          <div class="doc-mini">
+            <p>The deflection at the tip is <span class="live" data-new-f>7.69</span>&nbsp;mm, <span class="live" data-new-v>within</span> the limit <i>L</i>/300.</p>
+          </div>
+          <footer class="errata-count ok mono">0 errors, always</footer>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 2 — Tres gestos: | ∫ ▶
+     ===================================================================== -->
+<section class="chapter gestures" id="como" data-chapter="<b>§ 2</b> · How it works">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 2</span><span class="n">How it works</span></p>
+      <h2>Three gestures. The same ones its icon&nbsp;draws.</h2>
+      <p class="chap-sub">The caret that writes, the integral that calculates and the triangle that compiles.</p>
+    </header>
+  </div>
+  <div class="gest-track" data-gestures>
+    <div class="gest-stage">
+      <div class="gest-copy">
+        <ol class="gest-list">
+          <li class="is-on" data-g="0">
+            <span class="gest-glyph g0" aria-hidden="true"><i></i></span>
+            <h3>Write</h3>
+            <p>Your report in <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>, with completion of more than 300 commands, errors marked before compiling and a Spanish and English spell checker. Where a result will go, you type <code>\py{…}</code>.</p>
+          </li>
+          <li data-g="1">
+            <span class="gest-glyph g1" aria-hidden="true"><svg viewBox="10 -4 62 106"><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74"/></svg></span>
+            <h3>Calculate</h3>
+            <p>Python cells as in Jupyter, inside the document itself, with their output below. Next to each <code>\py{}</code> its value shows in grey, without compiling.</p>
+          </li>
+          <li data-g="2">
+            <span class="gest-glyph g2" aria-hidden="true"><i></i></span>
+            <h3>Compile</h3>
+            <p>Pyx runs only the cells that changed, puts each value in its place and produces the PDF, shown alongside. You change a datum and start&nbsp;again: it does the&nbsp;rest.</p>
+          </li>
+        </ol>
+      </div>
+      <div class="gest-visual" aria-hidden="true">
+        <div class="win">
+          <div class="win-bar"><span></span><span></span><span></span><b>report.pltx — Pyx 2.2.0</b></div>
+          <div class="win-body">
+            <div class="win-editor">
+              <div class="wl"><em>14</em><span class="tk-cmd">\section</span>{Input data}</div>
+              <div class="wl gcell"><em>15</em><span class="cellbox"><span>g = <span class="tk-num">9.81</span>   <span class="tk-com"># gravity (m/s²)</span></span><span>rho = <span class="tk-num">1025</span> <span class="tk-com"># sea water (kg/m³)</span></span><span>Hs = <span class="tk-num">2.8</span>   <span class="tk-com"># design wave (m)</span></span><small class="cell-out">✓ [1]  4 ms</small></span></div>
+              <div class="wl"><em>16</em>The design wave height is</div>
+              <div class="wl"><em>17</em>$H_s = <span class="tk-py">\py</span>{Hs}$<span class="ghost"> = 2.8</span>~m, with a</div>
+              <div class="wl"><em>18</em>density of <span class="tk-py">\py</span>{rho}<span class="ghost"> = 1025</span>~kg/m³.</div>
+              <div class="wl typing"><em>19</em><span class="tk-py">\pyif</span>{Hs &gt; 2.5}{Storm.}{Calm.}<span class="ghost"> = Storm.</span><i class="caret"></i></div>
+            </div>
+            <div class="win-pdf">
+              <div class="mini-page">
+                <h4><span>1</span> Input data</h4>
+                <p>The design wave height is <i>H<sub>s</sub></i> = <b class="pv">2.8</b>&nbsp;m, with a density of <b class="pv">1025</b>&nbsp;kg/m³. <b class="pv">Storm.</b></p>
+                <div class="mini-lines"><i></i><i></i><i></i><i style="width:60%"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="win-status"><span class="led"></span><span data-gstatus>Kernel ready</span><span class="sp"></span><span>xelatex</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 3 — Laboratorio
+     ===================================================================== -->
+<section class="chapter lab-chapter" id="laboratorio" data-chapter="<b>§ 3</b> · Lab">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 3</span><span class="n">Lab</span></p>
+      <h2>Your turn. <em>Change the code</em> and watch the&nbsp;PDF.</h2>
+      <p class="chap-sub">A real calculation report: a steel cantilever with a load at the tip. Type another load, another span or another section (IPE 200 to IPE 400) in lines 4 to 6. When you stop typing it compiles by itself, as in Pyx; <kbd>Ctrl</kbd>+<kbd>S</kbd> does it at once. Click the PDF to jump to the line that writes it.</p>
+    </header>
+  </div>
+
+  <div class="lab reveal" data-lab>
+    <div class="lab-toolbar">
+      <div class="lab-tabs" role="tablist" aria-label="View">
+        <button class="lab-tab is-on" role="tab" aria-selected="true" data-lab-view="code">Code</button>
+        <button class="lab-tab" role="tab" aria-selected="false" data-lab-view="pdf">PDF</button>
+      </div>
+      <span class="lab-file mono">cantilever.pltx</span>
+      <span class="sp"></span>
+      <span class="lab-hint mono hide-sm">compile as you type · on</span>
+    </div>
+    <div class="lab-body" data-view="code">
+      <div class="lab-code" aria-label="Document code">
+        <ol class="code-lines" data-lab-code>
+          <li data-line="1"><span class="tk-cmd">\pyfile</span>{perfiles.py}<span class="ghost">  ← IPE: inertias and moduli</span></li>
+          <li data-line="2"><span class="tk-cmd">\section</span>{Steel cantilever}</li>
+          <li data-line="3" class="c-start"><span class="tk-cell">%#python</span></li>
+          <li data-line="4" class="c">P = <input class="code-in" data-var="P" value="15.0" inputmode="decimal" spellcheck="false" autocomplete="off" aria-label="Line 4: load P in kN">      <span class="tk-com"># load at the tip (kN)</span></li>
+          <li data-line="5" class="c">L = <input class="code-in" data-var="L" value="3.0" inputmode="decimal" spellcheck="false" autocomplete="off" aria-label="Line 5: span L in metres">       <span class="tk-com"># span (m)</span></li>
+          <li data-line="6" class="c">perfil = <span class="tk-str">"</span><input class="code-in str" data-var="perfil" value="IPE 300" spellcheck="false" autocomplete="off" aria-label="Line 6: section, IPE 200 to IPE 400"><span class="tk-str">"</span></li>
+          <li data-line="7" class="c">I, W = IPE[perfil]          <span class="tk-com"># cm⁴, cm³</span></li>
+          <li data-line="8" class="c">E, fyd = <span class="tk-num">210e3</span>, <span class="tk-num">275</span>/<span class="tk-num">1.05</span>   <span class="tk-com"># MPa (S275)</span></li>
+          <li data-line="9" class="c">flecha = P*<span class="tk-num">1e3</span>*(L*<span class="tk-num">1e3</span>)**<span class="tk-num">3</span> / (<span class="tk-num">3</span>*E*I*<span class="tk-num">1e4</span>)</li>
+          <li data-line="10" class="c">sigma = P*L*<span class="tk-num">1e6</span> / (W*<span class="tk-num">1e3</span>)</li>
+          <li data-line="11" class="c">comprobaciones = tabla(flecha, sigma, L, fyd)</li>
+          <li data-line="12" class="c">fig = figtex(<span class="tk-str">"flecha"</span>, caption=<span class="tk-str">"Deformada"</span>)</li>
+          <li data-line="13" class="c-end"><span class="tk-cell">%#end</span><span class="cell-run mono" data-lab-run>✓ [1] 3 ms</span></li>
+          <li data-line="14">With a span of <span class="tk-py">\py</span>{L}<span class="ghost" data-g="L"> = 3.0</span> m and a load of <span class="tk-py">\py</span>{P}<span class="ghost" data-g="P"> = 15.0</span> kN,</li>
+          <li data-line="15">section <span class="tk-py">\py</span>{perfil}<span class="ghost" data-g="perfil"> = IPE 300</span> has a deflection of</li>
+          <li data-line="16"><span class="tk-py">\py</span>{f"{flecha:.2f}"}<span class="ghost" data-g="f"> = 7.69</span> mm and works at <span class="tk-py">\py</span>{round(sigma)}<span class="ghost" data-g="s"> = 81</span> MPa.</li>
+          <li data-line="17"><span class="tk-py">\pyif</span>{flecha &lt;= L*<span class="tk-num">1e3</span>/<span class="tk-num">300</span> <span class="tk-kw">and</span> sigma &lt;= fyd}</li>
+          <li data-line="18">  {The section \textbf{passes}.}{The section \textbf{fails}.}</li>
+          <li data-line="19"><span class="tk-py">\py</span>{tabletex(comprobaciones)}</li>
+          <li data-line="20"><span class="tk-py">\py</span>{fig}</li>
+        </ol>
+      </div>
+      <div class="lab-pdf" aria-live="polite">
+        <article class="pdf-page big" data-lab-pdf>
+          <div class="pdf-runhead"><span>Calculation report</span><span>1 · Steel cantilever</span></div>
+          <h3 class="pdf-h" data-sync="2"><span>1</span>Steel cantilever</h3>
+          <p class="pdf-p" data-sync="14-18">With a span of <span class="v" data-o="L">3.0</span>&nbsp;m and a load of <span class="v" data-o="P">15.0</span>&nbsp;kN, section <span class="v" data-o="perfil">IPE 300</span> has a deflection of <span class="v" data-o="f">7.69</span>&nbsp;mm and works at <span class="v" data-o="s">81</span>&nbsp;MPa. <span class="v verdict" data-o="verdict" data-sync="17-18">The section <b>passes</b>.</span></p>
+          <table class="booktabs" data-sync="19">
+            <caption><b>Table 1:</b> Checks of the cantilever.</caption>
+            <thead><tr><th>Check</th><th>Value</th><th>Limit</th><th>Util.</th></tr></thead>
+            <tbody>
+              <tr><td>Deflection (SLS)</td><td data-o="f2">7.69 mm</td><td data-o="adm">10.00 mm</td><td data-o="uf">77 %</td></tr>
+              <tr><td>Stress (ULS)</td><td data-o="s2">80.8 MPa</td><td>261.9 MPa</td><td data-o="us">31 %</td></tr>
+            </tbody>
+          </table>
+          <figure class="pdf-fig" data-sync="20">
+            <svg viewBox="0 0 360 150" data-o="plot" role="img" aria-label="Plot of the cantilever’s deflected shape"></svg>
+            <figcaption><b>Figure 1:</b> Deflected shape of the cantilever.</figcaption>
+          </figure>
+          <div class="pdf-foot">1</div>
+        </article>
+      </div>
+    </div>
+    <div class="lab-status mono">
+      <span class="led" data-lab-led></span>
+      <span data-lab-state>Compiled · 0.4 s</span>
+      <span class="sp"></span>
+      <span class="hide-sm" data-lab-cells>Python cells: 3 ms (1 run of 1)</span>
+      <span>Engine: xelatex</span>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 4 — Ejecución reactiva
+     ===================================================================== -->
+<section class="chapter" id="reactivo" data-chapter="<b>§ 4</b> · Reactive execution">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 4</span><span class="n">Reactive execution</span></p>
+      <h2>Only <em>what a change reaches</em>&nbsp;runs.</h2>
+      <p class="chap-sub">Pyx knows which variables each cell defines and which it uses, and with that it draws a dependency graph. A half-minute simulation is not repeated because you changed the colour of a plot.</p>
+    </header>
+
+    <div class="dag reveal" data-dag>
+      <ol class="dag-steps mono" aria-label="Five changes, one after another">
+        <li data-dag-do="texto">You edit the text</li>
+        <li data-dag-do="grafica">You edit the plot</li>
+        <li data-dag-do="datos">You edit the data</li>
+        <li data-dag-do="excel">tests.xlsx changes</li>
+        <li data-dag-do="mismo">You retype g = 9.81</li>
+      </ol>
+      <div class="dag-board">
+        <svg class="dag-svg" viewBox="0 0 720 360" role="img" aria-label="Dependency graph of five cells">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="currentColor"/></marker></defs>
+          <g class="edges"><path data-e="datos-sim"/><path data-e="excel-sim"/><path data-e="sim-graf"/><path data-e="sim-tabla"/><path data-e="datos-tabla"/></g>
+        </svg>
+        <div class="dag-node" data-n="datos" style="--x:16.7%;--y:21.7%"><b>data</b><span>g, L, q</span><em>2 ms</em></div>
+        <div class="dag-node" data-n="excel" style="--x:83.3%;--y:21.7%"><b>reading</b><span>pd.read_excel("tests.xlsx")</span><em>1.8 s</em></div>
+        <div class="dag-node heavy" data-n="sim" style="--x:50%;--y:51%"><b>simulation</b><span>scipy.integrate…</span><em>30 s</em></div>
+        <div class="dag-node" data-n="graf" style="--x:83.3%;--y:78.3%"><b>plot</b><span>plt.plot(…)</span><em>0.4 s</em></div>
+        <div class="dag-node" data-n="tabla" style="--x:16.7%;--y:78.3%"><b>summary table</b><span>tabletex(res)</span><em>0.05 s</em></div>
+      </div>
+      <div class="dag-log">
+        <p class="mono dag-line" data-dag-line>Pick a change and see what runs again.</p>
+        <div class="dag-bars">
+          <div class="dag-bar"><span class="mono">Pyx</span><i data-dag-pyx style="--w:0%"></i><b class="mono" data-dag-pyxt>—</b></div>
+          <div class="dag-bar ref"><span class="mono">Run everything</span><i style="--w:100%"></i><b class="mono">32.3 s</b></div>
+        </div>
+        <p class="dag-note caption" data-dag-note>If a cell gives exactly the same result again, those depending on it do not run: Pyx compares the values and cuts the chain (<i>early cutoff</i>).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 5 — Cuadernos y archivos vinculados
+     ===================================================================== -->
+<section class="chapter" id="cuadernos" data-chapter="<b>§ 5</b> · Your notebooks">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 5</span><span class="n">Your notebooks</span></p>
+      <h2>Your Jupyter notebook is already done. <em>Don’t copy&nbsp;it.</em></h2>
+      <p class="chap-sub">One line links it: from that point on, the document uses its variables and functions as if they were its own. And since a notebook can take minutes, Pyx does its best not to run it again.</p>
+    </header>
+
+    <div class="nb reveal" data-nb>
+      <div class="nb-visual">
+        <div class="nb-card">
+          <div class="nb-title mono"><span class="nb-dot"></span>waves.ipynb <small data-nb-where>· open in VS Code</small></div>
+          <div class="nb-cell"><em class="mono">[1]</em><code>records = pd.read_csv(<span class="tk-str">"buoy.csv"</span>)</code></div>
+          <div class="nb-cell"><em class="mono">[2]</em><code>Hs = lognormal(records).mean()</code></div>
+          <div class="nb-cell"><em class="mono">[3]</em><code><span class="tk-kw">def</span> rows_ln(heading, n): …</code></div>
+        </div>
+        <div class="nb-wire" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="nb-doc">
+          <div class="code-line mono"><span class="tk-py">\pynotebook</span>{calcs/waves.ipynb}</div>
+          <div class="code-line mono">$H_s = <span class="tk-py">\py</span>{Hs}$~m<span class="ghost"> = 2.89</span></div>
+          <p class="nb-pdf">The lognormal mean of the NW records is <i>H<sub>s</sub></i> = <b>2.89</b>&nbsp;m.</p>
+        </div>
+      </div>
+      <div class="nb-panel">
+        <p class="nb-situation"><span class="mono">Right now</span><b data-nb-situation>The notebook is open in VS Code and you have already run it.</b></p>
+        <ol class="nb-steps">
+          <li data-nb-step="live"><b>From Jupyter, live.</b> It copies from that kernel the variables the document uses, in tenths of a second. Nothing runs in the notebook and no trace is left.<em class="mono">≈ 0.3 s</em></li>
+          <li data-nb-step="saved"><b>From the saved values.</b> With Jupyter closed, it uses the last values it took, as long as the code does not change.<em class="mono">0 s</em></li>
+          <li data-nb-step="once"><b>Running it once.</b> Only if there is neither. Its values are saved for next time.<em class="mono">whatever it takes, once</em></li>
+          <li data-nb-step="diff"><b>Only what changed.</b> It recovers what the last run left and repeats only the modified cells and those depending on them.<em class="mono">whatever that cell takes</em></li>
+        </ol>
+        <p class="caption">Also with <code>.py</code> files (<code>\pyfile{data.py}</code>), whole or in <code># %%</code> blocks. If you save them from VS Code, or the Excel file they read changes, the PDF updates by itself. And with <code>\hoja{…}</code> and <code>\celda{E4}</code> the cells of an Excel workbook go into the text without any Python.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 6 — Escribir
+     ===================================================================== -->
+<section class="chapter" id="escribir" data-chapter="<b>§ 6</b> · Writing">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 6</span><span class="n">Writing</span></p>
+      <h2>An editor that <em>reads what you write.</em></h2>
+      <p class="chap-sub">What you expect from TeXstudio, and a few things you don’t. Three of them, right here.</p>
+    </header>
+  </div>
+
+  <div class="write-grid">
+    <!-- corrector -->
+    <article class="demo reveal" data-spell>
+      <header class="demo-head">
+        <span class="eyebrow"><span>6.1</span><span class="n">Proofing</span></span>
+        <h3>Three colours, three kinds of error.</h3>
+        <p class="demo-legend mono"><span class="sw red"></span>spelling <span class="sw blue"></span>punctuation and spacing <span class="sw green"></span>style</p>
+      </header>
+      <div class="spell-paper" data-spell-text></div>
+      <footer class="demo-foot">
+        <span class="mono" data-spell-left>6 warnings</span>
+        <span class="caption">Hover to see why. Click (or right-click) a marked word to see the suggestion, as in Pyx.</span>
+      </footer>
+    </article>
+
+    <!-- autocompletado -->
+    <article class="demo reveal" data-ac>
+      <header class="demo-head">
+        <span class="eyebrow"><span>6.2</span><span class="n">Completion</span></span>
+        <h3>Type a backslash.</h3>
+        <p class="caption">Commands with their package (and the missing <code>\usepackage</code>, added by itself). Inside <code>\py{</code>, the variables of the lab above.</p>
+      </header>
+      <div class="ac-editor">
+        <span class="ac-ln mono">27</span>
+        <input class="ac-input mono" type="text" value="The moment is \" spellcheck="false" autocomplete="off" aria-label="Editor line: type a command" data-ac-input>
+        <ul class="ac-list" role="listbox" data-ac-list></ul>
+      </div>
+      <div class="ac-tips mono"><span><kbd>↑</kbd><kbd>↓</kbd> choose</span><span><kbd>Enter</kbd> accept</span><span>try <code>\py{</code> · <code>\qt</code> · <code>\begin</code></span></div>
+      <p class="ac-added mono" data-ac-added hidden>+ <span class="tk-cmd">\usepackage</span>{siunitx} added to the preamble</p>
+    </article>
+
+    <!-- pegar de excel -->
+    <article class="demo demo-wide reveal" data-paste>
+      <header class="demo-head">
+        <span class="eyebrow"><span>6.3</span><span class="n">Tables</span></span>
+        <h3>Copy from Excel. Paste. Out comes a <code>tabular</code>.</h3>
+        <p class="caption">Numbers are right-aligned and special characters are escaped. Select the example table (or some cells of your Excel, Calc or Google&nbsp;Sheets), copy it with <kbd>Ctrl</kbd>+<kbd>C</kbd> and paste it in the editor line with <kbd>Ctrl</kbd>+<kbd>V</kbd>.</p>
+      </header>
+      <div class="paste-flow">
+        <div class="xl" data-paste-grid aria-label="Example table to copy"></div>
+        <div class="paste-mid">
+          <div class="paste-editor"><span class="ac-ln mono">31</span><textarea class="paste-area mono" rows="1" placeholder="paste here with Ctrl+V" spellcheck="false" aria-label="Editor line: paste spreadsheet cells here" data-paste-area></textarea></div>
+        </div>
+        <div class="paste-out">
+          <pre class="paste-code mono" data-paste-code aria-label="Generated LaTeX code"></pre>
+          <div class="paste-render" data-paste-render></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 7 — El visor
+     ===================================================================== -->
+<section class="chapter" id="visor" data-chapter="<b>§ 7</b> · The viewer">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 7</span><span class="n">The viewer</span></p>
+      <h2>Review the PDF <em>with a real&nbsp;marker.</em></h2>
+      <p class="chap-sub">Highlight, underline, draw, point with the laser. Marks are saved with the PDF, survive recompiles and are exported. And while you hold a tool, the page does not move: neither with a digital pen nor with a finger.</p>
+    </header>
+
+    <div class="viewer reveal" data-viewer>
+      <div class="viewer-bar" role="toolbar" aria-label="Annotation tools">
+        <button class="tool is-on" type="button" data-tool="hl" title="Highlight">Highlight</button>
+        <button class="tool" type="button" data-tool="pen" title="Pen">Pen</button>
+        <button class="tool" type="button" data-tool="arrow" title="Arrow (Shift: 0°, 45°, 90°)">Arrow</button>
+        <button class="tool" type="button" data-tool="rect" title="Rectangle">Rectangle</button>
+        <button class="tool" type="button" data-tool="laser" title="Laser">Laser</button>
+        <button class="tool" type="button" data-tool="eraser" title="Eraser">Eraser</button>
+        <span class="sep"></span>
+        <span class="swatches" role="radiogroup" aria-label="Color">
+          <button class="sw-btn is-on" type="button" style="--c:#e5484d" data-color="#e5484d" aria-label="Red"></button>
+          <button class="sw-btn" type="button" style="--c:#007acc" data-color="#007acc" aria-label="Blue"></button>
+          <button class="sw-btn" type="button" style="--c:#1a7f37" data-color="#1a7f37" aria-label="Green"></button>
+          <button class="sw-btn" type="button" style="--c:#f0b400" data-color="#f0b400" aria-label="Yellow"></button>
+        </span>
+        <span class="sp"></span>
+        <button class="tool" type="button" data-undo title="Undo (Ctrl+Z)">Undo</button>
+        <button class="tool" type="button" data-clear title="Delete all">Clear</button>
+      </div>
+      <div class="viewer-desk">
+        <div class="pdf-page big viewer-page">
+          <div class="pdf-runhead"><span>Calculation report</span><span>3 · Foundations</span></div>
+          <h3 class="pdf-h"><span>3</span>Foundations</h3>
+          <p class="pdf-p">The strip footing rests on medium-stiff clays, with an allowable bearing pressure of 0.20&nbsp;MPa from the geotechnical report. With the load from the wall, the pressure under the footing is 0.17&nbsp;MPa, so the foundation passes with a 15&nbsp;% margin.</p>
+          <p class="pdf-p">The settlement estimated by the oedometric method is 18&nbsp;mm, below the 25&nbsp;mm maximum allowed for reinforced concrete structures. The water table is at 4.2&nbsp;m, below the founding level.</p>
+          <table class="booktabs small">
+            <caption><b>Table 3:</b> Checks of the footing.</caption>
+            <thead><tr><th>Check</th><th>Value</th><th>Limit</th></tr></thead>
+            <tbody><tr><td>Pressure</td><td>0.17 MPa</td><td>0.20 MPa</td></tr><tr><td>Settlement</td><td>18 mm</td><td>25 mm</td></tr><tr><td>Overturning</td><td>2.10</td><td>1.50</td></tr></tbody>
+          </table>
+          <div class="pdf-foot">7</div>
+        </div>
+        <canvas class="viewer-ink" data-ink aria-label="Annotation canvas: draw on the page"></canvas>
+      </div>
+      <p class="caption viewer-tip">Draw on the page. With the arrow, <kbd>Shift</kbd> snaps it to 0°, 45° or 90°. The laser glows for a moment and disappears by itself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 8 — Rapidez
+     ===================================================================== -->
+<section class="chapter" id="rapidez" data-chapter="<b>§ 8</b> · Speed">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 8</span><span class="n">Speed</span></p>
+      <h2>Measured on a real report, <em>not on a&nbsp;demo.</em></h2>
+      <p class="chap-sub">After each compile, Pyx leaves <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> waiting with the preamble already loaded. And the viewer draws in the background the pages you have not seen yet.</p>
+    </header>
+
+    <figure class="speed reveal" data-speed>
+      <table class="booktabs speed-table">
+        <caption><b>Table 2:</b> Pyx 2.0 times against the usual way.</caption>
+        <thead><tr><th>What</th><th>Before</th><th>With Pyx</th><th class="bar-col" aria-hidden="true"></th></tr></thead>
+        <tbody>
+          <tr><td>One compile pass <small>18-page report</small></td><td>17.3 s</td><td>13.5 s</td><td class="bar-col"><span class="bars"><i style="--w:100%"></i><i class="b" style="--w:78%"></i></span></td></tr>
+          <tr><td>Loading the preamble <small>template with 122 packages</small></td><td>7 s</td><td>0 s</td><td class="bar-col"><span class="bars"><i style="--w:100%"></i><i class="b" style="--w:1.5%"></i></span></td></tr>
+          <tr><td>Showing an A3 page <small>with fifty images</small></td><td>4.5 s</td><td>4 ms</td><td class="bar-col"><span class="bars"><i style="--w:100%"></i><i class="b" style="--w:1.5%"></i></span></td></tr>
+          <tr><td>Cells after changing a plot <small>five-cell report</small></td><td>5 of 5</td><td>1 of 5</td><td class="bar-col"><span class="bars"><i style="--w:100%"></i><i class="b" style="--w:20%"></i></span></td></tr>
+        </tbody>
+      </table>
+      <figcaption class="caption">Data from the Pyx 2.0 user manual. With light compression the PDF grows only 3&nbsp;%.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 9 — Sin preparar nada
+     ===================================================================== -->
+<section class="chapter" id="sin-preparar" data-chapter="<b>§ 9</b> · Nothing to set up">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 9</span><span class="n">Nothing to set up</span></p>
+      <h2>No Python or <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>? <em>One&nbsp;click.</em></h2>
+      <p class="chap-sub">If you already have them (Anaconda, python.org, MiKTeX, TeX Live…), Pyx finds them and uses them. If not, it sets them up in its own folder, without touching the system or the PATH.</p>
+    </header>
+
+    <div class="setup">
+      <div class="term reveal" data-term>
+        <div class="term-bar mono"><b>Set up Pyx</b></div>
+        <ol class="term-lines mono" data-term-lines>
+          <li data-t="0"><span class="dim">checking…</span> Python: <span class="bad">not found</span> · LaTeX: <span class="bad">not found</span></li>
+          <li data-t="1"><span class="arr">↓</span> uv, the fast Python installer <span class="ok">done</span></li>
+          <li data-t="2"><span class="arr">↓</span> standalone Python 3.12 <span class="ok">done</span></li>
+          <li data-t="3"><span class="arr">↓</span> numpy scipy sympy pandas matplotlib<br><span class="pad"></span>handcalcs pint openpyxl ipython jedi <span class="ok">done</span></li>
+          <li data-t="4"><span class="arr">↓</span> Tectonic, LaTeX in a single program (30 MB) <span class="ok">done</span></li>
+          <li data-t="5"><span class="ok">✓</span> Pyx now uses that Python and that LaTeX. The PATH is unchanged.</li>
+        </ol>
+        <div class="term-progress"><i data-term-bar></i></div>
+      </div>
+
+      <div class="folders reveal" data-folders>
+        <div class="folder">
+          <p class="mono folder-name">report/ <small>another editor</small></p>
+          <ul class="mono">
+            <li>report.tex</li><li class="junk">report.aux</li><li class="junk">report.log</li><li class="junk">report.out</li><li class="junk">report.toc</li><li class="junk">report.synctex.gz</li><li class="junk">report.fdb_latexmk</li><li class="junk">report.fls</li><li class="junk">report.bbl</li><li class="junk">report.blg</li><li class="junk">report.pdf</li><li class="junk">report (1).pdf</li>
+          </ul>
+        </div>
+        <div class="folder clean">
+          <p class="mono folder-name">report/ <small>Pyx</small></p>
+          <ul class="mono"><li>report.pltx <small>6 KB</small></li></ul>
+          <p class="caption">A <code>.pltx</code> keeps your text and the results of the cells: when you open it again the numbers, tables and figures show without running anything, even on a computer without Python. The rest lives in Pyx’s working folder only while Pyx is open: it is deleted when you close it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 10 — La aplicación, tal cual
+     ===================================================================== -->
+<section class="chapter" id="galeria" data-chapter="<b>§ 10</b> · The application">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 10</span><span class="n">The application</span></p>
+      <h2>And now, without make-up: <em>real screenshots.</em></h2>
+      <p class="chap-sub">As they appear in the user manual (interface in Spanish). Click one to see it large.</p>
+    </header>
+  </div>
+  <div class="gallery" tabindex="0" aria-label="Pyx screenshots, scroll horizontally">
+    <figure><button class="shot-zoom" type="button"><img src="../assets/img/interfaz-anotada.webp" alt="Pyx’s window with its eight numbered areas" loading="lazy" decoding="async" width="1280" height="820"></button><figcaption class="caption"><b>Figure 10.1</b> The window: ribbon, tabs, side panel, editor, cell, viewer and status bar.</figcaption></figure>
+    <figure><button class="shot-zoom" type="button"><img src="../assets/img/tema-oscuro.webp" alt="Pyx with the dark theme" loading="lazy" decoding="async" width="1280" height="820"></button><figcaption class="caption"><b>Figure 10.2</b> The dark theme. There is also a light one and a blue one.</figcaption></figure>
+    <figure><button class="shot-zoom" type="button"><img src="../assets/img/m-tabla.webp" alt="The table wizard with rows pasted from Excel" loading="lazy" decoding="async" width="1264" height="765"></button><figcaption class="caption"><b>Figure 10.3</b> The table wizard, with rows pasted from Excel and the code it will insert.</figcaption></figure>
+    <figure><button class="shot-zoom" type="button"><img src="../assets/img/desactualizadas.webp" alt="Cells marked out of date after changing a datum" loading="lazy" decoding="async" width="617" height="528"></button><figcaption class="caption"><b>Figure 10.4</b> You change the span in the first cell: those depending on it are marked out of date.</figcaption></figure>
+    <figure><button class="shot-zoom" type="button"><img src="../assets/img/m-figura.webp" alt="The figure wizard" loading="lazy" decoding="async" width="1264" height="765"></button><figcaption class="caption"><b>Figure 10.5</b> The figure wizard: the path stays relative to the main document.</figcaption></figure>
+    <figure><button class="shot-zoom" type="button"><img src="../assets/img/registro.webp" alt="The compile log" loading="lazy" decoding="async" width="1280" height="820"></button><figcaption class="caption"><b>Figure 10.6</b> The log says where each value came from and how long each part took.</figcaption></figure>
+    <figure><button class="shot-zoom" type="button"><img src="../assets/img/m-config.webp" alt="The settings window" loading="lazy" decoding="async" width="1264" height="765"></button><figcaption class="caption"><b>Figure 10.7</b> Settings, with search and the update button.</figcaption></figure>
+    <figure><button class="shot-zoom" type="button"><img src="../assets/img/visor-marcadores.webp" alt="The PDF’s bookmarks in the viewer" loading="lazy" decoding="async" width="619" height="613"></button><figcaption class="caption"><b>Figure 10.8</b> The PDF’s bookmarks, with the section you are reading highlighted.</figcaption></figure>
+  </div>
+</section>
+
+<!-- =====================================================================
+     § 11 — Novedades
+     ===================================================================== -->
+<section class="chapter" id="novedades" data-chapter="<b>§ 11</b> · What’s new">
+  <div class="wrap">
+    <header class="chap-head reveal">
+      <p class="eyebrow"><span>§ 11</span><span class="n">What’s new</span></p>
+      <h2 data-news-title>The latest.</h2>
+    </header>
+    <div class="news reveal" data-news></div>
+    <p class="news-more"><a class="key" href="news/">Every version <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+  </div>
+</section>
+
+<!-- =====================================================================
+     Descargar
+     ===================================================================== -->
+<section class="chapter download" id="descargar" data-chapter="<b>End</b> · Download">
+  <div class="wrap">
+    <div class="dl-head reveal">
+      <svg class="dl-logo" aria-hidden="true"><use href="#logo"/></svg>
+      <h2>Download it. <em>It’s free.</em></h2>
+      <p class="chap-sub">No account, no subscription and no administrator rights. Open source under the MIT licence. Pyx looks for its own updates from <span class="menu">Settings → General</span>.</p>
+    </div>
+    <div class="dl-grid reveal">
+      <a class="dl-card" href="https://github.com/LorGIOO/Pyx/releases/latest" data-os="windows">
+        <svg aria-hidden="true"><use href="#i-win"/></svg>
+        <span class="dl-os">Windows</span>
+        <span class="dl-meta mono">10 and 11 · 64-bit · <b>.exe</b></span>
+        <span class="dl-note">No administrator rights needed. <code>.pltx</code> files open with a double click.</span>
+        <span class="key primary dl-key">Download for Windows</span>
+      </a>
+      <a class="dl-card" href="https://github.com/LorGIOO/Pyx/releases/latest" data-os="linux">
+        <svg aria-hidden="true"><use href="#i-linux"/></svg>
+        <span class="dl-os">Linux</span>
+        <span class="dl-meta mono">64-bit · <b>.deb</b> · <b>.rpm</b> · <b>.AppImage</b></span>
+        <span class="dl-note">Ubuntu and Debian, Fedora, or any distribution with the AppImage.</span>
+        <span class="key dl-key">Download for Linux</span>
+      </a>
+    </div>
+    <p class="dl-req caption reveal">Requirements: 4&nbsp;GB of memory and about 600&nbsp;MB of disk if Pyx sets up its own Python (200&nbsp;MB if you use one you already have). Internet only the first time and to look for updates. First time? Start with <a href="manual/#cap-installation-and-first-start">chapter 2 of the manual</a> and open one of the <a href="examples/">example projects</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div>
+      <a class="brand" href="./"><svg aria-hidden="true"><use href="#logo"/></svg>Pyx</a>
+      <p>The calculation and the document, in one file.</p>
+      <p>This page is set in Computer Modern, <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span>’s typeface, and JetBrains Mono. It uses no cookies or trackers.</p>
+    </div>
+    <div><h2>Product</h2><ul><li><a href="#laboratorio">Lab</a></li><li><a href="examples/">Examples</a></li><li><a href="#descargar">Download</a></li><li><a href="news/">What’s new</a></li></ul></div>
+    <div><h2>Help</h2><ul><li><a href="manual/">User manual</a></li><li><a href="manual/pyx-user-manual.pdf">Manual as PDF</a></li><li><a href="manual/#cap-keyboard-shortcuts">Keyboard shortcuts</a></li><li><a href="https://github.com/LorGIOO/Pyx/issues">Report a bug</a></li></ul></div>
+    <div><h2>Project</h2><ul><li><a href="https://github.com/LorGIOO/Pyx">Source code</a></li><li><a href="privacy/">Privacy</a></li><li><a href="signing/">Code signing</a></li><li><a href="https://github.com/LorGIOO/Pyx/blob/main/LICENSE">MIT licence</a></li></ul></div>
+  </div>
+  <div class="endmark"><span>© <span data-year>2026</span> Pyx · Free software</span><span>∎</span></div>
+</footer>
+
+<script src="../assets/data/novedades.js?v=20261117a"></script>
+<script src="../assets/js/common.js?v=20261117a"></script>
+<script src="../assets/js/home.js?v=20261117a"></script>
+</body>
+</html>

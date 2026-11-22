@@ -14,6 +14,8 @@
     <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="stylesheet" href="../assets/css/base.css?v=20261117a">
   <link rel="stylesheet" href="../assets/css/doc.css?v=20261117a">
+  <link rel="alternate" hreflang="es" href="https://lorgioo.github.io/Pyx-web/novedades/">
+  <link rel="alternate" hreflang="en" href="https://lorgioo.github.io/Pyx-web/en/news/">
   <link rel="stylesheet" href="../assets/css/ejemplos.css?v=20261117a">
 </head>
 <body>
@@ -35,13 +37,14 @@
     <a href="../novedades/">Novedades</a>
     <a class="key small primary" href="../#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar</a>
   </nav>
+  <a class="icon-btn lang-btn" href="../en/news/" hreflang="en" lang="en" title="View in English" aria-label="View in English">EN</a>
   <a class="icon-btn gh-btn" href="https://github.com/LorGIOO/Pyx" aria-label="El código de Pyx en GitHub" title="El código de Pyx en GitHub"><svg aria-hidden="true"><use href="#i-gh"/></svg></a>
   <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar el tema"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
   <button class="icon-btn menu-btn" type="button" aria-label="Menú" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
 </header>
 
 <header class="page-head">
-  <p class="eyebrow"><span>Ejemplos</span><span class="n">5 proyectos para descargar</span></p>
+  <p class="eyebrow"><span>Ejemplos</span><span class="n">6 proyectos para descargar</span></p>
   <h1>Proyectos para <em>abrir, compilar y copiar.</em></h1>
   <p class="lede">Proyectos completos de Pyx con datos inventados. Descarga uno, ábrelo y compílalo tal cual; luego cambia un dato y mira cómo se rehace el documento entero. Cópialos, rómpelos, úsalos de plantilla.</p>
 </header>
@@ -53,7 +56,7 @@
       <li><b>Abre</b> en Pyx el archivo principal que se indica en cada uno.</li>
       <li><b>Compila</b> con <span class="menu">Compilar y ver</span> (Ctrl+Mayús+B). Las librerías que usan las trae el Python que prepara Pyx.</li>
     </ol>
-    <nav class="ej-index" aria-label="Ejemplos"><ol><li><a href="#00-plantilla"><span>00</span>Plantilla vacía</a></li><li><a href="#01-memoria-de-calculo"><span>01</span>Memoria de cálculo</a></li><li><a href="#02-handcalcs-y-unidades"><span>02</span>Handcalcs y unidades</a></li><li><a href="#03-cuaderno-de-jupyter"><span>03</span>Solo un cuaderno de Jupyter</a></li><li><a href="#04-tablas-graficas-y-condicionales"><span>04</span>Tablas, gráficas y condicionales</a></li></ol></nav>
+    <nav class="ej-index" aria-label="Ejemplos"><ol><li><a href="#00-plantilla"><span>00</span>Plantilla vacía</a></li><li><a href="#01-memoria-de-calculo"><span>01</span>Memoria de cálculo</a></li><li><a href="#02-handcalcs-y-unidades"><span>02</span>Handcalcs y unidades</a></li><li><a href="#03-cuaderno-de-jupyter"><span>03</span>Solo un cuaderno de Jupyter</a></li><li><a href="#04-tablas-graficas-y-condicionales"><span>04</span>Tablas, gráficas y condicionales</a></li><li><a href="#05-datos-de-excel"><span>05</span>Datos de Excel y CSV</a></li></ol></nav>
 
 <article class="ej" id="00-plantilla" data-chapter="<b>00</b> · Plantilla vacía">
   <header class="ej-head">
@@ -274,6 +277,55 @@ La tensión máxima es <span class="tk-py">\py</span>{round(sigma_max, 1)} y la 
     Marzo   &amp; <span class="tk-py">\py</span>{df.at[&quot;Mar&quot;, &quot;calefaccion&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Mar&quot;, &quot;refrigeracion&quot;]} &amp; <span class="tk-py">\py</span>{df.at[&quot;Mar&quot;, &quot;fotovoltaica&quot;]} &amp; <span class="tk-py">\py</span>{round(df.at[&quot;Mar&quot;, &quot;neto&quot;], 1)} <span class="tk-cmd">\\</span>
     <span class="tk-cmd">\midrule</span>
     Total   &amp; <span class="tk-py">\py</span>{df.loc[&quot;Ene&quot;:&quot;Mar&quot;, &quot;calefaccion&quot;].sum().round(1)} &amp; <span class="tk-py">\py</span>{df.loc[&quot;Ene&quot;:&quot;Mar&quot;, &quot;refrigeracion&quot;].sum().round(1)} &amp; <span class="tk-py">\py</span>{df.loc[&quot;Ene&quot;:&quot;Mar&quot;, &quot;fotovoltaica&quot;].sum().round(1)} &amp; <span class="tk-py">\py</span>{df.loc[&quot;Ene&quot;:&quot;Mar&quot;, &quot;neto&quot;].sum().round(1)} <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\bottomrule</span>
+  <span class="tk-cmd">\end</span>{tabular}</code></pre></figure>
+</article>
+<article class="ej" id="05-datos-de-excel" data-chapter="<b>05</b> · Datos de Excel y CSV">
+  <header class="ej-head">
+    <p class="ej-num">05</p>
+    <div>
+      <h2>Datos de Excel y CSV</h2>
+      <p class="ej-lema">Un presupuesto cuyos números viven en Excel, sin una línea de Python.</p>
+      <ul class="ej-tags"><li>\hoja</li><li>\celda</li><li>.xlsx</li><li>.csv</li><li>sin Python</li></ul>
+    </div>
+  </header>
+  <div class="ej-grid">
+    <div class="ej-text">
+      <p>El documento vincula un libro de Excel con <code>\hoja[Mediciones]{datos/obra.xlsx}</code> y coloca sus celdas con <code>\celda{E4}</code> o un rango entero con <code>\celda{A2:E7}</code>, que sale como el cuerpo de una tabla. Un capítulo lee un CSV con el <code>;</code> y la coma decimal del Excel en español. Cambia un número en Excel, guarda y compila: el documento cambia solo.</p>
+      <ul class="ej-list"><li>Una celda suelta en una frase: <code>\celda{B3}</code>; otra hoja: <code>\celda{Resumen!B5}</code>.</li><li>Una tabla entera desde Excel: cabecera <code>\celda{A1:E1}</code> y cuerpo <code>\celda{A2:E7}</code>.</li><li><code>\celda[T]{B2:B6}</code> pone una columna como fila (y al revés).</li><li>Lee lo que Excel guardó, también los resultados de las fórmulas.</li></ul>
+      <div class="ej-actions">
+        <a class="key primary" href="descargas/05-datos-de-excel.zip" download><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar .zip <span class="k-hint">8 KB</span></a>
+        <a class="key" href="pdf/05-datos-de-excel.pdf">Ver el PDF</a>
+        <a class="key" href="https://github.com/LorGIOO/Pyx-web/tree/main/ejemplos/src/05-datos-de-excel">Ver en GitHub</a>
+      </div>
+      <p class="ej-open">Abre <code>informe.pltx</code> y pulsa <b>Compilar y ver</b>.</p>
+      <details class="ej-tree"><summary>Archivos del proyecto</summary><pre>├─ <span class="dir">capitulos/</span>
+│  └─ <span class="">ensayos.pltx</span>
+├─ <span class="dir">datos/</span>
+│  ├─ <span class="">ensayos.csv</span>
+│  └─ <span class="">obra.xlsx</span>
+├─ <span class="main">informe.pltx</span>
+└─ <span class="">LEEME.md</span></pre></details>
+    </div>
+    <div class="ej-pages" data-pages="1"><button class="ej-page" type="button" data-full="img/05-datos-de-excel-1.webp" aria-label="Ampliar la página 1"><img src="img/05-datos-de-excel-1.webp" alt="Datos de Excel y CSV, página 1" loading="lazy" width="910" height="1287"></button></div>
+  </div>
+  <figure class="code"><span class="code-lang">informe.pltx</span><pre><code><span class="tk-py">\hoja</span>[Resumen]{datos/obra.xlsx}
+<span class="tk-com">% …</span>
+<span class="tk-py">\hoja</span>[Mediciones]{datos/obra.xlsx}
+La tabla~<span class="tk-cmd">\ref</span>{tab:presupuesto} es la hoja «Mediciones» del libro: la cabecera
+es la fila 1 y el cuerpo, el rango A2:E7. Cada número sale de Excel.
+
+<span class="tk-cmd">\begin</span>{table}[H]
+  <span class="tk-cmd">\centering</span>
+  <span class="tk-cmd">\caption</span>{Presupuesto por capítulos.}
+  <span class="tk-cmd">\label</span>{tab:presupuesto}
+  <span class="tk-cmd">\begin</span>{tabular}{llrrr}
+    <span class="tk-cmd">\toprule</span>
+    <span class="tk-py">\celda</span>{A1:E1} <span class="tk-cmd">\\</span>
+    <span class="tk-cmd">\midrule</span>
+    <span class="tk-py">\celda</span>{A2:E7}
+    <span class="tk-cmd">\midrule</span>
+    <span class="tk-cmd">\multicolumn</span>{4}{l}{<span class="tk-cmd">\textbf</span>{<span class="tk-py">\celda</span>{A8}}} &amp; <span class="tk-cmd">\textbf</span>{<span class="tk-py">\celda</span>{E8}} <span class="tk-cmd">\\</span>
     <span class="tk-cmd">\bottomrule</span>
   <span class="tk-cmd">\end</span>{tabular}</code></pre></figure>
 </article>

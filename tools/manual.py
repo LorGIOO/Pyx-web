@@ -37,6 +37,14 @@ VALORES_PY = {
     'f"{admisible:.1f}"': "10.0",
 }
 VALORES_PYIF = {"flecha <= admisible": True}
+VALORES_PY_EN = dict(VALORES_PY, fecha="November 22, 2026", mes_anio="November 2026")
+
+# --en: the English manual (manual-pyx-en.pltx) into en/manual/.
+EN = "--en" in sys.argv
+
+
+def L(es: str, en: str) -> str:
+    return en if EN else es
 
 
 # --------------------------------------------------------------------------
@@ -45,7 +53,8 @@ VALORES_PYIF = {"flecha <= admisible": True}
 def leer_pltx(ruta: Path) -> tuple[str, dict]:
     with zipfile.ZipFile(ruta) as z:
         fuente = z.read("source.tex").decode("utf-8")
-        salidas = json.loads(z.read("outputs.json").decode("utf-8"))
+        nombres = z.namelist()
+        salidas = json.loads(z.read("outputs.json").decode("utf-8")) if "outputs.json" in nombres else {}
     return fuente, salidas
 
 
@@ -205,7 +214,7 @@ class Conversor:
             etiqueta = "Python" if lenguaje == "python" else "Pyx · LaTeX"
             self.listados.append(
                 f'<div class="code"><span class="code-lang">{etiqueta}</span>'
-                f'<button class="code-copy" type="button" aria-label="Copiar el código">Copiar</button>'
+                f'<button class="code-copy" type="button" aria-label="{L("Copiar el código", "Copy the code")}">{L("Copiar", "Copy")}</button>'
                 f"<pre><code>{resaltar(codigo, lenguaje)}</code></pre></div>"
             )
             return f"{BLOQUE}\x00L{n}\x00{BLOQUE}"
@@ -318,7 +327,7 @@ class Conversor:
             self.ultimo = (num, ident)
             self.indice[-1]["secciones"].append({"num": num, "titulo": titulo, "id": ident})
             out.append(f'{BLOQUE}<h3 id="{ident}"><span class="sec-num">{num}</span> {titulo}'
-                       f'<a class="anchor" href="#{ident}" aria-label="Enlace a esta sección">#</a></h3>{BLOQUE}')
+                       f'<a class="anchor" href="#{ident}" aria-label="{L('Enlace a esta sección', 'Link to this section')}">#</a></h3>{BLOQUE}')
             return i
         if nombre == "subsection":
             titulo = conv(arg())
@@ -382,7 +391,7 @@ class Conversor:
             return i
         if nombre == "py":
             expr = arg()
-            out.append(html.escape(VALORES_PY.get(expr, expr)))
+            out.append(html.escape((VALORES_PY_EN if EN else VALORES_PY).get(expr, expr)))
             return i
         if nombre == "pyif":
             cond, si = arg(), arg()
@@ -448,7 +457,7 @@ class Conversor:
 
     # -- entornos
     def entorno(self, t: str, i: int, accion: str, entorno: str, out: list[str]) -> int:
-        cajas = {"consejo": "Consejo", "nota": "Nota", "atencion": "Atención"}
+        cajas = {"consejo": "Tip", "nota": "Note", "atencion": "Caution"} if EN else {"consejo": "Consejo", "nota": "Nota", "atencion": "Atención"}
         if entorno in cajas:
             if accion == "begin":
                 titulo, i = opcional(t, i)
@@ -545,7 +554,7 @@ class Conversor:
             celdas = [c.strip() for c in fila.split("\x00TD\x00")]
             if all(not c for c in celdas):
                 continue
-            if "Atajo" in celdas[0] and atajos:
+            if ("Atajo" in celdas[0] or "Shortcut" in celdas[0]) and atajos:
                 filas_html.insert(0, "<thead><tr>" + "".join(f"<th>{plano(c)}</th>" for c in celdas) + "</tr></thead>")
                 continue
             if atajos and len(celdas) == 2:
@@ -575,8 +584,8 @@ class Conversor:
                     estilo = f' style="max-width:{float(mm.group(1)) * 100:.0f}%"'
             src = "../assets/img/" + archivo.replace(".png", ".webp")
             imgs.append(f'<img src="{src}" alt="{html.escape(plano(pie))}" loading="lazy" decoding="async"{estilo}>')
-        return (f'{BLOQUE}<figure class="shot" id="{ident}"><button class="shot-zoom" type="button" aria-label="Ampliar la imagen">'
-                f'{"".join(imgs)}</button><figcaption><span class="fig-num">Figura {num}</span> {pie}</figcaption></figure>{BLOQUE}')
+        return (f'{BLOQUE}<figure class="shot" id="{ident}"><button class="shot-zoom" type="button" aria-label="{L('Ampliar la imagen', 'Enlarge the image')}">'
+                f'{"".join(imgs)}</button><figcaption><span class="fig-num">{L("Figura", "Figure")} {num}</span> {pie}</figcaption></figure>{BLOQUE}')
 
     def figura_entorno(self, interior: str) -> str:
         imagenes = re.findall(r"\x00IMG(.*?)\x00", interior)
@@ -586,19 +595,19 @@ class Conversor:
         for n, img in enumerate(imagenes):
             pie = self.convertir(pies[n]) if n < len(pies) else ""
             if "ruta_flecha" in img:
-                archivo, src = "flecha", "../assets/img/flecha.png"
+                archivo, src = "flecha", ("../../assets/img/flecha-en.png" if EN else "../assets/img/flecha.png")
             else:
                 archivo = img.split("/")[-1]
-                src = "../assets/img/" + archivo.replace(".png", ".webp")
+                src = ("../../assets/img/" if EN else "../assets/img/") + archivo.replace(".png", ".webp")
             self.figura += 1
             num = f"{self.capitulo}.{self.figura}"
             ident = self.nuevo_id("fig-" + slug(archivo.rsplit(".", 1)[0]))
             self.ultimo = (num, ident)
             self.etiquetas["fig:" + archivo] = (num, ident)
             piezas.append(
-                f'<figure class="shot" id="{ident}"><button class="shot-zoom" type="button" aria-label="Ampliar la imagen">'
+                f'<figure class="shot" id="{ident}"><button class="shot-zoom" type="button" aria-label="{L('Ampliar la imagen', 'Enlarge the image')}">'
                 f'<img src="{src}" alt="{html.escape(plano(pie))}" loading="lazy" decoding="async"></button>'
-                f'<figcaption><span class="fig-num">Figura {num}</span> {pie}</figcaption></figure>'
+                f'<figcaption><span class="fig-num">{L("Figura", "Figure")} {num}</span> {pie}</figcaption></figure>'
             )
         del etiquetas
         clase = "shot-row" if len(piezas) > 1 else "shot-single"
@@ -644,14 +653,43 @@ def indice_html(conv: Conversor) -> str:
     return "<ol>" + "".join(partes) + "</ol>"
 
 
+PLANTILLA_EN = [
+    ("<title>Manual de usuario · Pyx</title>", "<title>User manual · Pyx</title>"),
+    ('content="Manual de usuario de Pyx"', 'content="Pyx user manual"'),
+    ('content="Todo Pyx, capítulo a capítulo."', 'content="All of Pyx, chapter by chapter."'),
+    ('<a href="../manual/" aria-current="page">Manual</a>', '<a href="./" aria-current="page">Manual</a>'),
+    ('<span class="n">Escrito y compilado con Pyx</span>', '<span class="n">Written and compiled with Pyx</span>'),
+    ("<h1>Manual de <em>usuario</em></h1>", "<h1>User <em>manual</em></h1>"),
+    ('href="manual-pyx.pdf"', 'href="pyx-user-manual.pdf"'),
+    (">Manual en PDF <span", ">Manual as PDF <span"),
+    ('href="#cap-atajos-de-teclado">', 'href="#cap-keyboard-shortcuts">'),
+    ("<span>Versión 2.2.0</span>", "<span>Version 2.2.0</span>"),
+    (">1,8 MB</span>", ">1.8 MB</span>"),
+    ("<p class=\"lede\">Todo Pyx, capítulo a capítulo: desde instalarlo hasta el último atajo de teclado. Es el mismo texto que el PDF, que se escribió en Pyx con celdas de Python que se ejecutaron al compilarlo.</p>",
+     "<p class=\"lede\">All of Pyx, chapter by chapter: from installing it to the last keyboard shortcut. It is the same text as the PDF, which was written in Pyx with Python cells that ran when it was compiled.</p>"),
+    ('content="El manual de usuario completo de Pyx 2.2: instalación, la interfaz, LaTeX, celdas de Python, \\py{} y \\pyif, cuadernos de Jupyter, datos de Excel, ejecución reactiva, compilación, el visor de PDF, macros, configuración y atajos."',
+     'content="The complete Pyx 2.2 user manual: installation, the interface, LaTeX, Python cells, \\py{} and \\pyif, Jupyter notebooks, Excel data, reactive execution, compiling, the PDF viewer, macros, settings and shortcuts."'),
+    ('href="#cap-solucion-de-problemas">Solución de problemas</a>', 'href="#cap-troubleshooting">Troubleshooting</a>'),
+    ('aria-label="Índice del manual"', 'aria-label="Contents of the manual"'),
+    ('placeholder="Buscar en el manual" aria-label="Buscar en el manual"', 'placeholder="Search the manual" aria-label="Search the manual"'),
+    ('aria-label="Resultados"', 'aria-label="Results"'),
+    ('<p class="toc-title">Índice</p>', '<p class="toc-title">Contents</p>'),
+    ("data-toc-toggle>Índice</button>", "data-toc-toggle>Contents</button>"),
+    ("<p>Esta página se genera a partir de la fuente del manual en PDF. No usa cookies ni rastreadores.</p>", "<p>This page is generated from the source of the PDF manual. It uses no cookies or trackers.</p>"),
+    ('<li><a href="./">User manual</a></li><li><a href="pyx-user-manual.pdf">', '<li><a href="./">User manual</a></li><li><a href="pyx-user-manual.pdf">'),
+]
+
+
 def main() -> None:
-    ruta = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ.parent / "Pyx" / "Manual de usuario" / "manual-pyx.pltx"
+    args = [a for a in sys.argv[1:] if a != "--en"]
+    base = RAIZ.parent / "Pyx" / "Manual de usuario"
+    ruta = Path(args[0]) if args else base / ("manual-pyx-en.pltx" if EN else "manual-pyx.pltx")
     fuente, salidas = leer_pltx(ruta)
 
     # la gráfica de la ménsula que dibujó la celda manual02
     imagenes = salidas.get("cells", {}).get("manual02", {}).get("images", [])
     if imagenes:
-        (RAIZ / "assets" / "img" / "flecha.png").write_bytes(base64.b64decode(imagenes[0]))
+        (RAIZ / "assets" / "img" / ("flecha-en.png" if EN else "flecha.png")).write_bytes(base64.b64decode(imagenes[0]))
 
     conv = Conversor()
     t = conv.proteger_listados(cuerpo(fuente))
@@ -669,8 +707,19 @@ def main() -> None:
         print("Aviso: quedan marcas internas sin resolver", file=sys.stderr)
 
     plantilla = (RAIZ / "manual" / "plantilla.html").read_text(encoding="utf-8")
+    if EN:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from en_chrome import to_english
+        plantilla = to_english(plantilla, "manual")
+        for a, b in PLANTILLA_EN:
+            plantilla = plantilla.replace(a, b)
     pagina = plantilla.replace("{{INDICE}}", indice_html(conv)).replace("{{CONTENIDO}}", htm)
-    (RAIZ / "manual" / "index.html").write_text(pagina, encoding="utf-8")
+    salida = RAIZ / "en" / "manual" if EN else RAIZ / "manual"
+    salida.mkdir(parents=True, exist_ok=True)
+    (salida / "index.html").write_text(pagina, encoding="utf-8")
+    if EN:
+        print(f"Manual (en): {conv.capitulo} chapters, {len(conv.ids)} anchors.")
+        return
 
     datos = RAIZ / "assets" / "data"
     datos.mkdir(parents=True, exist_ok=True)

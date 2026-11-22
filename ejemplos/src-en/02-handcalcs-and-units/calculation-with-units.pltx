@@ -1,0 +1,140 @@
+% !TeX program = xelatex
+% =====================================================================
+%  HANDCALCS AND UNITS (Pyx example) — a single file
+%  · handcalcs: %%render cells write in the PDF the development of each
+%    formula, as it would be done by hand, with the values substituted.
+%  · pint: every quantity carries its units and conversions are automatic.
+%  Every datum is fictitious.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,graphicx,xcolor,float}
+\usepackage[hidelinks]{hyperref}
+\definecolor{ok}{HTML}{1A7F37}\definecolor{ko}{HTML}{CF222E}
+\newcommand{\pass}{\textcolor{ok}{\textbf{PASSES}}}
+\newcommand{\fail}{\textcolor{ko}{\textbf{FAILS}}}
+
+\title{Hand calculations, without writing them by hand\\\large handcalcs and units with pint}
+\author{Pyx example}
+\date{}
+
+\begin{document}
+\maketitle
+
+%#python
+# Libraries are imported in the cells, as in Jupyter.
+from math import pi, sqrt
+import pint
+import handcalcs
+import handcalcs.render          # turns on the %%render and %%tex cells
+import numpy as np
+import matplotlib.pyplot as plt
+from pyx import figtex
+
+u = pint.UnitRegistry()
+u.formatter.default_format = "~"   # abbreviated units in \py{}: kN, m, MPa
+handcalcs.set_option("preferred_string_formatter", "~L")   # …and in handcalcs
+handcalcs.set_option("display_precision", 2)
+%#end
+
+\section{Pad footing}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. A square footing takes
+the axial force and the moment of a column. The data carry their units:
+\texttt{N = 850 * u.kN}, \texttt{B = 2.2 * u.m}\ldots
+
+\subsection{Data}
+The \verb|%%render params| cell writes them in columns, without development.
+
+%#python
+%%render params
+N = 850 * u.kN
+M = 60 * u.kN * u.m
+B = 2.2 * u.m
+sigma_adm = 0.25 * u.MPa
+%#end
+
+\subsection{Ground pressure}
+With \verb|%%render| each line is a formula with its values. Units simplify by
+themselves: kN/m$^2$ goes to the requested unit with \texttt{.to()}.
+
+%#python
+%%render
+A = B**2
+W = B**3 / 6
+sigma_max = (N / A + M / W).to(u.kPa)
+sigma_min = (N / A - M / W).to(u.kPa)
+%#end
+
+The maximum pressure is \py{round(sigma_max, 1)} and the allowable one \py{sigma_adm.to(u.kPa)}:
+\pyif{sigma_max <= sigma_adm}{the footing \pass.}{the footing \fail: it must be enlarged.}
+\pyif{sigma_min > 0 * u.kPa}{The whole base is in compression.}{Part of the base lifts: the eccentricity is large.}
+
+When comparing pint quantities in a \texttt{\textbackslash pyif} there is no need to
+worry about units: \texttt{sigma\_max <= sigma\_adm} compares kPa with MPa
+correctly.
+
+\section{Buckling of a column}
+Integer posuere erat a ante venenatis dapibus posuere velit aliquet. A pinned
+steel column. Names with Greek letters (\texttt{lamb\_r},
+\texttt{chi}) are written as symbols.
+
+%#python
+%%render params
+L_p = 4.5 * u.m
+E = 210 * u.GPa
+f_y = 275 * u.MPa
+A_p = 53.8 * u.cm**2
+I_z = 1318 * u.cm**4
+alpha = 0.34
+gamma_M1 = 1.05
+%#end
+
+%#python
+%%render
+N_cr = (pi**2 * E * I_z / L_p**2).to(u.kN)
+lamb_r = sqrt(A_p * f_y / N_cr)
+phi = 0.5 * (1 + alpha * (lamb_r - 0.2) + lamb_r**2)
+chi = 1 / (phi + sqrt(phi**2 - lamb_r**2))
+N_bRd = (chi * A_p * f_y / gamma_M1).to(u.kN)
+%#end
+
+%#python
+N_Ed = 420 * u.kN
+util = (N_Ed / N_bRd).to_base_units().magnitude
+lam = np.linspace(0, 3, 300)
+ph = 0.5 * (1 + alpha * (lam - 0.2) + lam**2)
+curve = np.minimum(1, 1 / (ph + np.sqrt(ph**2 - lam**2)))
+fig, ax = plt.subplots(figsize=(6, 3))
+ax.plot(lam, curve, color="#007acc", lw=2, label="buckling curve (α = %.2f)" % alpha)
+ax.plot([lamb_r], [chi], "o", color="#cf222e", label="this column")
+ax.set_xlabel(r"non-dimensional slenderness $\bar\lambda$"); ax.set_ylabel(r"$\chi$")
+ax.grid(alpha=0.3); ax.legend(frameon=False)
+fig.tight_layout()
+fig_buckling = figtex("buckling_curve", caption="The column on the buckling curve.", label="fig:buckling", width=0.75)
+%#end
+
+The column resists \py{round(N_bRd.to(u.kN).magnitude, 1)}~kN against a design axial force of
+\py{N_Ed.magnitude}~kN: a utilisation of \py{f"{100*util:.0f}"}~\%, \pyif{util <= 1}{\pass}{\fail}.
+Its position on the buckling curve is in figure~\ref{fig:buckling}.
+
+\py{fig_buckling}
+
+\section{Summary}
+\begin{table}[H]
+  \centering
+  \caption{Summary of checks.}
+  \begin{tabular}{lrrl}
+    \toprule
+    Check & Demand & Capacity & Result \\
+    \midrule
+    Ground pressure (kPa) & \py{round(sigma_max.magnitude, 1)} & \py{round(sigma_adm.to(u.kPa).magnitude, 1)} & \pyif{sigma_max <= sigma_adm}{\pass}{\fail} \\
+    Column buckling (kN) & \py{round(N_Ed.magnitude, 1)} & \py{round(N_bRd.magnitude, 1)} & \pyif{util <= 1}{\pass}{\fail} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Change \texttt{B = 2.2 * u.m} to \texttt{1.8 * u.m}, or the column's axial force, and compile
+again: the development, the conclusions, the plot and the table change at once.
+\end{document}

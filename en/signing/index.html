@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code signing · Pyx</title>
+  <meta name="description" content="Pyx code signing policy: who signs the installers, how they are built and what data the application transmits.">
+  <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="../../assets/css/base.css?v=20261117a">
+  <link rel="stylesheet" href="../../assets/css/doc.css?v=20261117a">
+  <link rel="alternate" hreflang="es" href="https://lorgioo.github.io/Pyx-web/firma/">
+  <link rel="alternate" hreflang="en" href="https://lorgioo.github.io/Pyx-web/en/signing/">
+</head>
+<body>
+<a class="skip" href="#contenido">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="logo" viewBox="-2 -4 86 104"><rect x=".5" y="11.15" width="6.25" height="74.4" rx="3.1" fill="var(--blue)"/><path d="M67.2 16.93C67.2-1.91 41.1-1.91 41.1 23.21V73.46C41.1 98.59 15 98.59 15 79.74" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M80.06 84.77 58.5 95.28V74.26Z" fill="var(--blue)"/></symbol>
+  <symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2Z" fill="currentColor"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v13M6 12l6 6 6-6M5 21h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 2.3a9.8 9.8 0 0 0-3.1 19.1c.5.1.7-.2.7-.5v-1.7c-2.7.6-3.3-1.3-3.3-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.2-4.5-1.1-4.5-4.9 0-1.1.4-2 1-2.7-.1-.2-.4-1.2.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.8-2.3 4.7-4.5 4.9.4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A9.8 9.8 0 0 0 12 2.3Z" fill="currentColor"/></symbol>
+</defs></svg>
+
+<header class="runhead">
+  <a class="brand" href="../" aria-label="Pyx, home"><svg aria-hidden="true"><use href="#logo"/></svg></a>
+  <nav aria-label="Main">
+    <a href="../#laboratorio">Lab</a>
+    <a href="../examples/">Examples</a>
+    <a href="../manual/">Manual</a>
+    <a href="../news/">What’s new</a>
+    <a class="key small primary" href="../#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Download</a>
+  </nav>
+  <a class="icon-btn lang-btn" href="../../firma/" hreflang="es" lang="es" title="Ver en español" aria-label="Ver en español">ES</a>
+  <a class="icon-btn gh-btn" href="https://github.com/LorGIOO/Pyx" aria-label="Pyx’s code on GitHub" title="Pyx’s code on GitHub"><svg aria-hidden="true"><use href="#i-gh"/></svg></a>
+  <button class="icon-btn" type="button" data-theme-toggle aria-label="Change the theme"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
+  <button class="icon-btn menu-btn" type="button" aria-label="Menu" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+</header>
+
+<header class="page-head">
+  <p class="eyebrow"><span>Code signing policy</span><span class="n">Windows installers</span></p>
+  <h1>Code <em>signing</em></h1>
+  <p class="lede">Who signs Pyx’s Windows installers, how they are built and what each version is checked for before it is published.</p>
+</header>
+
+<div class="doc-layout single">
+  <main class="doc-body legal" id="contenido" lang="en">
+    <div class="summary">
+      <p style="margin:0"><strong>Free code signing provided by <a href="https://about.signpath.io/">SignPath.io</a>, certificate by <a href="https://signpath.org/">SignPath Foundation</a>.</strong></p>
+    </div>
+
+    <h2 id="scope">What is signed</h2>
+    <p>The Windows release artifacts of <a href="https://github.com/LorGIOO/Pyx">Pyx</a>, an open source (MIT) desktop LaTeX editor with embedded Python cells:</p>
+    <ul>
+      <li>the NSIS installer <code>Pyx_&lt;version&gt;_x64-setup.exe</code>,</li>
+      <li>the MSI installer <code>Pyx_&lt;version&gt;_x64_en-US.msi</code>,</li>
+      <li>the application executable <code>pyx.exe</code> contained in them.</li>
+    </ul>
+    <p>Only binaries built from the source code of the <a href="https://github.com/LorGIOO/Pyx">LorGIOO/Pyx</a> repository are signed. Every release is built by GitHub Actions (<a href="https://github.com/LorGIOO/Pyx/blob/main/.github/workflows/release.yml"><code>release.yml</code></a>) from a version tag, on GitHub-hosted runners, with a pinned Rust toolchain. No binary built on a personal computer is ever signed. Before each release is published, its installers are scanned with antivirus software.</p>
+    <p>Pyx does not bundle third-party executables. When the user asks for it in the “Prepare Pyx” dialog, Pyx downloads uv, a standalone Python and Tectonic from their official GitHub releases into its own data folder; those files keep their publishers’ own signatures (or lack of them) and are not signed under this policy.</p>
+
+    <h2 id="team">Team roles</h2>
+    <table>
+      <thead><tr><th>Role</th><th>Members</th></tr></thead>
+      <tbody>
+        <tr><td>Committers and reviewers</td><td><a href="https://github.com/LorGIOO">LorGIOO</a></td></tr>
+        <tr><td>Approvers</td><td><a href="https://github.com/LorGIOO">LorGIOO</a></td></tr>
+      </tbody>
+    </table>
+    <p>Changes from outside contributors are only merged through pull requests reviewed by a committer. Every signing request is approved manually by an approver. All team members use multi-factor authentication on GitHub and SignPath.</p>
+
+    <h2 id="privacy">Privacy policy</h2>
+    <p>Pyx has no telemetry, no crash reporting and no user accounts, and it never uploads the user’s documents. It connects to other networked systems only in these cases:</p>
+    <ul>
+      <li><strong>Update check:</strong> a few seconds after start-up, and when the user clicks “Check for updates”, Pyx asks <code>api.github.com</code> for the latest published release. If the user installs it, the installer is downloaded from <code>github.com</code> and verified with its SHA-256 hash.</li>
+      <li><strong>Setup, on request:</strong> when the user clicks “Prepare”, Pyx downloads uv, a standalone Python and Tectonic from GitHub and Python packages from PyPI; Tectonic downloads the LaTeX packages a document needs the first time it compiles it.</li>
+      <li><strong>Installing a missing package, on request:</strong> the package name is sent to PyPI.</li>
+      <li><strong>LanguageTool, only if configured by the user:</strong> the document text is sent to the server the user enters (their own server, or the public one at <code>api.languagetool.org</code>).</li>
+    </ul>
+    <p>The full privacy policy is at <a href="../privacy/">lorgioo.github.io/Pyx-web/en/privacy/</a>.</p>
+
+  </main>
+</div>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <div>
+      <a class="brand" href="../"><svg aria-hidden="true"><use href="#logo"/></svg>Pyx</a>
+      <p>The calculation and the document, in one file.</p>
+      <p>No cookies or trackers.</p>
+    </div>
+    <div><h2>Product</h2><ul><li><a href="../#laboratorio">Lab</a></li><li><a href="../examples/">Examples</a></li><li><a href="../#descargar">Download</a></li><li><a href="../news/">What’s new</a></li></ul></div>
+    <div><h2>Help</h2><ul><li><a href="../manual/">User manual</a></li><li><a href="../manual/pyx-user-manual.pdf">Manual as PDF</a></li><li><a href="https://github.com/LorGIOO/Pyx/issues">Report a bug</a></li></ul></div>
+    <div><h2>Project</h2><ul><li><a href="https://github.com/LorGIOO/Pyx">Source code</a></li><li><a href="../privacy/">Privacy</a></li><li><a href="./">Code signing</a></li><li><a href="https://github.com/LorGIOO/Pyx/blob/main/LICENSE">MIT licence</a></li></ul></div>
+  </div>
+  <div class="endmark"><span>© <span data-year>2026</span> Pyx · Free software</span><span>∎</span></div>
+</footer>
+<script src="../../assets/js/common.js?v=20261117a"></script>
+</body>
+</html>

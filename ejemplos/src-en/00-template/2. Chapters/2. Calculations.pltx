@@ -1,0 +1,14 @@
+\section{Calculations}
+
+% A Python cell: it runs when compiling and does not appear in the PDF.
+%#python
+plot_area = 25.0 * 40.0      # m²
+coverage = 0.35              # site coverage ratio
+floor_area = plot_area * coverage
+%#end
+
+The plot is \py{plot_area}~m$^2$ and, with a site coverage of
+\py{round(coverage*100)}~\%, it allows \py{floor_area}~m$^2$ of building.
+\pyif{floor_area > 300}{It is a large area.}{It is a small area.}
+
+Change the numbers of the cell and compile again: the text adjusts by itself.

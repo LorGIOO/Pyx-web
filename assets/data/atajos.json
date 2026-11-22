@@ -92,7 +92,7 @@
    "T"
   ],
   "texto": "Ctrl+T",
-  "accion": "Comentar o descomentar"
+  "accion": "Comentar o descomentar (con una palabra seleccionada, solo esa)"
  },
  {
   "grupo": "Edición",

@@ -1,0 +1,105 @@
+\section{Beam design}\label{sec:beam}
+
+%#python
+import handcalcs.render
+import pint
+import numpy as np
+import matplotlib.pyplot as plt
+from pyx import figtex
+
+u = pint.UnitRegistry()
+
+# Candidate sections: second moment of area (cm⁴) and section modulus (cm³),
+# made up from a rounded IPE catalogue.
+sections = {"IPE 300": (8360, 557), "IPE 330": (11770, 713), "IPE 360": (16270, 904)}
+section = "IPE 330"
+I_cm4, W_cm3 = sections[section]
+%#end
+
+\subsection{Load combination}
+Lorem ipsum dolor sit amet. The actions are combined with the usual partial
+factors. The development is written by \emph{handcalcs}: the next cell is a
+\verb|%%render| cell, which puts every formula in the PDF with its values.
+
+%#python
+%%render params
+gamma_G = 1.35
+gamma_Q = 1.50
+%#end
+
+%#python
+%%render
+q_d = gamma_G * q_perm + gamma_Q * q_imp
+M_d = q_d * span**2 / 8
+V_d = q_d * span / 2
+%#end
+
+\subsection{Strength (ULS)}
+%#python
+# With units (pint): conversions happen by themselves.
+fy = steel["fy"] * u.MPa
+W = W_cm3 * u.cm**3
+M_Rd = (W * fy / steel["gamma_M"]).to(u.kN * u.m)
+M_Ed = M_d * u.kN * u.m
+util_M = (M_Ed / M_Rd).to_base_units().magnitude
+%#end
+
+Section \textbf{\py{section}} resists a moment of \py{f"{M_Rd.magnitude:.1f}"}~kN·m
+against the design \py{f"{M_Ed.magnitude:.1f}"}~kN·m: a utilisation of
+\py{f"{100*util_M:.0f}"}~\%, so the section \pyif{util_M <= 1}{\pass}{\fail}
+in bending.
+
+\subsection{Deflection (SLS)}
+%#python
+%%render
+E_s = 210000
+I_s = I_cm4 * 1e4
+q_k = q_perm + q_imp
+f = 5 * q_k * (span*1000)**4 / (384 * E_s * I_s)
+f_lim = span*1000 / 350
+%#end
+
+%#python
+x = np.linspace(0, span, 200)
+y = -(q_k*(x*1000)*((span*1000)**3 - 2*span*1000*(x*1000)**2 + (x*1000)**3)) / (24*E_s*I_s)
+fig, ax = plt.subplots(figsize=(6.4, 2.6))
+ax.plot(x, y, color="#007acc", lw=2, label="deflected shape")
+ax.axhline(-f_lim, color="#cf222e", ls="--", lw=1, label=f"limit L/350 = {f_lim:.1f} mm")
+ax.set_xlabel("x (m)"); ax.set_ylabel("deflection (mm)")
+ax.legend(loc="lower right", frameon=False); ax.grid(alpha=0.3)
+fig.tight_layout()
+fig_deflection = figtex("beam_deflection", caption="Deflected shape of the beam under the characteristic load.", label="fig:deflection", width=0.85)
+%#end
+
+The maximum deflection is \py{f"{f:.1f}"}~mm, \pyif{f <= f_lim}{below}{above} the
+limit of \py{f"{f_lim:.1f}"}~mm (figure~\ref{fig:deflection}): \pyif{f <= f_lim}{\pass}{\fail}.
+
+\py{fig_deflection}
+
+\subsection{Comparison of sections}
+%#python
+rows = []
+for name, (I_i, W_i) in sections.items():
+    MR = W_i * steel["fy"] / steel["gamma_M"] / 1000          # kN·m
+    fl = 5 * q_k * (span*1000)**4 / (384 * E_s * I_i * 1e4)   # mm
+    ok = MR >= M_d and fl <= f_lim
+    mark = r"\pass" if ok else r"\fail"
+    rows.append(rf"{name} & {MR:.1f} & {fl:.1f} & {mark} \\")
+section_table = "\n".join(rows)
+%#end
+
+Table~\ref{tab:sections} repeats the calculation for each section. Its rows are
+written by a Python loop as ordinary \LaTeX{} text.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Check of the candidate sections ($M_d$ = \py{f"{M_d:.1f}"} kN·m, deflection limit \py{f"{f_lim:.1f}"} mm).}
+  \label{tab:sections}
+  \begin{tabular}{lccc}
+    \toprule
+    Section & $M_{Rd}$ (kN·m) & Deflection (mm) & Result \\
+    \midrule
+    \py{section_table}
+    \bottomrule
+  \end{tabular}
+\end{table}

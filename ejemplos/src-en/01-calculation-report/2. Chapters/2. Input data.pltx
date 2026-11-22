@@ -1,0 +1,54 @@
+\section{Input data}\label{sec:data}
+
+%#python
+import pandas as pd
+
+# Geometry (made up)
+span = 9.0            # m, between supports
+width = 2.5           # m, usable deck width
+
+# Materials: a CSV table in the project's resources. The path is relative to
+# the main document's folder («1. Main»).
+mat = pd.read_csv("../999. Resources/1. Data/materials.csv", index_col="material")
+steel = mat.loc["S275"]
+
+# Loads: an Excel sheet (read just as in Jupyter).
+loads = pd.read_excel("../999. Resources/1. Data/loads.xlsx", index_col="load")
+q_perm = loads.loc[["Self-weight", "Timber deck", "Railings"], "value"].sum()
+q_imp = loads.loc["Imposed load", "value"]
+%#end
+
+\subsection{Geometry}
+The footbridge spans \py{span}~m with a usable width of \py{width}~m.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+
+\subsection{Materials}
+The values of table~\ref{tab:materials} are read from the file
+\texttt{materials.csv}. Each cell of the table is a \texttt{\textbackslash py\{\}}
+that asks the pandas table for one value: \texttt{mat.loc["S275", "fy"]}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Materials (read from \texttt{materials.csv}).}
+  \label{tab:materials}
+  \begin{tabular}{lccc}
+    \toprule
+    Material & $f_y$ (MPa) & $E$ (GPa) & $\gamma_M$ \\
+    \midrule
+    Steel S235 & \py{mat.loc["S235", "fy"]} & \py{mat.loc["S235", "E"]} & \py{mat.loc["S235", "gamma_M"]} \\
+    Steel S275 & \py{mat.loc["S275", "fy"]} & \py{mat.loc["S275", "E"]} & \py{mat.loc["S275", "gamma_M"]} \\
+    Steel S355 & \py{mat.loc["S355", "fy"]} & \py{mat.loc["S355", "E"]} & \py{mat.loc["S355", "gamma_M"]} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Steel \textbf{S275} is used, with a yield strength of \py{steel["fy"]}~MPa.
+
+\subsection{Actions}
+The loads per metre of beam are in the sheet \texttt{loads.xlsx}. This time the
+whole table is written by Python with \texttt{tabletex} (table~\ref{tab:loads}).
+
+\py{tabletex(loads.reset_index(), caption="Loads per metre of beam (read from \\texttt{loads.xlsx}).", label="tab:loads", prec=2)}
+
+They add up to \py{f"{q_perm:.2f}"}~kN/m of permanent loads and \py{f"{q_imp:.2f}"}~kN/m of
+imposed load.

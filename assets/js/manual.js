@@ -1,6 +1,7 @@
 /* Pyx · manual: índice que sigue la lectura, buscador y prueba de atajos */
 (() => {
   'use strict';
+  const EN = document.documentElement.lang === 'en';
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -36,7 +37,7 @@
 
   /* ---------- el índice en pantallas estrechas ---------- */
   const toggle = $('[data-toc-toggle]');
-  const setToc = (open) => { toc.classList.toggle('open', open); toggle?.setAttribute('aria-expanded', String(open)); toggle.textContent = open ? 'Cerrar' : 'Índice'; };
+  const setToc = (open) => { toc.classList.toggle('open', open); toggle?.setAttribute('aria-expanded', String(open)); toggle.textContent = open ? (EN ? 'Close' : 'Cerrar') : (EN ? 'Contents' : 'Índice'); };
   toggle?.addEventListener('click', () => setToc(!toc.classList.contains('open')));
   toc.addEventListener('click', (e) => { if (e.target.closest('a') && toc.classList.contains('open')) setToc(false); });
 
@@ -70,7 +71,7 @@
     found = blocks.filter((b) => b.n.includes(q) && !seen.has(b.el.closest('li, p, dd, td, h3, h4, h5, dt, figcaption')) && seen.add(b.el)).slice(0, 30);
     results.innerHTML = found.length
       ? found.map((b, i) => `<li><a href="#" data-i="${i}" class="${i === 0 ? 'is-on' : ''}"><small>${esc(b.where || 'Manual')}</small>${snippet(b.text, q)}</a></li>`).join('')
-      : `<li class="none">Nada con «${esc(input.value.trim())}».</li>`;
+      : `<li class="none">${EN ? 'Nothing with' : 'Nada con'} «${esc(input.value.trim())}».</li>`;
   };
   const go = (i) => {
     const b = found[i];

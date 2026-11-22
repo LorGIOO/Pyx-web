@@ -1,0 +1,21 @@
+\section{Concrete tests}
+% Another file: a CSV, with the «;» and decimal comma of Excel in Spanish
+% and other European languages.
+\hoja{data/tests.csv}
+The specimens were tested at \celda{C2}~days. The column of strengths
+(B2:B6) is placed as a row with \texttt{[T]}:
+
+\begin{table}[H]
+  \centering
+  \caption{Compressive strength of the specimens (MPa).}
+  \begin{tabular}{ccccc}
+    \toprule
+    \celda[T]{A2:A6} \\
+    \midrule
+    \celda[T]{B2:B6} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Nulla vitae elit libero, a pharetra augue. If you change a strength in
+\texttt{tests.csv} and compile, the table changes.

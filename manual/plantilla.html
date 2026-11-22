@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Manual de usuario · Pyx</title>
-  <meta name="description" content="El manual de usuario completo de Pyx 2.0: instalación, la interfaz, LaTeX, celdas de Python, \py{} y \pyif, cuadernos de Jupyter, ejecución reactiva, compilación, el visor de PDF, macros, configuración y atajos.">
+  <meta name="description" content="El manual de usuario completo de Pyx 2.2: instalación, la interfaz, LaTeX, celdas de Python, \py{} y \pyif, cuadernos de Jupyter, datos de Excel, ejecución reactiva, compilación, el visor de PDF, macros, configuración y atajos.">
   <meta name="theme-color" content="#f4f2ec" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
   <meta property="og:title" content="Manual de usuario de Pyx">
@@ -15,6 +15,8 @@
   <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="stylesheet" href="../assets/css/base.css?v=20261117a">
   <link rel="stylesheet" href="../assets/css/doc.css?v=20261117a">
+  <link rel="alternate" hreflang="es" href="https://lorgioo.github.io/Pyx-web/manual/">
+  <link rel="alternate" hreflang="en" href="https://lorgioo.github.io/Pyx-web/en/manual/">
 </head>
 <body>
 <!-- ESTE ARCHIVO ES LA PLANTILLA. manual/index.html se genera con: python3 tools/manual.py -->
@@ -37,17 +39,18 @@
     <a href="../novedades/">Novedades</a>
     <a class="key small primary" href="../#descargar"><svg aria-hidden="true"><use href="#i-down"/></svg>Descargar</a>
   </nav>
+  <a class="icon-btn lang-btn" href="../en/manual/" hreflang="en" lang="en" title="View in English" aria-label="View in English">EN</a>
   <a class="icon-btn gh-btn" href="https://github.com/LorGIOO/Pyx" aria-label="El código de Pyx en GitHub" title="El código de Pyx en GitHub"><svg aria-hidden="true"><use href="#i-gh"/></svg></a>
   <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar el tema"><svg aria-hidden="true"><use href="#i-contrast"/></svg></button>
   <button class="icon-btn menu-btn" type="button" aria-label="Menú" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
 </header>
 
 <header class="page-head">
-  <p class="eyebrow"><span>Versión 2.0.0</span><span class="n">Escrito y compilado con Pyx</span></p>
+  <p class="eyebrow"><span>Versión 2.2.0</span><span class="n">Escrito y compilado con Pyx</span></p>
   <h1>Manual de <em>usuario</em></h1>
   <p class="lede">Todo Pyx, capítulo a capítulo: desde instalarlo hasta el último atajo de teclado. Es el mismo texto que el PDF, que se escribió en Pyx con celdas de Python que se ejecutaron al compilarlo.</p>
   <div class="doc-meta">
-    <a class="key primary" href="manual-pyx.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg>Manual en PDF <span class="k-hint">1,7 MB</span></a>
+    <a class="key primary" href="manual-pyx.pdf" download><svg aria-hidden="true"><use href="#i-down"/></svg>Manual en PDF <span class="k-hint">1,8 MB</span></a>
     <a class="key" href="#cap-atajos-de-teclado">Atajos de teclado</a>
     <a class="key" href="#cap-solucion-de-problemas">Solución de problemas</a>
   </div>

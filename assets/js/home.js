@@ -1,6 +1,9 @@
 /* Pyx · portada: escenas interactivas */
 (() => {
   'use strict';
+  // The same scenes in Spanish and English: the page's <html lang> decides.
+  const EN = document.documentElement.lang === 'en';
+  const T = (es, en) => (EN ? en : es);
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -36,8 +39,8 @@
   const pyNumber = (src) => {
     const s = src.trim();
     if (/^[-+]?(\d+(_\d+)*(\.\d*)?|\.\d+)([eE][-+]?\d+)?$/.test(s)) return { ok: true, value: Number(s.replace(/_/g, '')) };
-    if (/^\d+,\d+$/.test(s)) return { ok: false, error: `TypeError: ${s} es una tupla en Python; usa punto decimal.` };
-    return { ok: false, error: s ? `SyntaxError: «${s}» no es un número.` : 'SyntaxError: falta el valor.' };
+    if (/^\d+,\d+$/.test(s)) return { ok: false, error: T(`TypeError: ${s} es una tupla en Python; usa punto decimal.`, `TypeError: ${s} is a tuple in Python; use a decimal point.`) };
+    return { ok: false, error: s ? T(`SyntaxError: «${s}» no es un número.`, `SyntaxError: «${s}» is not a number.`) : T('SyntaxError: falta el valor.', 'SyntaxError: the value is missing.') };
   };
   /** Un campo de código mide lo que su texto, como en el editor. */
   const fitInput = (el) => { el.style.width = `${Math.max(el.value.length, 1) + 0.6}ch`; };
@@ -133,7 +136,7 @@
       setText($('[data-h="P"]', sheet), pyfmt(P));
       setText($('[data-h="f"]', sheet), f.toFixed(2));
       const v = $('[data-h="ok"]', sheet);
-      setText(v, ok ? 'cumple' : 'no cumple');
+      setText(v, ok ? T('cumple', 'passes') : T('no cumple', 'fails'));
       v.classList.toggle('ok', ok); v.classList.toggle('ko', !ok);
       $('[data-h="Pcode"]', sheet).textContent = input.value.trim();
       drawPlot(plot, { L, flecha: f, adm });
@@ -145,8 +148,8 @@
       fitInput(input);
       if (r.ok && r.value >= 0) {
         paint(r.value);
-        note.textContent = r.value * 7.6923 / 15 > 10 ? 'Más de 10 mm: el párrafo ya dice «no cumple».' : 'Escribe otra carga en la línea de arriba.';
-      } else note.textContent = r.ok ? 'Una carga negativa no tiene sentido aquí.' : r.error;
+        note.textContent = r.value * 7.6923 / 15 > 10 ? T('Más de 10 mm: el párrafo ya dice «no cumple».', 'Over 10 mm: the paragraph already says «fails».') : T('Escribe otra carga en la línea de arriba.', 'Type another load in the line above.');
+      } else note.textContent = r.ok ? T('Una carga negativa no tiene sentido aquí.', 'A negative load makes no sense here.') : r.error;
     };
     input.addEventListener('input', (e) => { if (e.isTrusted) stopTyping?.(); fromInput(); });
     input.addEventListener('focus', () => stopTyping?.());
@@ -199,7 +202,7 @@
       if (from !== py) { py.value = P.toFixed(1); fitInput(py); }
       setText($('[data-xl-f]', box), coma(f.toFixed(2)));
       setText($('[data-new-f]', box), f.toFixed(2));
-      setText($('[data-new-v]', box), inside ? 'dentro' : 'fuera');
+      setText($('[data-new-v]', box), inside ? T('dentro', 'within') : T('fuera', 'outside'));
       const wrongF = Math.abs(f - f0) > 1e-9;
       const wrongV = inside !== (f0 <= 10);
       $('[data-old-f]', box).classList.toggle('wrong', wrongF);
@@ -247,14 +250,14 @@
       win.className = `win s${step}`;
       clearTimeout(timer);
       led.className = 'led';
-      if (step === 0) status.textContent = 'Kernel listo';
+      if (step === 0) status.textContent = T('Kernel listo', 'Kernel ready');
       if (step === 1) {
-        led.className = 'led py'; status.textContent = 'Ejecutando Python…';
-        timer = setTimeout(() => { led.className = 'led'; status.textContent = 'Celdas Python: 4 ms (1 ejecutada de 1)'; }, 700);
+        led.className = 'led py'; status.textContent = T('Ejecutando Python…', 'Running Python…');
+        timer = setTimeout(() => { led.className = 'led'; status.textContent = T('Celdas Python: 4 ms (1 ejecutada de 1)', 'Python cells: 4 ms (1 run of 1)'); }, 700);
       }
       if (step === 2) {
-        led.className = 'led tex'; status.textContent = 'Componiendo LaTeX…';
-        timer = setTimeout(() => { led.className = 'led'; status.textContent = 'Compilado · 0,4 s'; }, 800);
+        led.className = 'led tex'; status.textContent = T('Componiendo LaTeX…', 'Typesetting LaTeX…');
+        timer = setTimeout(() => { led.className = 'led'; status.textContent = T('Compilado · 0,4 s', 'Compiled · 0.4 s'); }, 800);
       }
     });
   })();
@@ -307,7 +310,7 @@
       setText(o('f'), r.flecha.toFixed(2));
       setText(o('s'), String(Math.round(r.sigma)));
       const v = o('verdict');
-      const html = `La sección <b>${r.ok ? 'cumple' : 'no cumple'}</b>.`;
+      const html = T(`La sección <b>${r.ok ? 'cumple' : 'no cumple'}</b>.`, `The section <b>${r.ok ? 'passes' : 'fails'}</b>.`);
       if (v.innerHTML !== html) { v.innerHTML = html; bump(v); }
       v.classList.toggle('ok', r.ok); v.classList.toggle('ko', !r.ok);
       setText(o('f2'), `${r.flecha.toFixed(2)} mm`);
@@ -323,16 +326,16 @@
       const perfil = fields.perfil.value;
       if (!P.ok) return { line: 4, error: P.error };
       if (!L.ok) return { line: 5, error: L.error };
-      if (!IPE[perfil]) return { line: 7, error: `KeyError: '${perfil}' (hay del IPE 200 al IPE 400)` };
-      if (L.value === 0) return { line: 9, error: 'ZeroDivisionError: el vuelo no puede ser 0' };
-      if (P.value < 0 || L.value < 0) return { line: P.value < 0 ? 4 : 5, error: 'ValueError: la carga y el vuelo deben ser positivos' };
+      if (!IPE[perfil]) return { line: 7, error: T(`KeyError: '${perfil}' (hay del IPE 200 al IPE 400)`, `KeyError: '${perfil}' (IPE 200 to IPE 400 available)`) };
+      if (L.value === 0) return { line: 9, error: T('ZeroDivisionError: el vuelo no puede ser 0', 'ZeroDivisionError: the span cannot be 0') };
+      if (P.value < 0 || L.value < 0) return { line: P.value < 0 ? 4 : 5, error: T('ValueError: la carga y el vuelo deben ser positivos', 'ValueError: the load and the span must be positive') };
       Object.assign(lab, { P: P.value, L: L.value, perfil });
       return { ok: true };
     };
     // compilar al escribir: cuando dejas de teclear (o con Ctrl+S), ejecuta, compone y muestra el PDF
     const compile = () => {
       clearTimeout(compileTimer); clearTimeout(phaseTimer); clearTimeout(idleTimer);
-      led.className = 'led py'; state.textContent = 'Ejecutando Python…';
+      led.className = 'led py'; state.textContent = T('Ejecutando Python…', 'Running Python…');
       run.textContent = `… [${count + 1}]`; run.className = 'cell-run mono busy';
       $$('.code-lines li.err-line', root).forEach((li) => li.classList.remove('err-line'));
       compileTimer = setTimeout(() => {
@@ -341,19 +344,19 @@
         if (!res.ok) {
           run.textContent = `✗ [${count}] ${res.error}`; run.className = 'cell-run mono err';
           $(`[data-line="${res.line}"]`, root)?.classList.add('err-line');
-          cells.textContent = 'Celdas Python: error en la línea ' + res.line;
-          led.className = 'led err'; state.textContent = 'Error en la celda · se conserva el PDF anterior';
+          cells.textContent = T('Celdas Python: error en la línea ', 'Python cells: error on line ') + res.line;
+          led.className = 'led err'; state.textContent = T('Error en la celda · se conserva el PDF anterior', 'Error in the cell · the previous PDF is kept');
           return;
         }
         const ms = 2 + Math.round(Math.random() * 3);
         run.textContent = `✓ [${count}] ${ms} ms`; run.className = 'cell-run mono';
-        cells.textContent = `Celdas Python: ${ms} ms (1 ejecutada de 1)`;
+        cells.textContent = T(`Celdas Python: ${ms} ms (1 ejecutada de 1)`, `Python cells: ${ms} ms (1 run of 1)`);
         paintGhosts();
-        led.className = 'led tex'; state.textContent = 'Componiendo LaTeX…';
+        led.className = 'led tex'; state.textContent = T('Componiendo LaTeX…', 'Typesetting LaTeX…');
         phaseTimer = setTimeout(() => {
           paintPdf();
           led.className = 'led';
-          state.textContent = `Compilado · ${coma((0.3 + Math.random() * 0.2).toFixed(1))} s`;
+          state.textContent = T(`Compilado · ${coma((0.3 + Math.random() * 0.2).toFixed(1))} s`, `Compiled · ${(0.3 + Math.random() * 0.2).toFixed(1)} s`);
         }, 260);
       }, 320);
     };
@@ -363,7 +366,7 @@
       el.addEventListener('input', () => {
         fitInput(el);
         clearTimeout(idleTimer);
-        led.className = 'led'; state.textContent = 'Sin guardar · compila al dejar de escribir';
+        led.className = 'led'; state.textContent = T('Sin guardar · compila al dejar de escribir', 'Unsaved · compiles when you stop typing');
         idleTimer = setTimeout(compile, 900);
       });
       el.addEventListener('keydown', (e) => {
@@ -425,14 +428,14 @@
   (function dag() {
     const root = $('[data-dag]');
     if (!root) return;
-    const T = { datos: 0.002, excel: 1.8, sim: 30, graf: 0.4, tabla: 0.05 };
-    const TOTAL = Object.values(T).reduce((a, b) => a + b, 0);
+    const TIMES = { datos: 0.002, excel: 1.8, sim: 30, graf: 0.4, tabla: 0.05 };
+    const TOTAL = Object.values(TIMES).reduce((a, b) => a + b, 0);
     const S = {
-      texto: { run: [], edges: [], line: 'Cambias el texto: <b>no se ejecuta ninguna celda</b>. Solo se compone el PDF.' },
-      grafica: { run: ['graf'], edges: [], line: 'Cambias la gráfica: <b>solo se ejecuta la gráfica</b>. La simulación no se repite.' },
-      datos: { run: ['datos', 'sim', 'graf', 'tabla'], edges: ['datos-sim', 'sim-graf', 'sim-tabla', 'datos-tabla'], line: 'Cambias los datos: <b>se ejecuta lo que los usa</b>, directa o indirectamente. La lectura del Excel no.' },
-      excel: { run: ['excel', 'sim', 'graf', 'tabla'], edges: ['excel-sim', 'sim-graf', 'sim-tabla'], line: 'Cambia el archivo que lee una celda: <b>esa celda se repite</b> aunque su código sea el mismo, y con ella todo lo que depende.' },
-      mismo: { run: ['datos'], cut: true, edges: [], line: 'Vuelves a escribir g = 9.81: la celda da <b>el mismo resultado</b> y la cadena se corta ahí.' },
+      texto: { run: [], edges: [], line: T('Cambias el texto: <b>no se ejecuta ninguna celda</b>. Solo se compone el PDF.', 'You change the text: <b>no cell runs</b>. Only the PDF is typeset.') },
+      grafica: { run: ['graf'], edges: [], line: T('Cambias la gráfica: <b>solo se ejecuta la gráfica</b>. La simulación no se repite.', 'You change the plot: <b>only the plot runs</b>. The simulation is not repeated.') },
+      datos: { run: ['datos', 'sim', 'graf', 'tabla'], edges: ['datos-sim', 'sim-graf', 'sim-tabla', 'datos-tabla'], line: T('Cambias los datos: <b>se ejecuta lo que los usa</b>, directa o indirectamente. La lectura del Excel no.', 'You change the data: <b>what uses them runs</b>, directly or indirectly. Reading the Excel file does not.') },
+      excel: { run: ['excel', 'sim', 'graf', 'tabla'], edges: ['excel-sim', 'sim-graf', 'sim-tabla'], line: T('Cambia el archivo que lee una celda: <b>esa celda se repite</b> aunque su código sea el mismo, y con ella todo lo que depende.', 'The file a cell reads changes: <b>that cell runs again</b> even though its code is the same, and everything depending on it.') },
+      mismo: { run: ['datos'], cut: true, edges: [], line: T('Vuelves a escribir g = 9.81: la celda da <b>el mismo resultado</b> y la cadena se corta ahí.', 'You type g = 9.81 again: the cell gives <b>the same result</b> and the chain stops there.') },
     };
     const nodes = Object.fromEntries($$('.dag-node', root).map((n) => [n.dataset.n, n]));
     const edges = $$('.dag-svg .edges path', root);
@@ -460,9 +463,9 @@
           } else { nodes[k].classList.add('done'); nodes[k].dataset.badge = '✓ ejecutada'; }
         }, 120 + i * 520 + 480));
       });
-      const t = sc.run.reduce((a, k) => a + T[k], 0);
+      const t = sc.run.reduce((a, k) => a + TIMES[k], 0);
       const n = sc.run.length;
-      $('[data-dag-line]', root).innerHTML = `${sc.line}<br><span style="color:var(--ink-3)">Celdas Python: ${fmtT(t)} (${n} ${n === 1 ? 'ejecutada' : 'ejecutadas'} de 5)</span>`;
+      $('[data-dag-line]', root).innerHTML = `${sc.line}<br><span style="color:var(--ink-3)">${T(`Celdas Python: ${fmtT(t)} (${n} ${n === 1 ? 'ejecutada' : 'ejecutadas'} de 5)`, `Python cells: ${fmtT(t)} (${n} run of 5)`)}</span>`;
       $('[data-dag-pyx]', root).style.setProperty('--w', `${(t / TOTAL) * 100}%`);
       $('[data-dag-pyxt]', root).textContent = fmtT(t);
     };
@@ -501,10 +504,10 @@
     if (!root) return;
     const card = $('.nb-card', root);
     const MODES = [
-      ['live', 'El cuaderno está abierto en VS Code y ya lo has ejecutado.', '· abierto en VS Code', 'Pyx copia Hs del kernel de Jupyter. En el cuaderno no se ejecuta nada.'],
-      ['saved', 'Has cerrado Jupyter y el cuaderno no ha cambiado.', '· cerrado', 'Pyx usa los valores que tomó la última vez. Nada que ejecutar.'],
-      ['diff', 'Jupyter está cerrado y has editado la celda [2].', '· cerrado, celda [2] editada', 'Pyx recupera lo que dejó la última ejecución y repite solo la celda [2].'],
-      ['once', 'Es la primera vez que lo vinculas y Jupyter está cerrado.', '· cerrado, nunca ejecutado', 'Pyx lo ejecuta una vez, desde su carpeta, y guarda sus valores.'],
+      ['live', T('El cuaderno está abierto en VS Code y ya lo has ejecutado.', 'The notebook is open in VS Code and you have already run it.'), T('· abierto en VS Code', '· open in VS Code'), T('Pyx copia Hs del kernel de Jupyter. En el cuaderno no se ejecuta nada.', 'Pyx copies Hs from the Jupyter kernel. Nothing runs in the notebook.')],
+      ['saved', T('Has cerrado Jupyter y el cuaderno no ha cambiado.', 'You closed Jupyter and the notebook has not changed.'), T('· cerrado', '· closed'), T('Pyx usa los valores que tomó la última vez. Nada que ejecutar.', 'Pyx uses the values it took last time. Nothing to run.')],
+      ['diff', T('Jupyter está cerrado y has editado la celda [2].', 'Jupyter is closed and you edited cell [2].'), T('· cerrado, celda [2] editada', '· closed, cell [2] edited'), T('Pyx recupera lo que dejó la última ejecución y repite solo la celda [2].', 'Pyx recovers what the last run left and repeats only cell [2].')],
+      ['once', T('Es la primera vez que lo vinculas y Jupyter está cerrado.', 'It is the first time you link it and Jupyter is closed.'), T('· cerrado, nunca ejecutado', '· closed, never run'), T('Pyx lo ejecuta una vez, desde su carpeta, y guarda sus valores.', 'Pyx runs it once, from its folder, and saves its values.')],
     ];
     const situation = $('[data-nb-situation]', root);
     const paint = (i) => {
@@ -533,7 +536,15 @@
     const root = $('[data-spell]');
     if (!root) return;
     const paper = $('[data-spell-text]', root);
-    const DOC = [
+    const DOC = EN ? [
+      'The ', { t: 'beam beam', fix: 'beam', c: 'green', why: 'Repeated word.' },
+      ' is designed to the code', { t: ' ,with', fix: ', with', c: 'blue', why: 'There is a space before the comma and none after it.' },
+      ' a load of ', { t: '25kN', fix: '25 kN', c: 'blue', why: 'A space goes between a number and its unit.' },
+      '. The ', { t: 'stresess', fix: 'stresses', c: 'red', why: 'Not in the dictionary.' },
+      ' that were not considered', { t: '  ', fix: ' ', c: 'blue', why: 'Two spaces in a row.' },
+      'in the ', { t: 'calculaton', fix: 'calculation', c: 'red', why: 'Not in the dictionary.' },
+      ' are now included.',
+    ] : [
       'La ', { t: 'viga viga', fix: 'viga', c: 'green', why: 'Palabra repetida.' },
       ' se dimensiona ', { t: 'en base a', fix: 'según', c: 'green', why: 'Expresión que conviene evitar.' },
       ' la norma', { t: ' ,con', fix: ', con', c: 'blue', why: 'Sobra el espacio antes de la coma y falta uno después.' },
@@ -545,16 +556,16 @@
       'en el ', { t: 'calculo', fix: 'cálculo', c: 'red', why: 'Como sustantivo lleva tilde: «cálculo».' },
       '.',
     ];
-    const NAMES = { red: 'Ortografía', blue: 'Puntuación y espacios', green: 'Redacción' };
+    const NAMES = EN ? { red: 'Spelling', blue: 'Punctuation and spacing', green: 'Style' } : { red: 'Ortografía', blue: 'Puntuación y espacios', green: 'Redacción' };
     paper.innerHTML = DOC.map((d, i) => typeof d === 'string' ? esc(d)
-      : `<span class="err ${d.c}" tabindex="0" role="button" data-i="${i}" aria-label="${esc(NAMES[d.c])}: ${esc(d.why)} Sugerencia: ${esc(d.fix.trim() || 'un espacio')}">${esc(d.t)}</span>`).join('');
+      : `<span class="err ${d.c}" tabindex="0" role="button" data-i="${i}" aria-label="${esc(NAMES[d.c])}: ${esc(d.why)} ${T('Sugerencia', 'Suggestion')}: ${esc(d.fix.trim() || T('un espacio', 'a space'))}">${esc(d.t)}</span>`).join('');
     const tip = document.createElement('div');
     tip.className = 'spell-tip'; tip.setAttribute('aria-hidden', 'true');
     paper.appendChild(tip);
     const left = $('[data-spell-left]', root);
     const count = () => {
       const n = $$('.err:not(.fixed)', paper).length;
-      left.textContent = n ? `${n} ${n === 1 ? 'aviso' : 'avisos'}` : 'Sin avisos ✓';
+      left.textContent = n ? `${n} ${n === 1 ? T('aviso', 'warning') : T('avisos', 'warnings')}` : T('Sin avisos ✓', 'No warnings ✓');
     };
     const show = (el) => {
       const d = DOC[el.dataset.i];
@@ -573,9 +584,9 @@
     const openMenu = (el) => {
       const d = DOC[el.dataset.i];
       menuFor = el; hide();
-      menu.innerHTML = `<button type="button" role="menuitem" data-act="fix">${esc(d.fix.trim() ? d.fix : 'un solo espacio')}</button>`
-        + (d.c === 'red' ? '<button type="button" role="menuitem" data-act="dict">Añadir al diccionario</button>' : '')
-        + '<button type="button" role="menuitem" data-act="ignore">Ignorar</button>';
+      menu.innerHTML = `<button type="button" role="menuitem" data-act="fix">${esc(d.fix.trim() ? d.fix : T('un solo espacio', 'a single space'))}</button>`
+        + (d.c === 'red' ? '<button type="button" role="menuitem" data-act="dict">' + T('Añadir al diccionario', 'Add to dictionary') + '</button>' : '')
+        + '<button type="button" role="menuitem" data-act="ignore">' + T('Ignorar', 'Ignore') + '</button>';
       const r = el.getBoundingClientRect(), pr = paper.getBoundingClientRect();
       menu.style.left = `${clamp(r.left - pr.left, 8, pr.width - 220)}px`;
       menu.style.top = `${r.bottom - pr.top + 6}px`;
@@ -653,6 +664,8 @@
       ['\\cite{clave}', 'Cita de la bibliografía', ''],
       ['\\gls{entrada}', 'Entrada del glosario', 'glossaries', true],
     ];
+    // English page: the same commands, described in English.
+    if (EN) [['\\py{expression}', 'Python value in the PDF'], ['\\pyif{condition}{yes}{no}', 'One text or another depending on Python'], ['\\pyfile{data.py}', 'Links a .py file'], ['\\pynotebook{notebook.ipynb}', 'Links a Jupyter notebook'], ['\\qty{value}{unit}', 'Quantity with units'], ['\\num{number}', 'Formatted number'], ['\\frac{num}{den}', 'Fraction'], ['\\sqrt{x}', 'Square root'], ['\\section{title}', 'Section'], ['\\subsection{title}', 'Subsection'], ['\\textbf{text}', 'Bold'], ['\\textit{text}', 'Italic'], ['\\includegraphics{file}', 'Image'], ['\\begin{equation}', 'Numbered equation'], ['\\begin{figure}', 'Figure with its \\caption and \\label'], ['\\begin{table}', 'Table with its tabular'], ['\\begin{align}', 'Aligned equations'], ['\\ref{label}', 'Reference to a label'], ['\\cref{label}', 'Reference with its name'], ['\\cite{key}', 'Bibliography citation'], ['\\gls{entry}', 'Glossary entry']].forEach(([c, d], k) => { if (CMDS[k]) { CMDS[k][0] = c; CMDS[k][1] = d; if (CMDS[k][2] === 'entorno') CMDS[k][2] = 'environment'; } });
     let items = [], sel = 0, ctx = null;
     const vars = () => {
       const r = labResult();
@@ -680,7 +693,7 @@
       if (ctx.kind === 'var') {
         items = vars().filter(([n]) => n.toLowerCase().startsWith(w)).map(([n, v, t]) => ({ insert: n, label: n, desc: `${v}`, tag: t }));
       } else {
-        items = CMDS.filter(([c]) => c.slice(1).toLowerCase().startsWith(w)).map(([c, d, p, add]) => ({ insert: c, label: c.replace(/\{[^}]*\}/g, '{…}'), desc: d, tag: add ? `se añade \\usepackage` : p, add: add ? p : null }));
+        items = CMDS.filter(([c]) => c.slice(1).toLowerCase().startsWith(w)).map(([c, d, p, add]) => ({ insert: c, label: c.replace(/\{[^}]*\}/g, '{…}'), desc: d, tag: add ? T('se añade \\usepackage', 'adds \\usepackage') : p, add: add ? p : null }));
       }
       sel = clamp(sel, 0, Math.max(0, items.length - 1));
       list.innerHTML = items.map((it, i) => `<li role="option" id="ac-${i}" aria-selected="${i === sel}" data-i="${i}"><span>${esc(it.label)}</span><small>${esc(it.desc)}</small>${it.tag ? `<em class="${it.add ? 'add' : ''}">${esc(it.tag)}</em>` : '<span></span>'}</li>`).join('');
@@ -714,7 +727,7 @@
           const end = ctx.start + it.insert.length;
           input.setSelectionRange(end, end);
         }
-        if (it.add) { added.hidden = false; added.innerHTML = `+ <span class="tk-cmd">\\usepackage</span>{${esc(it.add)}} añadido al preámbulo`; }
+        if (it.add) { added.hidden = false; added.innerHTML = `+ <span class="tk-cmd">\\usepackage</span>{${esc(it.add)}} ${T('añadido al preámbulo', 'added to the preamble')}`; }
       }
       input.focus();
       render();
@@ -749,7 +762,7 @@
     const renderEl = $('[data-paste-render]', root);
     const area = $('[data-paste-area]', root);
     const SAMPLE = [
-      ['Perfil', 'I (cm⁴)', 'W (cm³)', 'Peso (kg/m)'],
+      [T('Perfil', 'Section'), 'I (cm⁴)', 'W (cm³)', T('Peso (kg/m)', 'Weight (kg/m)')],
       ['IPE 200', '1943', '194', '22.4'],
       ['IPE 240', '3892', '324', '30.7'],
       ['IPE 300', '8356', '557', '42.2'],
@@ -1027,9 +1040,10 @@
     const box = $('[data-news]');
     const data = window.PYX_NOVEDADES;
     if (!box || !data?.length) return;
-    const v = data[0];
+    const v0 = data[0];
+    const v = EN && v0.en ? { ...v0, ...v0.en } : v0;
     const md = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    const fecha = new Date(`${v.fecha}T12:00:00`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+    const fecha = new Date(`${v.fecha}T12:00:00`).toLocaleDateString(EN ? 'en-GB' : 'es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
     $('[data-news-title]').innerHTML = `Pyx ${esc(v.version)}. <em>${esc(v.titulo.split(':')[0])}.</em>`;
     box.insertAdjacentHTML('beforebegin', `<p class="eyebrow" style="margin:-36px 0 28px"><span>${esc(fecha)}</span><span class="n">${esc(v.titulo.includes(':') ? v.titulo.split(':').slice(1).join(':').trim() : '')}</span></p>`);
     box.innerHTML = v.grupos.map((g) => `<div class="news-group"><h3>${esc(g.nombre)}</h3><ul>${g.cambios.slice(0, 4).map((c) => `<li>${md(c)}</li>`).join('')}</ul></div>`).join('');

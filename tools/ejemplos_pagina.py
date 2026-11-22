@@ -8,6 +8,8 @@ import html
 import json
 import re
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 WEB = Path(__file__).resolve().parent.parent
 SRC = WEB / "ejemplos" / "src"
@@ -104,6 +106,25 @@ EJEMPLOS = [
         "abrir": "estudio.pltx",
         "fragmentos": [("estudio.pltx", [(60, 70)])],
     },
+    {
+        "slug": "05-datos-de-excel",
+        "titulo": "Datos de Excel y CSV",
+        "lema": "Un presupuesto cuyos números viven en Excel, sin una línea de Python.",
+        "etiquetas": ["\\hoja", "\\celda", ".xlsx", ".csv", "sin Python"],
+        "texto": "El documento vincula un libro de Excel con <code>\\hoja[Mediciones]{datos/obra.xlsx}</code> "
+                 "y coloca sus celdas con <code>\\celda{E4}</code> o un rango entero con "
+                 "<code>\\celda{A2:E7}</code>, que sale como el cuerpo de una tabla. Un capítulo lee un "
+                 "CSV con el <code>;</code> y la coma decimal del Excel en español. Cambia un número en Excel, "
+                 "guarda y compila: el documento cambia solo.",
+        "muestra": [
+            "Una celda suelta en una frase: <code>\\celda{B3}</code>; otra hoja: <code>\\celda{Resumen!B5}</code>.",
+            "Una tabla entera desde Excel: cabecera <code>\\celda{A1:E1}</code> y cuerpo <code>\\celda{A2:E7}</code>.",
+            "<code>\\celda[T]{B2:B6}</code> pone una columna como fila (y al revés).",
+            "Lee lo que Excel guardó, también los resultados de las fórmulas.",
+        ],
+        "abrir": "informe.pltx",
+        "fragmentos": [("informe.pltx", [(18, 18), (34, 50)])],
+    },
 ]
 
 # --------------------------------------------------------------- resaltado
@@ -136,7 +157,7 @@ def _tex(line: str) -> str:
             break
     body, com = (line, "") if cut is None else (line[:cut], line[cut:])
     out, i = [], 0
-    for m in re.finditer(r"\\(py(?:if|file|notebook)?)\b|\\[A-Za-z@]+|\\.", body):
+    for m in re.finditer(r"\\(py(?:if|file|notebook)?|hoja|celda)\b|\\[A-Za-z@]+|\\.", body):
         out.append(html.escape(body[i:m.start()]))
         cls = "tk-py" if m.group(1) else "tk-cmd"
         out.append(f'<span class="{cls}">{html.escape(m.group(0))}</span>')
@@ -307,8 +328,12 @@ def escribir() -> None:
 </body>
 </html>
 '''
+    from en_chrome import spanish_switch
+    pagina = spanish_switch(pagina, "ejemplos")
     (WEB / "ejemplos" / "index.html").write_text(pagina, encoding="utf-8")
     print("ejemplos/index.html escrita")
+    import ejemplos_en
+    ejemplos_en.write()
 
 
 if __name__ == "__main__":

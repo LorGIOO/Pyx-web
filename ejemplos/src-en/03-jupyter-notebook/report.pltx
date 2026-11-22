@@ -1,0 +1,73 @@
+% !TeX program = xelatex
+% =====================================================================
+%  A REPORT WITHOUT CELLS (Pyx example)
+%  This document has not a single Python cell. All the calculation is in:
+%    calcs/rainfall.ipynb      a Jupyter notebook
+%    calcs/station_data.py     a .py file with # %% blocks
+%  \pyfile and \pynotebook link them; from that point on, the values and
+%  functions they define are used and CALLED as if they were the document's.
+%  If the notebook is open and run in Jupyter or VS Code, Pyx takes the
+%  values from there without running anything. Every datum is fictitious.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath,booktabs,graphicx,float}
+\usepackage[hidelinks]{hyperref}
+
+\title{Maximum rainfall in the Lorem Valley catchment\\\large A report that only calls a Jupyter notebook}
+\author{Pyx example}
+\date{}
+
+\begin{document}
+\maketitle
+
+\pyfile{calcs/station_data.py}
+\pynotebook{calcs/rainfall.ipynb}
+
+\section{Data}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. The series of maximum
+daily rainfall of the \py{station["name"]} is analysed
+(code \py{station["code"]}, at \py{station["altitude"]}~m above sea level), which
+covers \py{n_years}~years, from \py{series["year"].min()} to \py{series["year"].max()}.
+
+The mean of the series is \py{f"{mean:.1f}"}~mm and its standard deviation
+\py{f"{std:.1f}"}~mm. The series \pyif{trend > 0.2}{shows a rising trend
+of \py{f"{trend:.2f}"}~mm a year}{shows no noticeable trend} over the period.
+
+\section{Gumbel fit}
+The method of moments gives a scale $\alpha =
+\py{f"{alpha:.2f}"}$~mm and a location $u = \py{f"{u:.2f}"}$~mm. Table~\ref{tab:periods}
+is written by the notebook's function \texttt{period\_rows}, called from here with the
+periods of interest.
+
+\begin{table}[H]
+  \centering
+  \caption{Maximum daily rainfall by return period.}
+  \label{tab:periods}
+  \begin{tabular}{rrr}
+    \toprule
+    $T$ (years) & Annual probability (\%) & $P_d$ (mm) \\
+    \midrule
+    \py{period_rows([2, 5, 10, 25, 50, 100, 500])}
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\linewidth]{calcs/figures/gumbel.png}
+  \caption{Annual series and Gumbel fit (plot saved by the notebook).}
+\end{figure}
+
+\section{Design flow}
+A pandas table is also queried cell by cell: for $T = 100$ years, the
+rainfall is \py{f"{quantiles.loc[100, 'P']:.1f}"}~mm. With a time of
+concentration of \py{f"{t_c:.2f}"}~h (from the file \texttt{station\_data.py}), the
+design intensity for $T = 100$ years is \py{f"{intensity(100, t_c * 60):.1f}"}~mm/h,
+and for $T = 500$ years, \py{f"{intensity(500, t_c * 60):.1f}"}~mm/h.
+
+\pyif{station["catchment"] > 15}{The catchment, of \py{station["catchment"]}~km$^2$, is medium-sized: the result should be checked against a hydrological model.}{The catchment is small: the rational method is enough.}
+Nulla vitae elit libero, a pharetra augue.
+\end{document}

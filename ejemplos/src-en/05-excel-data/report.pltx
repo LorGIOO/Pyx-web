@@ -1,0 +1,57 @@
+% !TeX program = xelatex
+% =====================================================================
+%  EXCEL AND CSV DATA, WITHOUT PYTHON (Pyx example)
+%  · \hoja[Sheet]{workbook.xlsx} links a workbook and its sheet, from that
+%    point on (hoja is Spanish for sheet).
+%  · \celda{E4} places one cell (celda: cell); \celda{A2:E7} a range (row,
+%    column or table, ready for a tabular); \celda[T]{…} transposes it.
+%  · Pyx reads the file when compiling: change a number in Excel, save
+%    (Ctrl+S) and compile. No Python cell is needed.
+%  Every datum is fictitious.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{booktabs,array,float}
+\usepackage[hidelinks]{hyperref}
+
+\hoja[Summary]{data/works.xlsx}
+
+\title{Construction budget\\\large Data read from an Excel workbook and a CSV}
+\author{Pyx example}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{General data}
+Works: \celda{B1}; client: \celda{B2}; built floor area of
+\celda{B3}~m$^2$, a duration of \celda{B4}~months and a construction budget
+of \celda{B5}~€. Lorem ipsum dolor sit amet, consectetur
+adipiscing elit.
+
+\section{Quantities and budget}
+\hoja[Quantities]{data/works.xlsx}
+Table~\ref{tab:budget} is the workbook's «Quantities» sheet: the header is
+row 1 and the body, range A2:E7. Every number comes from Excel.
+
+\begin{table}[H]
+  \centering
+  \caption{Budget by chapter.}
+  \label{tab:budget}
+  \begin{tabular}{llrrr}
+    \toprule
+    \celda{A1:E1} \\
+    \midrule
+    \celda{A2:E7}
+    \midrule
+    \multicolumn{4}{l}{\textbf{\celda{A8}}} & \textbf{\celda{E8}} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The \celda{A4} chapter costs \celda{E4}~€: \celda{C4}~\celda{B4} at \celda{D4}~€ each.
+
+\input{chapters/tests}
+\end{document}
