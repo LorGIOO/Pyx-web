@@ -13,8 +13,8 @@
   <link rel="icon" href="../assets/img/logo.svg" type="image/svg+xml">
   <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
   <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-  <link rel="stylesheet" href="../assets/css/base.css?v=20261122c">
-  <link rel="stylesheet" href="../assets/css/doc.css?v=20261122c">
+  <link rel="stylesheet" href="../assets/css/base.css?v=20261123a">
+  <link rel="stylesheet" href="../assets/css/doc.css?v=20261123a">
   <link rel="alternate" hreflang="es" href="https://lorgioo.github.io/Pyx-web/manual/">
   <link rel="alternate" hreflang="en" href="https://lorgioo.github.io/Pyx-web/en/manual/">
 </head>
@@ -46,7 +46,7 @@
 </header>
 
 <header class="page-head">
-  <p class="eyebrow"><span>Versión 2.2.0</span><span class="n">Escrito y compilado con Pyx</span></p>
+  <p class="eyebrow"><span>Versión 2.2.1</span><span class="n">Escrito y compilado con Pyx</span></p>
   <h1>Manual de <em>usuario</em></h1>
   <p class="lede">Todo Pyx, capítulo a capítulo: desde instalarlo hasta el último atajo de teclado. Es el mismo texto que el PDF, que se escribió en Pyx con celdas de Python que se ejecutaron al compilarlo.</p>
   <div class="doc-meta">
@@ -100,7 +100,7 @@
 <p>No necesitas instalar nada más. Si ya tienes Python (Anaconda, python.org, Microsoft Store…) o una distribución de <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> (MiKTeX, TeX Live, MacTeX), Pyx los encuentra y los usa. Si no, te ofrece prepararlos.</p>
 <h3 id="instalar-pyx"><span class="sec-num">2.2</span> Instalar Pyx<a class="anchor" href="#instalar-pyx" aria-label="Enlace a esta sección">#</a></h3>
 <p>Descarga el instalador de tu sistema desde la página de versiones (<a href="https://github.com/LorGIOO/Pyx/releases">github.com/LorGIOO/Pyx/releases</a>). Junto a los instaladores de cada versión está también este manual, en PDF, de esa misma versión.</p>
-<dl class="desc"><dt>Windows:</dt><dd><code>Pyx_2.2.0_x64-setup.exe</code>. Ábrelo y sigue el asistente; no pide permisos de administrador. Al terminar, los archivos <code>.pltx</code> (y, si quieres, los <code>.tex</code>) se abren con Pyx al hacer doble clic.</dd><dt>macOS:</dt><dd><code>Pyx_2.2.0_universal.dmg</code>, válido para Mac con Intel y con Apple Silicon. Arrastra Pyx a Aplicaciones. La primera vez, abre la aplicación con clic derecho → <span class="menu">Abrir</span>.</dd><dt>Linux:</dt><dd><code>.deb</code> (Ubuntu, Debian), <code>.rpm</code> (Fedora) o <code>.AppImage</code> (cualquier distribución: dale permiso de ejecución y ábrelo).</dd></dl>
+<dl class="desc"><dt>Windows:</dt><dd><code>Pyx_2.2.1_x64-setup.exe</code>. Ábrelo y sigue el asistente; no pide permisos de administrador. Al terminar, los archivos <code>.pltx</code> (y, si quieres, los <code>.tex</code>) se abren con Pyx al hacer doble clic.</dd><dt>macOS:</dt><dd><code>Pyx_2.2.1_universal.dmg</code>, válido para Mac con Intel y con Apple Silicon. Arrastra Pyx a Aplicaciones. La primera vez, abre la aplicación con clic derecho → <span class="menu">Abrir</span>.</dd><dt>Linux:</dt><dd><code>.deb</code> (Ubuntu, Debian), <code>.rpm</code> (Fedora) o <code>.AppImage</code> (cualquier distribución: dale permiso de ejecución y ábrelo).</dd></dl>
 <h3 id="actualizar-pyx"><span class="sec-num">2.3</span> Actualizar Pyx<a class="anchor" href="#actualizar-pyx" aria-label="Enlace a esta sección">#</a></h3>
 <p>Pyx se actualiza solo, como VS Code. En <span class="menu">Configuración → General → Actualizaciones</span> está la versión instalada y el botón <span class="ui-btn">Buscar actualizaciones</span>. Al pulsarlo, si hay una versión nueva, Pyx la descarga, comprueba que es idéntica a la publicada (su huella SHA-256), la instala y se vuelve a abrir. Solo te pregunta si hay documentos sin guardar, porque la instalación cierra la aplicación un momento. Además, unos segundos después de arrancar Pyx lo comprueba por su cuenta y, si hay novedades, la barra de estado ofrece <span class="ui-btn">Actualizar a…</span>.</p>
 <p>La versión que tienes se ve siempre en la barra de título y en el nombre de la ventana (en la barra de tareas y en <kbd>Alt</kbd>+<kbd>Tab</kbd>). En macOS y Linux el botón abre la página de la versión para descargarla.</p>
@@ -394,6 +394,8 @@ El presupuesto total es de <span class="tk-cmd">\celda</span>{E8} euros.</code><
 <div class="code"><span class="code-lang">Pyx · LaTeX</span><button class="code-copy" type="button" aria-label="Copiar el código">Copiar</button><pre><code><span class="tk-cmd">\textbf</span>{<span class="tk-cmd">\celda</span>{E4}}   $<span class="tk-cmd">\celda</span>[.2f]{E4}$   <span class="tk-cmd">\textcolor</span>{red}{<span class="tk-cmd">\celda</span>{E4}}</code></pre></div>
 <p>Alrededor de un <strong>rango</strong>, cuyas celdas van separadas por <code>&amp;</code>, Pyx aplica ese <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> a cada celda: <code>\textbf{\celda{E27:K27}}</code> pone en negrita toda la fila sin romper la tabla.</p>
 <h3 id="siempre-al-dia"><span class="sec-num">9.4</span> Siempre al día<a class="anchor" href="#siempre-al-dia" aria-label="Enlace a esta sección">#</a></h3>
+<p>Mientras escribes, el valor de cada <code>\celda</code> aparece en gris junto al comando, leído del libro sin compilar; si no se puede leer (una celda vacía, una hoja que no existe…), en su lugar sale el motivo. <kbd>Ctrl</kbd>+clic sobre <code>\celda{D18}</code> abre el libro en Excel en esa hoja y celda; si ya lo tienes abierto, Excel salta a la celda.</p>
+<p>Una celda combinada se lee en cualquiera de sus celdas, y una fórmula que llegó sin su resultado guardado (un libro escrito por otro programa) la calcula Pyx si es de las habituales: operaciones, <code>SUM</code>, <code>AVERAGE</code>, <code>ROUND</code>, <code>IF</code>…</p>
 <p>Pyx lee el archivo en cada compilación si ha cambiado. Puedes tener el libro abierto en Excel: cambia un número, guarda (<kbd>Ctrl</kbd>+<kbd>S</kbd>) y compila. Lo que se lee es lo que Excel guardó, también el resultado de cada fórmula; los cambios aún sin guardar no se ven.</p>
 <p>En un <code>.csv</code>, la fila 1 es la primera línea, como lo muestra Excel. Se entiende el formato del Excel en español: el punto y coma entre campos y la coma decimal.</p>
 <aside class="box box-nota"><p class="box-title">Nota</p>
@@ -531,7 +533,7 @@ resultado = <span class="tk-str">r"\qty{"</span> + valor + <span class="tk-str">
   <div class="endmark"><span>© <span data-year>2026</span> Pyx · Software libre</span><span>∎</span></div>
 </footer>
 
-<script src="../assets/js/common.js?v=20261122c"></script>
-<script src="../assets/js/manual.js?v=20261122c"></script>
+<script src="../assets/js/common.js?v=20261123a"></script>
+<script src="../assets/js/manual.js?v=20261123a"></script>
 </body>
 </html>

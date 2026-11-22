@@ -663,7 +663,7 @@ PLANTILLA_EN = [
     ('href="manual-pyx.pdf"', 'href="pyx-user-manual.pdf"'),
     (">Manual en PDF <span", ">Manual as PDF <span"),
     ('href="#cap-atajos-de-teclado">', 'href="#cap-keyboard-shortcuts">'),
-    ("<span>Versión 2.2.0</span>", "<span>Version 2.2.0</span>"),
+    ("<span>Versión 2.2.1</span>", "<span>Version 2.2.1</span>"),
     (">1,8 MB</span>", ">1.8 MB</span>"),
     ("<p class=\"lede\">Todo Pyx, capítulo a capítulo: desde instalarlo hasta el último atajo de teclado. Es el mismo texto que el PDF, que se escribió en Pyx con celdas de Python que se ejecutaron al compilarlo.</p>",
      "<p class=\"lede\">All of Pyx, chapter by chapter: from installing it to the last keyboard shortcut. It is the same text as the PDF, which was written in Pyx with Python cells that ran when it was compiled.</p>"),

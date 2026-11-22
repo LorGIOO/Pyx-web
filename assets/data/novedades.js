@@ -13,6 +13,50 @@
    ========================================================================== */
 window.PYX_NOVEDADES = [
   {
+    version: "2.2.1",
+    fecha: "2026-11-23",
+    titulo: "El valor de cada celda de Excel, a la vista en el editor",
+    grupos: [
+      {
+        nombre: "Excel",
+        cambios: [
+          "El valor de cada `\\celda{…}` aparece en gris junto al comando mientras escribes, leído del libro sin compilar; si no se puede leer, dice por qué.",
+          "**Ctrl+clic** en `\\celda{D18}` abre el libro en Excel en esa hoja y celda (si ya está abierto, salta a ella).",
+          "Se leen bien las celdas combinadas y las fórmulas que llegan sin resultado guardado; una celda vacía avisa en Problemas.",
+        ],
+      },
+      {
+        nombre: "Y además",
+        cambios: [
+          "Modo noche del PDF sin el halo violeta alrededor de las letras: el texto negro sale blanco y limpio.",
+          "Diálogos con el estilo de Pyx (nombre de un entorno, avisos y preguntas) y autocompletado completamente en inglés cuando se elige inglés.",
+          "El acceso directo del escritorio se llama «Pyx 2.2.1».",
+        ],
+      },
+    ],
+    en: {
+      titulo: "The value of every Excel cell, in sight in the editor",
+      grupos: [
+        {
+          nombre: "Excel",
+          cambios: [
+            "The value of each `\\celda{…}` shows in grey next to the command as you type, read from the workbook without compiling; if it cannot be read, it says why.",
+            "**Ctrl+click** on `\\celda{D18}` opens the workbook in Excel on that sheet and cell (if it is already open, it jumps there).",
+            "Merged cells and formulas that arrive without a saved result are read properly; an empty cell warns in Problems.",
+          ],
+        },
+        {
+          nombre: "And also",
+          cambios: [
+            "PDF night mode without the violet halo around the letters: black text comes out white and clean.",
+            "Dialogs in Pyx's style (environment name, messages and questions) and completion fully in English when English is chosen.",
+            "The desktop shortcut is called “Pyx 2.2.1”.",
+          ],
+        },
+      ],
+    },
+  },
+  {
     version: "2.2.0",
     fecha: "2026-11-22",
     titulo: "Excel en el documento, abrir carpeta y un modo noche que respeta los colores",

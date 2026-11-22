@@ -13,8 +13,8 @@
   <link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
   <link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
   <script>try{var t=localStorage.getItem('pyx-tema');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
-  <link rel="stylesheet" href="../../assets/css/base.css?v=20261122c">
-  <link rel="stylesheet" href="../../assets/css/doc.css?v=20261122c">
+  <link rel="stylesheet" href="../../assets/css/base.css?v=20261123a">
+  <link rel="stylesheet" href="../../assets/css/doc.css?v=20261123a">
   <link rel="alternate" hreflang="es" href="https://lorgioo.github.io/Pyx-web/manual/">
   <link rel="alternate" hreflang="en" href="https://lorgioo.github.io/Pyx-web/en/manual/">
 </head>
@@ -46,7 +46,7 @@
 </header>
 
 <header class="page-head">
-  <p class="eyebrow"><span>Version 2.2.0</span><span class="n">Written and compiled with Pyx</span></p>
+  <p class="eyebrow"><span>Version 2.2.1</span><span class="n">Written and compiled with Pyx</span></p>
   <h1>User <em>manual</em></h1>
   <p class="lede">All of Pyx, chapter by chapter: from installing it to the last keyboard shortcut. It is the same text as the PDF, which was written in Pyx with Python cells that ran when it was compiled.</p>
   <div class="doc-meta">
@@ -100,7 +100,7 @@
 <p>You do not need to install anything else. If you already have Python (Anaconda, python.org, Microsoft Store…) or a <span class="latex">L<sup>a</sup>T<sub>e</sub>X</span> distribution (MiKTeX, TeX Live, MacTeX), Pyx finds them and uses them. If not, it offers to set them up.</p>
 <h3 id="installing-pyx"><span class="sec-num">2.2</span> Installing Pyx<a class="anchor" href="#installing-pyx" aria-label="Link to this section">#</a></h3>
 <p>Download the installer for your system from the releases page (<a href="https://github.com/LorGIOO/Pyx/releases">github.com/LorGIOO/Pyx/releases</a>). Next to each version's installers there is also this manual, as a PDF, of that same version.</p>
-<dl class="desc"><dt>Windows:</dt><dd><code>Pyx_2.2.0_x64-setup.exe</code>. Open it and follow the wizard; it does not ask for administrator rights. When it finishes, <code>.pltx</code> files (and, if you want, <code>.tex</code> files) open with Pyx on a double click.</dd><dt>macOS:</dt><dd><code>Pyx_2.2.0_universal.dmg</code>, for Macs with Intel and with Apple Silicon. Drag Pyx to Applications. The first time, open the application with right click → <span class="menu">Open</span>.</dd><dt>Linux:</dt><dd><code>.deb</code> (Ubuntu, Debian), <code>.rpm</code> (Fedora) or <code>.AppImage</code> (any distribution: make it executable and open it).</dd></dl>
+<dl class="desc"><dt>Windows:</dt><dd><code>Pyx_2.2.1_x64-setup.exe</code>. Open it and follow the wizard; it does not ask for administrator rights. When it finishes, <code>.pltx</code> files (and, if you want, <code>.tex</code> files) open with Pyx on a double click.</dd><dt>macOS:</dt><dd><code>Pyx_2.2.1_universal.dmg</code>, for Macs with Intel and with Apple Silicon. Drag Pyx to Applications. The first time, open the application with right click → <span class="menu">Open</span>.</dd><dt>Linux:</dt><dd><code>.deb</code> (Ubuntu, Debian), <code>.rpm</code> (Fedora) or <code>.AppImage</code> (any distribution: make it executable and open it).</dd></dl>
 <p>The installation folder also holds this manual in PDF (in Spanish and English), the example projects and the licence.</p>
 <h3 id="updating-pyx"><span class="sec-num">2.3</span> Updating Pyx<a class="anchor" href="#updating-pyx" aria-label="Link to this section">#</a></h3>
 <p>Pyx updates itself, like VS Code. <span class="menu">Settings → General → Updates</span> shows the installed version and the <span class="ui-btn">Check for updates</span> button. When you press it and there is a new version, Pyx downloads it, checks that it is identical to the published one (its SHA-256 fingerprint), installs it and opens again. It only asks if there are unsaved documents, because the installation closes the application for a moment. Also, a few seconds after starting, Pyx checks by itself and, if there is something new, the status bar offers <span class="ui-btn">Update to…</span>.</p>
@@ -413,6 +413,8 @@ The total budget is <span class="tk-cmd">\celda</span>{E8} euros.</code></pre></
 <p>Also, if a cell gives exactly the same result again (for instance, you type <code>g = 9.81</code> again), those depending on it do not run: Pyx compares the values and cuts the chain (<em>early cutoff</em>).</p>
 <p>The log of each compile says how many cells ran and how many there were, for instance «Python cells: 220 ms (1 run of 5)».</p>
 <h3 id="out-of-date-cells"><span class="sec-num">10.2</span> Out-of-date cells<a class="anchor" href="#out-of-date-cells" aria-label="Link to this section">#</a></h3>
+<p>While you type, the value of each <code>\celda</code> shows in grey next to the command, read from the workbook without compiling; if it cannot be read (an empty cell, a sheet that does not exist…), the reason shows instead. <kbd>Ctrl</kbd>+click on <code>\celda{D18}</code> opens the workbook in Excel on that sheet and cell; if it is already open, Excel jumps to the cell.</p>
+<p>A merged cell can be read from any of its cells, and a formula that arrived without its saved result (a workbook written by another program) is worked out by Pyx if it is a usual one: arithmetic, <code>SUM</code>, <code>AVERAGE</code>, <code>ROUND</code>, <code>IF</code>…</p>
 <p>When you edit a cell without running it, the cells that depend on it are marked in cascade with «out of date: depends on a modified cell» (figure&nbsp;<a class="ref" href="#fig-desactualizadas">10.1</a>). The edited cell says «result out of date». So you see at a glance which results no longer match the code.</p>
 <figure class="shot" id="fig-desactualizadas"><button class="shot-zoom" type="button" aria-label="Enlarge the image"><img src="../assets/img/desactualizadas.webp" alt="After changing the span in the first cell, the cells that use it are marked out of date." loading="lazy" decoding="async" style="max-width:66%"></button><figcaption><span class="fig-num">Figure 10.1</span> After changing the span in the first cell, the cells that use it are marked out of date.</figcaption></figure>
 <h3 id="shift-enter-reactive"><span class="sec-num">10.3</span> Shift+Enter, reactive<a class="anchor" href="#shift-enter-reactive" aria-label="Link to this section">#</a></h3>
@@ -537,7 +539,7 @@ resultado = <span class="tk-str">r"\qty{"</span> + valor + <span class="tk-str">
   <div class="endmark"><span>© <span data-year>2026</span> Pyx · Free software</span><span>∎</span></div>
 </footer>
 
-<script src="../../assets/js/common.js?v=20261122c"></script>
-<script src="../../assets/js/manual.js?v=20261122c"></script>
+<script src="../../assets/js/common.js?v=20261123a"></script>
+<script src="../../assets/js/manual.js?v=20261123a"></script>
 </body>
 </html>
