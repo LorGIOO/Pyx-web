@@ -13,6 +13,48 @@
    ========================================================================== */
 window.PYX_NOVEDADES = [
   {
+    version: "2.2.2",
+    fecha: "2026-11-24",
+    titulo: "Cualquier documento LaTeX, con el motor que necesite",
+    grupos: [
+      {
+        nombre: "Motor LaTeX",
+        cambios: [
+          "Pyx elige solo el motor que pide el documento: órdenes de pdfTeX (`\\pdfgentounicode`, `\\input glyphtounicode`…) → pdfLaTeX; `fontspec` o `unicode-math` → XeLaTeX; `\\directlua` → LuaLaTeX. Una plantilla descargada compila sin tocar nada.",
+          "Las órdenes de pdfTeX ya no detienen XeLaTeX, LuaLaTeX ni Tectonic, y un motor que no está instalado se sustituye por otro.",
+          "La barra de estado muestra el motor con el que compila el documento y cambia al cambiar el motor por defecto.",
+        ],
+      },
+      {
+        nombre: "Errores claros",
+        cambios: [
+          "Los errores fatales del motor (una fuente que falta, por ejemplo) aparecen en Problemas y como motivo de «No hay PDF nuevo».",
+          "Con MiKTeX, los paquetes que faltan se instalan solos al compilar y, si falta una fuente instalada, Pyx actualiza sus mapas de fuentes.",
+        ],
+      },
+    ],
+    en: {
+      titulo: "Any LaTeX document, with the engine it needs",
+      grupos: [
+        {
+          nombre: "LaTeX engine",
+          cambios: [
+            "Pyx picks the engine the document asks for: pdfTeX commands (`\\pdfgentounicode`, `\\input glyphtounicode`…) → pdfLaTeX; `fontspec` or `unicode-math` → XeLaTeX; `\\directlua` → LuaLaTeX. A downloaded template compiles untouched.",
+            "pdfTeX commands no longer stop XeLaTeX, LuaLaTeX or Tectonic, and an engine that is not installed is replaced by another.",
+            "The status bar shows the engine the document compiles with and changes when the default engine changes.",
+          ],
+        },
+        {
+          nombre: "Clear errors",
+          cambios: [
+            "The engine's fatal errors (a missing font, for instance) show in Problems and as the reason for “No new PDF”.",
+            "With MiKTeX, missing packages install by themselves when compiling and, if an installed font is missing, Pyx refreshes its font maps.",
+          ],
+        },
+      ],
+    },
+  },
+  {
     version: "2.2.1",
     fecha: "2026-11-23",
     titulo: "El valor de cada celda de Excel, a la vista en el editor",
