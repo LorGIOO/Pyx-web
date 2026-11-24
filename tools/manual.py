@@ -70,6 +70,7 @@ def limpiar(t: str) -> str:
     # página de créditos (hasta el primer \clearpage) e índice
     t = re.sub(r"\\thispagestyle\{empty\}\s*\\vspace\*\{\\fill\}.*?\\clearpage", "", t, count=1, flags=re.S)
     t = t.replace("\\tableofcontents", "").replace("\\clearpage", "")
+    t = t.replace("$\\to$", "→")  # an arrow in the text
     return t
 
 
@@ -582,7 +583,7 @@ class Conversor:
                 mm = re.match(r"([\d.]+)\\linewidth", ancho)
                 if mm:
                     estilo = f' style="max-width:{float(mm.group(1)) * 100:.0f}%"'
-            src = "../assets/img/" + archivo.replace(".png", ".webp")
+            src = ("../../assets/img/" if EN else "../assets/img/") + archivo.replace(".png", ".webp")
             imgs.append(f'<img src="{src}" alt="{html.escape(plano(pie))}" loading="lazy" decoding="async"{estilo}>')
         return (f'{BLOQUE}<figure class="shot" id="{ident}"><button class="shot-zoom" type="button" aria-label="{L('Ampliar la imagen', 'Enlarge the image')}">'
                 f'{"".join(imgs)}</button><figcaption><span class="fig-num">{L("Figura", "Figure")} {num}</span> {pie}</figcaption></figure>{BLOQUE}')

@@ -13,42 +13,58 @@
    ========================================================================== */
 window.PYX_NOVEDADES = [
   {
-    version: "2.2.2",
+    version: "2.3.0",
     fecha: "2026-11-24",
-    titulo: "Cualquier documento LaTeX, con el motor que necesite",
+    titulo: "Comparar versiones, notas al margen enteras y cualquier motor",
     grupos: [
       {
-        nombre: "Motor LaTeX",
+        nombre: "Comparar versiones",
         cambios: [
-          "Pyx elige solo el motor que pide el documento: órdenes de pdfTeX (`\\pdfgentounicode`, `\\input glyphtounicode`…) → pdfLaTeX; `fontspec` o `unicode-math` → XeLaTeX; `\\directlua` → LuaLaTeX. Una plantilla descargada compila sin tocar nada.",
-          "Las órdenes de pdfTeX ya no detienen XeLaTeX, LuaLaTeX ni Tectonic, y un motor que no está instalado se sustituye por otro.",
-          "La barra de estado muestra el motor con el que compila el documento y cambia al cambiar el motor por defecto.",
+          "**Archivo → Revisar → Comparar versiones**, como latexdiff y sin instalar nada: un documento con lo añadido y lo borrado marcados, que Pyx abre y compila.",
+          "La versión anterior puede ser otro archivo (`.tex` o `.pltx`) o lo último guardado en el disco. Estilos **UNDERLINE**, **CFONT**, **CCHANGEBAR** y **BOLD**.",
+          "Proyectos de varios archivos (`\\input`, `\\include`, `\\subfile`, como `--flatten`), cambios dentro de títulos y pies de figura, y la lista de cambios en las celdas de Python al final.",
         ],
       },
       {
-        nombre: "Errores claros",
+        nombre: "Notas \\todo",
         cambios: [
-          "Los errores fatales del motor (una fuente que falta, por ejemplo) aparecen en Problemas y como motivo de «No hay PDF nuevo».",
-          "Con MiKTeX, los paquetes que faltan se instalan solos al compilar y, si falta una fuente instalada, Pyx actualiza sus mapas de fuentes.",
+          "Con `todonotes`, la página se ensancha para que las notas quepan enteras, con una línea punteada donde acaba la hoja; también a doble cara.",
+          "Un botón del visor las oculta y la página vuelve a su tamaño. Se imprimen tal como se ven.",
+        ],
+      },
+      {
+        nombre: "Motor LaTeX",
+        cambios: [
+          "Pyx elige solo el motor que pide el documento: órdenes de pdfTeX → pdfLaTeX; `fontspec` o `unicode-math` → XeLaTeX; `\\directlua` → LuaLaTeX. La barra de estado muestra el que se usa.",
+          "Los errores fatales del motor aparecen en Problemas, y con MiKTeX los paquetes que faltan se instalan solos.",
+          "Hacer zoom con la rueda mientras se arrastra con el botón derecho ya no salta a las primeras páginas.",
         ],
       },
     ],
     en: {
-      titulo: "Any LaTeX document, with the engine it needs",
+      titulo: "Compare versions, whole margin notes and any engine",
       grupos: [
         {
-          nombre: "LaTeX engine",
+          nombre: "Compare versions",
           cambios: [
-            "Pyx picks the engine the document asks for: pdfTeX commands (`\\pdfgentounicode`, `\\input glyphtounicode`…) → pdfLaTeX; `fontspec` or `unicode-math` → XeLaTeX; `\\directlua` → LuaLaTeX. A downloaded template compiles untouched.",
-            "pdfTeX commands no longer stop XeLaTeX, LuaLaTeX or Tectonic, and an engine that is not installed is replaced by another.",
-            "The status bar shows the engine the document compiles with and changes when the default engine changes.",
+            "**File → Review → Compare versions**, like latexdiff and with nothing to install: a document with what was added and deleted marked, which Pyx opens and compiles.",
+            "The older version can be another file (`.tex` or `.pltx`) or what was last saved to disk. Styles **UNDERLINE**, **CFONT**, **CCHANGEBAR** and **BOLD**.",
+            "Projects of several files (`\\input`, `\\include`, `\\subfile`, like `--flatten`), changes inside headings and captions, and the list of changes in the Python cells at the end.",
           ],
         },
         {
-          nombre: "Clear errors",
+          nombre: "\\todo notes",
           cambios: [
-            "The engine's fatal errors (a missing font, for instance) show in Problems and as the reason for “No new PDF”.",
-            "With MiKTeX, missing packages install by themselves when compiling and, if an installed font is missing, Pyx refreshes its font maps.",
+            "With `todonotes`, the page widens so the notes fit whole, with a dotted line where the sheet ends; two-sided too.",
+            "A button of the viewer hides them and the page returns to its size. They print as they look.",
+          ],
+        },
+        {
+          nombre: "LaTeX engine",
+          cambios: [
+            "Pyx picks the engine the document asks for: pdfTeX commands → pdfLaTeX; `fontspec` or `unicode-math` → XeLaTeX; `\\directlua` → LuaLaTeX. The status bar shows the one used.",
+            "The engine's fatal errors show in Problems, and with MiKTeX missing packages install by themselves.",
+            "Zooming with the wheel while dragging with the right button no longer jumps to the first pages.",
           ],
         },
       ],
