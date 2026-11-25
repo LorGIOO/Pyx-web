@@ -13,6 +13,60 @@
    ========================================================================== */
 window.PYX_NOVEDADES = [
   {
+    version: "2.3.1",
+    fecha: "2026-11-25",
+    titulo: "Notas al margen en su sitio, panel «Por hacer» y símbolos desde SVG",
+    grupos: [
+      {
+        nombre: "Notas y cambios",
+        cambios: [
+          "Las notas `\\todo` ya no mueven la página: márgenes, cabecera y pie se quedan donde estaban y solo crecen, hacia la derecha y lo justo, las páginas con una nota al margen.",
+          "Panel **Por hacer**: notas `\\todo`, figuras pendientes, comentarios `% TODO` (también junto a un `\\py` o un `\\celda`) y `# TODO` de las celdas de Python. Un clic lleva a la nota en el código y en el PDF.",
+          "En un documento comparado, la lista de **cambios** en el mismo panel y un botón para ver las correcciones o solo la versión actual.",
+        ],
+      },
+      {
+        nombre: "Símbolos",
+        cambios: [
+          "**Mis símbolos desde un SVG**: el dibujo se convierte en un comando, del tamaño y el color del texto.",
+          "Los comandos de símbolo se ven dibujados en el editor: `\\textordfeminine` → ª, `\\S` → §, `\\textdegree` → °.",
+        ],
+      },
+      {
+        nombre: "Actualizar",
+        cambios: [
+          "Arreglado el «Acceso denegado» al actualizar en Windows; si el antivirus bloquea el instalador, Pyx lo reintenta y, si no puede, ofrece la página de descargas.",
+        ],
+      },
+    ],
+    en: {
+      titulo: "Margin notes in place, a «To do» panel and symbols from SVG",
+      grupos: [
+        {
+          nombre: "Notes and changes",
+          cambios: [
+            "`\\todo` notes no longer move the page: margins, header and footer stay put and only the pages with a margin note grow, to the right and just enough.",
+            "**To do** panel: `\\todo` notes, missing figures, `% TODO` comments (also next to a `\\py` or a `\\celda`) and `# TODO` in the Python cells. A click goes to the note in the code and in the PDF.",
+            "In a compared document, the list of **changes** in the same panel and a button to see the corrections or the current version alone.",
+          ],
+        },
+        {
+          nombre: "Symbols",
+          cambios: [
+            "**My symbols from an SVG**: the drawing becomes a command, the size and colour of the text.",
+            "Symbol commands show drawn in the editor: `\\textordfeminine` → ª, `\\S` → §, `\\textdegree` → °.",
+          ],
+        },
+        {
+          nombre: "Updating",
+          cambios: [
+            "Fixed the “Access denied” when updating on Windows; if the antivirus blocks the installer, Pyx retries and, failing that, offers the download page.",
+          ],
+        },
+      ],
+    },
+  },
+  {
     version: "2.3.0",
     fecha: "2026-11-24",
     titulo: "Comparar versiones, notas al margen enteras y cualquier motor",
